@@ -1,0 +1,17 @@
+<div class="main_container">
+  <div class="header_container">
+    Please check your email
+  </div>
+  <div class="top_description_container">
+    We use this {{ pageType }} code so you don’t have to remember or type in yet another long password
+  </div>
+  <div class="code_input_container">
+    <app-pin-input [disabled]="false" messageError="" (onEntered)="onEvent($event)"
+                   [name]="'Your ' + pageType + ' code'">
+
+    </app-pin-input>
+  </div>
+  <div class="bottom_description_container">
+    We've sent a 6 digit {{ pageType }} code to example@email.com Can't find it? Check your spam folder.
+  </div>
+</div>

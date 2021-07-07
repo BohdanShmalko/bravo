@@ -1,0 +1,14 @@
+<div class="main_container">
+  <div class="left_part">
+    <div class="icon_container" (click)="clickHandler()">
+      <mat-icon>menu</mat-icon>
+    </div>
+    <div class="name_container">
+      {{ name }}
+    </div>
+  </div>
+  <div class="spacer"></div>
+  <div class="content">
+    <ng-content></ng-content>
+  </div>
+</div>

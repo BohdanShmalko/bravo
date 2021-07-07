@@ -1,0 +1,28 @@
+@import "variables";
+
+.main_container {
+  display: flex;
+  flex-direction: column;
+  //width: 240px;
+  height: 800px; //for desktop
+  background-color: $auth_form_color;
+  border-right: 1px solid $auth_border_color;
+}
+
+.header {
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+.buttons_container {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.main_buttons_container {
+  flex: 1;
+}
+
+.bottom_button_container {
+}

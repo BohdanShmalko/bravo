@@ -1,0 +1,17 @@
+<div class="main_container"  [ngStyle]="{width : isOpen ? '240px' : '70px'}">
+
+  <div class="header" >
+    <app-logo [isFull]="isOpen" height="30"></app-logo>
+  </div>
+
+  <div class="buttons_container">
+    <div class="main_buttons_container">
+      <app-menu-button [isFull]="isOpen" icon="shopping_cart" text="Orders" [active]="false"></app-menu-button>
+      <app-menu-button [isFull]="isOpen" icon="label" text="Catalog" [active]="false"></app-menu-button>
+      <app-menu-button [isFull]="isOpen" icon="perm_identity" text="Customers" [active]="true"></app-menu-button>
+    </div>
+    <div class="bottom_button_container">
+      <app-menu-button [isFull]="isOpen" icon="logout" text="Log Out" [active]="false"></app-menu-button>
+    </div>
+  </div>
+</div>

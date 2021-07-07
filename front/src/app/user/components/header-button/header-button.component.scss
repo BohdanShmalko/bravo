@@ -1,0 +1,51 @@
+@import "variables";
+
+
+.main_container {
+  padding: 8px;
+  cursor: pointer;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: row;
+}
+
+.main_container:active {
+  opacity: 0.8;
+}
+
+.main_container:hover {
+  background-color: $active_background_color;
+}
+
+.icon_container {
+  font-size: 16px;
+}
+
+.text_container {
+  font-family: Manrope;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 16px;
+  line-height: 150%;
+  /* identical to box height, or 24px */
+
+  letter-spacing: 0.05em;
+  text-transform: capitalize;
+
+  /* Grey / 06 */
+
+  margin: 0px 8px;
+}
+
+.black {
+  color: $auth_description_color;
+}
+
+.blue {
+  color: $blue_button_color;
+}
+
+.active {
+  background-color: $active_background_color;
+}
+

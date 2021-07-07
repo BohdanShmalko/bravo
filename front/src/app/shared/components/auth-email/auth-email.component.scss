@@ -1,0 +1,116 @@
+@import "variables";
+
+.main_container {
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.logo_container {
+
+}
+
+.card_container {
+  width: 440px;
+  height: 440px;
+  background-color: $auth_form_color;
+  border: 1px solid $auth_border_color;
+  box-sizing: border-box;
+  border-radius: 8px;
+  margin-top: 10px;
+}
+
+.card_header {
+  font-family: Arial;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 24px;
+  line-height: 132%;
+  width: 260px;
+  height: 32px;
+  margin-left: 90px;
+  margin-right: 90px;
+  margin-top: 37px;
+  text-align: center;
+}
+
+.card_description {
+
+  width: 344px;
+  height: 48px;
+  margin-left: 48px;
+  font-family: Arial;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 142%;
+  text-align: center;
+  letter-spacing: 0.0168em;
+  font-feature-settings: 'tnum' on, 'lnum' on;
+  color: $auth_description_color;
+}
+
+.card_code {
+  margin-top: 11px;
+  height: 186px;
+}
+
+.code_container {
+  margin-bottom: 24px;
+  padding-top: 48px;
+  width: 260px;
+  height: 32px;
+  margin-left: 89px;
+
+  font-family: Manrope;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 132%;
+
+  display: flex;
+  flex-direction: row;
+  flex: 1;
+}
+
+.code_description {
+  margin-left: 87px;
+  //margin-bottom: 66px;
+  width: 266px;
+  height: 16px;
+  font-family: Arial;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 12px;
+  line-height: 130%;
+  /* identical to box height, or 16px */
+
+  text-align: center;
+  letter-spacing: 0.03em;
+
+  /* Secondary/05 */
+
+  color: $untouched_color;
+}
+
+.line {
+  height: 0px;
+  left: 0px;
+  right: 0px;
+  top: calc(50% - 0px / 2);
+
+  border: 1px solid $auth_border_color;
+}
+
+.bottom_card {
+  margin-top: 38px;
+}
+
+.email {
+  color: $touched_input_color;
+}
+
+.item {
+  flex: 1
+}

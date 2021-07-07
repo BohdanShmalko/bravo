@@ -1,0 +1,38 @@
+<div class="main_container">
+
+  <div [ngClass]="{
+  focused_text : focused,
+  error_text : !focused && !!messageError && !disabled
+  }" class="name">{{ name }}</div>
+
+  <div class="code_container">
+
+    <div class="input_container" [ngClass]="{
+             focused_container : focused,
+             error_container : !focused && !!messageError && !disabled
+             }">
+
+      <input [disabled]="disabled"
+             name="firstInput" maxlength="3" class="input_class"
+             [(ngModel)]="firstPin" (focus)="focused = true" (blur)="onBlur()">
+
+    </div>
+
+    <mat-icon class="separator">remove</mat-icon>
+
+    <div class="input_container" [ngClass]="{
+             focused_container : focused,
+             error_container : !focused && !!messageError && !disabled
+             }">
+
+      <input [disabled]="disabled"
+             name="secondInput" maxlength="3" class="input_class"
+             [(ngModel)]="secondPin" (blur)="onBlur()" (focus)="focused = true">
+
+    </div>
+
+  </div>
+
+  <div class="name error_text">{{messageError}}</div>
+
+</div>

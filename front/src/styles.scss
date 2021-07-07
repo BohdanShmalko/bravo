@@ -1,0 +1,12 @@
+/* You can add global styles to this file, and also import other style files */
+@import "variables";
+
+html, body { height: 100%; background: $app_background}
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.tooltip-red {
+  background-color: $auth_description_color;
+  color : $auth_form_color;
+  font-size: 16px;
+  line-height: 150%;
+}

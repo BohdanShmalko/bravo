@@ -1,0 +1,7 @@
+<div (click)="clickButton($event)"
+     [ngClass]="{ red : color === 'red', blue : color === 'blue', disabled : disabled, activeContainer : !disabled }"
+     class="main-container">
+  <mat-icon class="icon" *ngIf="icon">{{ icon }}</mat-icon>
+  <button [ngClass]="{red : color === 'red', blue : color === 'blue', activeBtn : !disabled}" class="btn">
+    {{ text }}</button>
+</div>

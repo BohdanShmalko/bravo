@@ -1,0 +1,90 @@
+@import "variables";
+
+.main_container {
+  width: 440px;
+  height: 400px;
+  left: 500px;
+  top: 180px;
+
+  /* Basic / White */
+
+  background: $auth_form_color;
+  /* Secondary / 01 */
+
+  border: 1px solid $auth_border_color;
+  box-sizing: border-box;
+  border-radius: 8px;
+}
+
+.header_container {
+  width: 273px;
+  height: 32px;
+  margin-left: 84px;
+  margin-top: 70px;
+
+  /* Headline 3 */
+
+  font-family: Manrope;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 132%;
+  /* identical to box height, or 32px */
+
+  text-align: center;
+}
+
+.top_description_container {
+  margin-left: 48px;
+  margin-top: 11px;
+
+  width: 344px;
+  height: 48px;
+
+  /* Body 2 */
+
+  font-family: Manrope;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 142%;
+  /* or 20px */
+
+  text-align: center;
+  letter-spacing: 0.0168em;
+  font-feature-settings: 'tnum' on, 'lnum' on;
+
+  /* Grey / 06 */
+
+  color: $auth_description_color;
+}
+
+.code_input_container {
+  margin-left: 48px;
+  margin-top: 22px;
+  height: 64px;
+
+}
+
+.bottom_description_container {
+  margin-top: 24px;
+  margin-left: 48px;
+
+  width: 344px;
+  height: 48px;
+  /* Caption */
+
+  font-family: Manrope;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 12px;
+  line-height: 130%;
+  /* or 16px */
+
+  text-align: center;
+  letter-spacing: 0.03em;
+
+  /* Grey / 06 */
+
+  color: $auth_description_color;
+}

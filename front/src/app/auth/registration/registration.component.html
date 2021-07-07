@@ -1,0 +1,19 @@
+<div class="main_container">
+  <div class="header_text">Registration</div>
+  <div class="content_container">
+    <div class="input_container">
+      <app-custom-input [invalid]="''" [success]="false" placeholder="Name" name="Your name" [width]="322">
+      </app-custom-input>
+    </div>
+    <div class="input_container">
+      <app-custom-input [invalid]="''" [success]="false" placeholder="email@email.com" name="Your Email" [width]="322">
+      </app-custom-input>
+    </div>
+    <div class="text_container">
+      Enter the email you signed up with to receive your registration code
+    </div>
+    <div class="button_container">
+      <app-custom-button [disabled]="false" (onClick)="clickHandler()" text="Create account" ></app-custom-button>
+    </div>
+  </div>
+</div>

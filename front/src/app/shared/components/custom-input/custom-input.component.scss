@@ -1,0 +1,60 @@
+@import "variables";
+
+.name-class {
+  font-size: 12px;
+  line-height: 130%;
+  font-family: Manrope;
+  font-style: normal;
+  font-weight: normal;
+  color: $untouched_color;
+  margin-left: 15px;
+}
+
+.input-container {
+  display: flex;
+  flex-direction: row;
+  width: 450px;
+  padding: 10px;
+  border: 1px solid $border_untouched_color;
+  border-radius: 8px;
+}
+
+.input {
+  width: 430px;
+  border: none;
+  outline: none;
+  font-family: Manrope;
+  font-size: 16px;
+  line-height: 150%;
+  background-color: rgba(0,0,0,0);
+}
+
+.focused_container {
+  border: 1px solid $touched_input_color;
+}
+
+.focused_text {
+  color : $touched_input_color;
+}
+
+.focused_cursor {
+  caret-color: $touched_input_color;
+}
+
+.error_container {
+  border: 1px solid $input_error_color;
+}
+
+.error_text {
+  color: $input_error_color;
+}
+
+.success_container {
+  border: 1px solid $input_success_color;
+}
+
+.success_text {
+  color: $input_success_color;
+}
+
+

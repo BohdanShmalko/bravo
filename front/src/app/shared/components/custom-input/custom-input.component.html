@@ -1,0 +1,32 @@
+<div>
+  <div
+    [ngClass]="{
+    focused_text: isFocused,
+    success_text : !isFocused && success && !invalid,
+    error_text : !isFocused && !!invalid
+    }"
+    class="name-class">{{ name }}</div>
+  <div
+    [ngClass]="{
+    focused_container : isFocused,
+    success_container : !isFocused && success && !invalid,
+    error_container : !!invalid
+    }"
+    [ngStyle]="{ width : width + 'px' }"
+    class="input-container">
+
+    <input #myInput
+           [ngClass]="{ focused_cursor: isFocused }"
+           [ngStyle]="{ width : (width - 20) + 'px' }"
+           class="input" [placeholder]="placeholder"
+           (focus)="isFocused = true" (blur)="isFocused = false">
+
+    <mat-icon class="error_text" *ngIf="invalid && !isFocused">report</mat-icon>
+    <mat-icon class="success_text" *ngIf="success && !invalid && !isFocused">check</mat-icon>
+
+  </div>
+  <div *ngIf="!!invalid" class="name-class error_text">
+    {{ invalid }}
+  </div>
+
+</div>
