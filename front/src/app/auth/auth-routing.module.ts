@@ -1,22 +1,23 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+
 import { AuthComponents } from './auth.components';
+import { RegistrationComponents } from './registration/registration.components';
+import {LoginDigitsComponents} from './login-digits/login-digits.components';
+import {LoginComponents} from './login/login.components';
 
 const routes: Routes = [
   {
-    path: '', component: AuthComponents, children: [
+    path: '', component : AuthComponents , children: [
       {
-        path: 'login', loadChildren: () => import('./login/login.module')
-          .then(m => m.LoginModule)
+        path: 'login', component: LoginComponents
       },
       {
         path: 'registration',
-        loadChildren: () => import('./registration/registration.module')
-          .then(m => m.RegistrationModule)
+        component: RegistrationComponents
       },
       {
-        path: 'loginDigits/:type', loadChildren: () => import('./login-digits/login-digits.module')
-          .then(m => m.LoginDigitsModule)
+        path: 'loginDigits/:type', component: LoginDigitsComponents
       }
     ]
   },
@@ -28,3 +29,14 @@ const routes: Routes = [
 })
 export class UserRoutingModule {
 }
+
+export type AuthComponentsType =
+  typeof RegistrationComponents |
+  typeof LoginDigitsComponents |
+  typeof LoginComponents;
+
+export const AuthRoutingComponents: AuthComponentsType[] = [
+  RegistrationComponents,
+  LoginDigitsComponents,
+  LoginComponents
+]

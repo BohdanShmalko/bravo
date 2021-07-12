@@ -1,19 +1,78 @@
 <div class="main_container">
   <div class="header_text">Registration</div>
   <div class="content_container">
-    <div class="input_container">
-      <app-custom-input [invalid]="''" [success]="false" placeholder="Name" name="Your name" [width]="322">
-      </app-custom-input>
-    </div>
-    <div class="input_container">
-      <app-custom-input [invalid]="''" [success]="false" placeholder="email@email.com" name="Your Email" [width]="322">
-      </app-custom-input>
-    </div>
-    <div class="text_container">
-      Enter the email you signed up with to receive your registration code
-    </div>
+    <mat-stepper linear #stepper [formGroup]="registrationForm">
+      <mat-step>
+        <ng-template matStepLabel>Step 1</ng-template>
+        <div class="input_container">
+          <app-custom-input
+            [invalid]="emailError"
+            [success]="!!(email?.touched && !email?.errors)"
+            formControlName="email"
+            placeholder="email@email.com" name="Your unique email">
+          </app-custom-input>
+        </div>
+        <div class="input_container">
+          <app-custom-input
+            [invalid]="noError"
+            [success]="!!(no?.touched && !no?.errors)"
+            formControlName="no"
+            placeholder="SDN-43-A" name="Your unique no">
+          </app-custom-input>
+        </div>
+      </mat-step>
+
+      <mat-step>
+        <ng-template matStepLabel>Step 2</ng-template>
+        <div class="input_container">
+          <app-custom-input
+            [invalid]="nameError"
+            [success]="!!(name?.touched && !name?.errors)"
+            formControlName="name"
+            placeholder="name" name="Your name">
+          </app-custom-input>
+        </div>
+        <div class="input_container">
+          <app-custom-input
+            [invalid]="addressError"
+            [success]="!!(address?.touched && !address?.errors)"
+            formControlName="address"
+            placeholder="address" name="Your address">
+          </app-custom-input>
+        </div>
+        <div class="input_container">
+          <app-custom-input
+            [invalid]="contactNameError"
+            [success]="!!(contactName?.touched && !contactName?.errors)"
+            formControlName="contactName"
+            placeholder="contact name" name="Your contact name">
+          </app-custom-input>
+        </div>
+      </mat-step>
+
+      <mat-step>
+
+        <ng-template matStepLabel>Step 3</ng-template>
+        <div class="input_container">
+          <div class="checkbox_container">
+            <app-day-checker formControlName="days"></app-day-checker>
+          </div>
+        </div>
+        <div class="input_container">
+          <app-custom-input
+            [success]="!!(phone?.touched && !phone?.errors)"
+            formControlName="phone"
+            placeholder="+380123456789" name="Your mobile phone number">
+          </app-custom-input>
+        </div>
+        <div class="text_container">
+          Enter the personal information you registered with to obtain your registration code
+        </div>
+      </mat-step>
+    </mat-stepper>
+
     <div class="button_container">
-      <app-custom-button [disabled]="false" (onClick)="clickHandler()" text="Create account" ></app-custom-button>
+      <app-custom-button [disabled]="formHasError" (onClick)="clickHandler()" text="Create account" ></app-custom-button>
     </div>
   </div>
 </div>

@@ -1,4 +1,4 @@
-@import "variables";
+@import 'variables';
 
 .name-class {
   font-size: 12px;
@@ -13,20 +13,19 @@
 .input-container {
   display: flex;
   flex-direction: row;
-  width: 450px;
   padding: 10px;
   border: 1px solid $border_untouched_color;
   border-radius: 8px;
 }
 
 .input {
-  width: 430px;
+  flex: 1;
   border: none;
   outline: none;
   font-family: Manrope;
   font-size: 16px;
   line-height: 150%;
-  background-color: rgba(0,0,0,0);
+  background-color: $invisible;
 }
 
 .focused_container {

@@ -5,8 +5,8 @@ module.exports = (req, res, next) => {
     let key = '';
     for (let i = 0; i < SECRET_LENGTH; i++) {
         const index = Math.floor(Math.random() * DIGIT.length);
-        key += DIGIT[ index ];
+        key += index;
     }
-    req.generateKey = key;
+    req.generatedKey = key;
     next();
 }

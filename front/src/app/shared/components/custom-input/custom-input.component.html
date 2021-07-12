@@ -10,16 +10,14 @@
     [ngClass]="{
     focused_container : isFocused,
     success_container : !isFocused && success && !invalid,
-    error_container : !!invalid
+    error_container : !!invalid && !isFocused
     }"
-    [ngStyle]="{ width : width + 'px' }"
     class="input-container">
 
-    <input #myInput
+    <input [type]="type" [(ngModel)]="value"
            [ngClass]="{ focused_cursor: isFocused }"
-           [ngStyle]="{ width : (width - 20) + 'px' }"
            class="input" [placeholder]="placeholder"
-           (focus)="isFocused = true" (blur)="isFocused = false">
+           (focus)="setFocus()" (blur)="isFocused = false">
 
     <mat-icon class="error_text" *ngIf="invalid && !isFocused">report</mat-icon>
     <mat-icon class="success_text" *ngIf="success && !invalid && !isFocused">check</mat-icon>

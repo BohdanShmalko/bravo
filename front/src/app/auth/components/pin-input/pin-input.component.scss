@@ -1,4 +1,4 @@
-@import "variables";
+@import 'variables';
 
 .main_container {
 
@@ -50,6 +50,7 @@
 
 .focused_container {
   border: 1px solid $touched_input_color;
+  caret-color: $touched_input_color;
 }
 
 .error_text {

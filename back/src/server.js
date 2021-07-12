@@ -8,6 +8,7 @@ const authAPI = require('./routes/auth');
 const clientAPI = require('./routes/customer');
 const { PORT, DB_SETTINGS } = require('./config');
 const databaseProvider = require('./middlewares/databaseProvider')
+const errorHandler = require('./middlewares/errorHandler')
 
 const db = new Pool(DB_SETTINGS);
 
@@ -15,6 +16,7 @@ const app = express();
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended : false }));
 app.use(bodyParser.json());
+app.use(errorHandler)
 
 app.use(databaseProvider(db))
 app.use('/admin', adminAPI);

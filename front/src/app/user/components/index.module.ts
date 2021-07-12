@@ -24,8 +24,8 @@ const components : ComponentsType[] = [
 ];
 
 @NgModule({
-  declarations: [components],
-  imports: [CommonModule, MatIconModule, FormsModule, SharedModule, MatTooltipModule],
-  exports: [components]
+  declarations: [ components ],
+  imports: [ CommonModule, MatIconModule, FormsModule, SharedModule, MatTooltipModule ],
+  exports: [ components ]
 })
 export class UserComponentsModule {}

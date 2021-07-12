@@ -12,14 +12,14 @@ export class LoginDigitsComponents implements OnInit{
   constructor(private activatedRoute : ActivatedRoute, private router : Router) {
   }
 
-  ngOnInit() {
+  public ngOnInit() {
     const typeFromUrl = this.activatedRoute.snapshot.paramMap.get('type');
     if (typeFromUrl === 'registration' || typeFromUrl === 'login')
       this.pageType = typeFromUrl;
     else this.router.navigate([ '/auth/login' ])
   }
 
-  onEvent(event : string) {
-
+  public onEvent(event : string) {
+    console.log(event)
   }
 }

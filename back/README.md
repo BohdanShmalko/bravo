@@ -5,9 +5,9 @@
 description | url | method | body | need token | response
 ----|----|--------|-------------|------------|-------
 send code in email | /auth/sendLogin | POST | { email } | NO | { token }/{message : "error"}
-send code in email | /auth/sendRegistration | POST | { email, name, address, contactName, deliveryDays, ?mobilePhone } | NO | { token }/{message : "error"}
-login user | /auth/login | POST | { secretKey } | YES | { token }/{message : "error"}
-register user | /auth/register | POST | { secretKey } | YES | { token }/{message : "error"}
+send code in email | /auth/sendRegistration | POST | { email, name, address, contactName, deliveryDays, ?mobilePhone, no } | NO | { token }/{message : "error"}
+login user | /auth/login | POST | { secretKey } | YES | { token, status }/{message : "error"}
+register user | /auth/register | POST | { secretKey } | YES | { token, status }/{message : "error"}
 
 ## ADMIN
 

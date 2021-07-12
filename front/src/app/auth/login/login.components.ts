@@ -1,17 +1,49 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: [ './login.component.scss' ]
+  styleUrls: ['./login.component.scss']
 })
 export class LoginComponents {
 
-  constructor(private router : Router) {
+  public loginForm : FormGroup = this.fb.group({
+    email: ['', [
+      Validators.required,
+      Validators.minLength(10),
+      Validators.maxLength(200),
+      Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$')
+    ]]
+  })
+
+  public get email(): AbstractControl | null {
+    return this.loginForm.get('email')
+  }
+
+  public get emailError(): string {
+    if(!this.email?.touched) return ''
+    if (this.email.errors?.required) return 'Email field must not be empty'
+    if (this.email.errors?.minLength) return 'Email is too small'
+    if (this.email.errors?.maxLength) return 'Email is too large'
+    if (this.email.errors?.pattern) return 'Invalid email'
+    return ''
+  }
+
+  public get formIsInvalid(): boolean {
+    return !!(this.email?.touched && !this.email?.errors)
+  }
+
+  public get loginIsSuccess(): boolean {
+    return !!(this.email?.touched && !this.email?.errors)
+  }
+
+  constructor(private fb: FormBuilder, private router: Router) {
   }
 
   clickHandler() {
-    this.router.navigate([ '/auth/loginDigits/login' ])
+    //this.router.navigate(['/auth/loginDigits/login'])
+    //console.log(this.loginForm.value)
   }
 }

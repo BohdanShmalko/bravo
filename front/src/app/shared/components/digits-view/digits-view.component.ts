@@ -3,10 +3,10 @@ import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-auth-email',
-  templateUrl: './auth-email.component.html',
-  styleUrls: [ './auth-email.component.scss' ]
+  templateUrl: './digits-view.component.html',
+  styleUrls: [ './digits-view.component.scss' ]
 })
-export class AuthEmailComponent implements OnInit{
+export class DigitsViewComponent implements OnInit{
 
   public code ?: string;
 
