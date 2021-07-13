@@ -1,6 +1,12 @@
-import { Component } from '@angular/core';
-import { Router } from '@angular/router';
-import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {Component} from '@angular/core';
+import {Router} from '@angular/router';
+import {AbstractControl, FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {Observable} from "rxjs";
+import {select, Store} from "@ngrx/store";
+import {selectRegistrationError} from "@core/reducers/auth/auth.selectors";
+import {AuthState} from "@core/reducers/auth/auth.reducers";
+import { SendRegistrationAction} from "@core/reducers/auth/auth.actions";
+import {PlatformService, PlatformType} from "@core/services/platform/platform.service";
 
 @Component({
   selector: 'app-registration',
@@ -8,8 +14,6 @@ import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/fo
   styleUrls: [ './registration.component.scss' ]
 })
 export class RegistrationComponents {
-  constructor(private router: Router, private fb: FormBuilder) {
-  }
 
   public get email(): AbstractControl | null {
     return this.registrationForm.get('email')
@@ -38,6 +42,8 @@ export class RegistrationComponents {
   public get phone(): AbstractControl | null | undefined {
     return this.registrationForm.get('phone')
   }
+
+  public registrationServerError$: Observable<string> = this.storage$.pipe( select( selectRegistrationError ) )
 
   public registrationForm: FormGroup = this.fb.group({
     email: ['', [
@@ -112,12 +118,21 @@ export class RegistrationComponents {
   }
 
   public get formHasError(): boolean {
-    return !!this.registrationForm.invalid
+    return this.registrationForm.invalid
   }
 
+  public currentPlatform: PlatformType;
+
+  constructor(
+    private router: Router,
+    private fb: FormBuilder,
+    private storage$: Store<AuthState>,
+    private platformService: PlatformService
+    ) {
+    this.currentPlatform = platformService.platform
+  }
 
   clickHandler() {
-    //this.router.navigate([ '/auth/loginDigits/registration' ])
-    console.log(this.registrationForm.value)
+    this.storage$.dispatch(new SendRegistrationAction(this.registrationForm.value));
   }
 }

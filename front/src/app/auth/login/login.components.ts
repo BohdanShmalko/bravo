@@ -1,6 +1,11 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {AuthState} from "@core/reducers/auth/auth.reducers";
+import {select, Store} from "@ngrx/store";
+import {SendLoginAction} from "@core/reducers/auth/auth.actions";
+import {selectLoginError} from "@core/reducers/auth/auth.selectors";
+import {Observable} from "rxjs";
 
 @Component({
   selector: 'app-login',
@@ -39,11 +44,12 @@ export class LoginComponents {
     return !!(this.email?.touched && !this.email?.errors)
   }
 
-  constructor(private fb: FormBuilder, private router: Router) {
+  public emailServerError$: Observable<string> = this.storage$.pipe( select( selectLoginError ) )
+
+  constructor(private fb: FormBuilder, private storage$: Store<AuthState>) {
   }
 
   clickHandler() {
-    //this.router.navigate(['/auth/loginDigits/login'])
-    //console.log(this.loginForm.value)
+    this.storage$.dispatch(new SendLoginAction(this.loginForm.value));
   }
 }

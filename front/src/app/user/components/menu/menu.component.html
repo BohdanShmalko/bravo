@@ -1,14 +1,25 @@
-<div class="main_container"  [ngStyle]="{width : isOpen ? '240px' : '70px'}">
+<div class="main_container"
+     *ngrxLet="isOpenMenu$ as isOpen"
+     [ngStyle]="{width : isOpen ? '240px' : '70px'}">
 
   <div class="header" >
     <app-logo [isFull]="isOpen" height="30"></app-logo>
   </div>
 
   <div class="buttons_container">
-    <div class="main_buttons_container">
-      <app-menu-button [isFull]="isOpen" icon="shopping_cart" text="Orders" [active]="false"></app-menu-button>
-      <app-menu-button [isFull]="isOpen" icon="label" text="Catalog" [active]="false"></app-menu-button>
-      <app-menu-button [isFull]="isOpen" icon="perm_identity" text="Customers" [active]="true"></app-menu-button>
+    <div class="main_buttons_container" *ngrxLet="currentPage$ as page">
+      <app-menu-button
+        (click)="toOrders()" [isFull]="isOpen"
+        icon="shopping_cart" text="Orders" [active]="page === 'orders'">
+      </app-menu-button>
+      <app-menu-button
+        (click)="toCatalog()" [isFull]="isOpen"
+        icon="label" text="Catalog" [active]="page === 'catalog'">
+      </app-menu-button>
+      <app-menu-button
+        (click)="toCustomers()" [isFull]="isOpen"
+        icon="perm_identity" text="Customers" [active]="page === 'customers'">
+      </app-menu-button>
     </div>
     <div class="bottom_button_container">
       <app-menu-button [isFull]="isOpen" icon="logout" text="Log Out" [active]="false"></app-menu-button>

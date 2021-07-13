@@ -1,4 +1,7 @@
 import { Component, Input } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { UserState } from '@core/reducers/usrer/user.reducers';
+import { ChangeMenuStatusAction } from '@core/reducers/usrer/user.actions';
 
 @Component({
   selector: 'app-header',
@@ -8,7 +11,10 @@ import { Component, Input } from '@angular/core';
 export class HeaderComponents {
   @Input('name') name: string;
 
-  public clickHandler(): void {
+  constructor(private storage$: Store<UserState>) {
+  }
 
+  public clickHandler(): void {
+    this.storage$.dispatch(new ChangeMenuStatusAction())
   }
 }

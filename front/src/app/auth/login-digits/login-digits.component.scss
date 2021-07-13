@@ -88,3 +88,35 @@
 
   color: $auth_description_color;
 }
+
+.spinner ::ng-deep .mat-progress-spinner circle, .mat-spinner circle {
+  stroke: $auth_description_color;
+}
+
+.spinner {
+  width: 340px;
+  margin-top: 30px;
+}
+
+@media (max-width: 320px) {
+  .main_container {
+    width: 320px;
+    border: none;
+    padding: 16px;
+    height: 450px;
+  }
+  .header_container {
+    margin-left: 8px;
+  }
+  .top_description_container {
+    width: 288px;
+    margin-left: 0px;
+  }
+  .code_input_container {
+    margin-left: 0px;
+  }
+  .bottom_description_container {
+    width: 288px;
+    margin-left: 0px;
+  }
+}

@@ -49,3 +49,11 @@
 .button_container {
   margin-top: 30px;
 }
+
+@media (max-width: 320px) {
+  .main_container {
+    width: 320px;
+    border: none;
+    padding: 16px;
+  }
+}

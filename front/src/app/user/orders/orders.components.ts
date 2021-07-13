@@ -6,4 +6,5 @@ import { Component } from '@angular/core';
   styleUrls: [ './orders.component.scss' ]
 })
 export class OrdersComponents {
+  public val:string = '';
 }

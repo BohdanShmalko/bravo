@@ -30,7 +30,7 @@ router.post('/sendLogin', generator, sendEmail, async (req, res) => {
     const token = jwt.sign(payload, SECRET_KEY);
 
     //send secret key to email
-    const url = `http://localhost:4200/authEmail/${req.generatedKey}`;
+    const url = `http://localhost:4200/digitsView/${req.generatedKey}`;
 
     await req.sendEmail({
         to : email,
@@ -45,8 +45,8 @@ router.post('/sendLogin', generator, sendEmail, async (req, res) => {
 
 router.post('/sendRegistration', generator, sendEmail, async (req, res) => {
     //get data from body
-    const { email, name, address, contactName, deliveryDays, mobilePhone, no } = req.body;
-    if(!email || !name || !address || !contactName || !deliveryDays || !no)
+    const { email, name, address, contactName, days, mobilePhone, no } = req.body;
+    if(!email || !name || !address || !contactName || !days || !no)
         return res.status(400).send({ message : 'Invalid data' });
 
     //check email in db
@@ -61,14 +61,14 @@ router.post('/sendRegistration', generator, sendEmail, async (req, res) => {
 
     //generate token
     const payload = {
-        email, name, address, contactName, deliveryDays, mobilePhone, no,
+        email, name, address, contactName, days, mobilePhone, no,
         tokenSecretKey : req.generatedKey,
         sendingTime : new Date().getTime()
     };
     const token = jwt.sign(payload, SECRET_KEY);
 
     //send secret key to email
-    const url = `http://localhost:4200/authEmail/${req.generatedKey}`;
+    const url = `http://localhost:4200/digitsView/${req.generatedKey}`;
 
     await req.sendEmail({
         to : email,
@@ -113,8 +113,8 @@ router.post('/register', verifyToken, async (req, res) => {
 
     //get data from token
     if(!req.jwtParams) return res.status(400).send({ message : 'Broken token' });
-    const { email, name, address, contactName, deliveryDays, mobilePhone , tokenSecretKey, sendingTime, no } = req.jwtParams
-    if(!email || !name || !tokenSecretKey || !sendingTime || !address || !contactName || !deliveryDays || !no)
+    const { email, name, address, contactName, days, mobilePhone , tokenSecretKey, sendingTime, no } = req.jwtParams
+    if(!email || !name || !tokenSecretKey || !sendingTime || !address || !contactName || !days || !no)
         return res.status(400).send({ message : 'Broken token' });
 
     if(new Date().getTime() - sendingTime > FRESH_TOKEN_TIME)
@@ -122,14 +122,22 @@ router.post('/register', verifyToken, async (req, res) => {
 
     if(tokenSecretKey !== secretKey) return res.status(400).send({ message : 'Code is not valid' });
 
-    //add user to db
+    //check email and no in db
     const userDb = usersRepo(req.db);
+    const customerDb = customerRepo(req.db);
+
+    const [existEmail] = await userDb.getByEmail(email)
+    if(existEmail) return res.status(400).send({ message : 'This email is already exist' });
+
+    const [existingNo] = await customerDb.getByNo(no)
+    if(existingNo) return res.status(400).send({ message : 'This No is already exist' });
+
+    //add user to db
     const [newUser] = await userDb.create({ email, status: 'customer' })
 
     //add customer to db
-    const customerDb = customerRepo(req.db);
     await customerDb.create({
-        no, name, address, contactName, deliveryDays, mobilePhone, userId : newUser.id
+        no, name, address, contactName, deliveryDays: JSON.stringify(days), mobilePhone, userId : newUser.id
     })
 
     //generate token
@@ -138,7 +146,7 @@ router.post('/register', verifyToken, async (req, res) => {
     };
     const token = jwt.sign(payload, SECRET_KEY);
 
-    res.send({ token, status })
+    res.send({ token, status: newUser.status })
 })
 
 module.exports = router

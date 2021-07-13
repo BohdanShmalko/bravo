@@ -3,7 +3,7 @@
   <div class="content_container">
     <mat-stepper linear #stepper [formGroup]="registrationForm">
       <mat-step>
-        <ng-template matStepLabel>Step 1</ng-template>
+        <ng-template *ngIf="currentPlatform !== 'mobile'" matStepLabel>Step 1</ng-template>
         <div class="input_container">
           <app-custom-input
             [invalid]="emailError"
@@ -23,7 +23,7 @@
       </mat-step>
 
       <mat-step>
-        <ng-template matStepLabel>Step 2</ng-template>
+        <ng-template *ngIf="currentPlatform !== 'mobile'" matStepLabel>Step 2</ng-template>
         <div class="input_container">
           <app-custom-input
             [invalid]="nameError"
@@ -52,7 +52,7 @@
 
       <mat-step>
 
-        <ng-template matStepLabel>Step 3</ng-template>
+        <ng-template *ngIf="currentPlatform !== 'mobile'" matStepLabel>Step 3</ng-template>
         <div class="input_container">
           <div class="checkbox_container">
             <app-day-checker formControlName="days"></app-day-checker>
@@ -70,6 +70,10 @@
         </div>
       </mat-step>
     </mat-stepper>
+
+    <div *ngIf="registrationServerError$ | ngrxPush as error" class="message_error">
+      {{ error }}
+    </div>
 
     <div class="button_container">
       <app-custom-button [disabled]="formHasError" (onClick)="clickHandler()" text="Create account" ></app-custom-button>

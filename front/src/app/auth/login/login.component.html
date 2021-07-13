@@ -5,7 +5,8 @@
       <app-custom-input
         type="email"
         formControlName="email"
-        [invalid]="emailError"
+        *ngrxLet="emailServerError$ as error"
+        [invalid]="emailError || error"
         [success]="loginIsSuccess"
         placeholder="email@email.com" name="Your Email">
       </app-custom-input>
@@ -15,7 +16,7 @@
     </div>
     <div class="button_container">
       <app-custom-button
-        [disabled]="formIsInvalid"
+        [disabled]="!formIsInvalid"
         (onClick)="clickHandler()" text="Log In">
       </app-custom-button>
     </div>

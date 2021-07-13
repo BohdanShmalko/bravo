@@ -6,14 +6,17 @@ import { EffectsModule } from '@ngrx/effects';
 import { StoreRouterConnectingModule } from '@ngrx/router-store';
 
 import { environment } from '../../environments/environment';
+import { effects, reducers } from '@core/reducers';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [],
   imports: [
     BrowserAnimationsModule,
-    StoreModule.forRoot({}, {}),
+    HttpClientModule,
+    StoreModule.forRoot( reducers ),
+    EffectsModule.forRoot( effects ),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
-    EffectsModule.forRoot([]),
     StoreRouterConnectingModule.forRoot(),
   ]
 })

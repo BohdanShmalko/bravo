@@ -4,6 +4,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { ReactiveComponentModule } from '@ngrx/component';
 import { MatStepperModule } from '@angular/material/stepper';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 import { AuthRoutingComponents, UserRoutingModule } from './auth-routing.module';
 import { AuthComponents } from './auth.components';
@@ -27,7 +28,8 @@ import { MyPipesModule } from '@shared/pipes/my-pipes.module';
       ReactiveFormsModule,
       ReactiveComponentModule,
       MyPipesModule,
-      MatStepperModule
+      MatStepperModule,
+      MatProgressSpinnerModule
     ],
     providers: []
 })

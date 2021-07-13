@@ -1,0 +1,54 @@
+@import 'variables';
+
+.main_container {
+  display: flex;
+  flex-direction: row;
+  background-color: $auth_form_color;
+  flex: 1;
+  box-sizing: border-box;
+  border: 1px solid $auth_border_color;
+  border-radius: 8px;
+  caret-color: $touched_input_color;
+}
+
+.input-container {
+  flex: 1;
+}
+
+.input {
+  border: none;
+  outline: none;
+  font-family: Manrope;
+  font-size: 16px;
+  line-height: 150%;
+  background-color: $invisible;
+  padding-top: 8px;
+  width: 270px;
+
+}
+
+.loop_container {
+  padding-top: 10px;
+  padding-bottom: 6px;
+  padding-left: 14px;
+  color: $unused_gray;
+}
+.icon {
+  font-size: 19px;
+}
+
+.delete_container {
+  padding-top: 10px;
+  padding-bottom: 6px;
+  padding-right: 14px;
+  color: $unused_gray;
+  cursor: pointer;
+}
+
+.focused_block {
+  border: 1.5px solid #1672EC;
+}
+
+.focused_icon {
+  color: #1672EC;
+}
