@@ -3,15 +3,14 @@ import { Component, Input, OnInit } from '@angular/core';
 @Component({
   selector: 'app-logo',
   template: `
-    <img [ngStyle]="{ height: height + 'px' }" [src]="logoPath">
+    <img *ngIf="isFull; else shortImg" [ngStyle]="{ height: height + 'px' }" src="assets/fullLogo.png">
+    <ng-template #shortImg>
+      <img  [ngStyle]="{ height: height + 'px' }" src="assets/logo.png">
+    </ng-template>
   `
 })
-export class LogoComponent implements OnInit{
+export class LogoComponent{
   @Input('isFull') isFull : boolean;
   @Input('height') height : string = '40';
-  public logoPath: string = ''
 
-  public ngOnInit(): void {
-    this.isFull ? this.logoPath = 'assets/fullLogo.png' : this.logoPath = 'assets/logo.png'
-  }
 }

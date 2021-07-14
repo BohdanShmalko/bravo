@@ -30,6 +30,8 @@ export const authReducer: ActionReducer<AuthState, AuthActions> =
       case authActionsType.setDigitsError: return { ...state, digitError: action.payload.message }
       case authActionsType.removeLoginError: return { ...state, loginError: '' }
       case authActionsType.removeRegistrationError: return { ...state, registrationError: '' }
+      case authActionsType.setLoginData:
+        return { ...state, isRegisteredUser: action.payload.isRegisteredUser, status: action.payload.status }
       default:
         return state;
     }

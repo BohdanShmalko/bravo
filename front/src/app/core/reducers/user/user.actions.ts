@@ -1,5 +1,5 @@
 import {Action} from "@ngrx/store";
-import {PageType} from "@core/reducers/usrer/user.reducers";
+import {PageType} from "@core/reducers/user/user.reducers";
 
 export enum userActionsType {
   changeMenuOpen = '[USER] change open menu status', //to reducer

@@ -11,10 +11,4 @@ export class HeaderButtonComponents {
   @Input('name') name: string;
   @Input('icon') icon: string;
   @Input('isFull') isFull: boolean = true;
-  @Output('click') click = new EventEmitter();
-
-
-  public clickHandler(): void {
-    this.click.emit();
-  }
 }

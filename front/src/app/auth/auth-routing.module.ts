@@ -3,8 +3,9 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { AuthComponents } from './auth.components';
 import { RegistrationComponents } from './registration/registration.components';
-import {LoginDigitsComponents} from './login-digits/login-digits.components';
-import {LoginComponents} from './login/login.components';
+import { LoginDigitsComponents } from './login-digits/login-digits.components';
+import { LoginComponents } from './login/login.components';
+import { AuthLoginGuard } from '@core/services/auth/auth-login.guard';
 
 const routes: Routes = [
   {
@@ -19,7 +20,7 @@ const routes: Routes = [
       {
         path: 'loginDigits/:type', component: LoginDigitsComponents
       }
-    ]
+    ], canActivate: [ AuthLoginGuard ]
   },
 ];
 

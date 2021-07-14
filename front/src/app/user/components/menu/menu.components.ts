@@ -1,33 +1,42 @@
-import { Component, Input } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {select, Store} from "@ngrx/store";
-import {PageType, UserState} from "@core/reducers/usrer/user.reducers";
+import {PageType, UserState} from "@core/reducers/user/user.reducers";
 import {Observable} from "rxjs";
-import {selectCurrentPage, selectIsOpenMenu} from "@core/reducers/usrer/user.selector";
-import { ToAnotherPageAction } from "@core/reducers/usrer/user.actions";
+import {selectCurrentPage, selectIsOpenMenu} from "@core/reducers/user/user.selector";
+import { ToAnotherPageAction } from "@core/reducers/user/user.actions";
+import {selectUserStatus} from "@core/reducers/auth/auth.selectors";
+import {AuthState} from "@core/reducers/auth/auth.reducers";
+import {LoadFromLocalstorageAction, LogoutAndDeleteAction} from "@core/reducers/auth/auth.actions";
 
 @Component({
   selector: 'app-menu',
   templateUrl: './menu.component.html',
   styleUrls: [ './menu.component.scss' ]
 })
-export class MenuComponents {
-  public currentPage$ : Observable<PageType> = this.storage$.pipe(select(selectCurrentPage))
+export class MenuComponents{
+  public currentPage$ : Observable<PageType> = this.userStorage$.pipe(select(selectCurrentPage))
 
-  public isOpenMenu$ : Observable<boolean> = this.storage$.pipe(select(selectIsOpenMenu))
+  public isOpenMenu$ : Observable<boolean> = this.userStorage$.pipe(select(selectIsOpenMenu))
 
-  constructor(private storage$: Store<UserState>) {
+  public userStatus$ : Observable<string> = this.userStorage$.pipe(select(selectUserStatus))
+
+  constructor(private userStorage$: Store<UserState>, private authStorage$: Store<AuthState>) {
   }
 
-  public toCatalog() {
-    this.storage$.dispatch(new ToAnotherPageAction('catalog'))
+  public toCatalog(): void {
+    this.userStorage$.dispatch(new ToAnotherPageAction('catalog'))
   }
 
-  public toOrders() {
-    this.storage$.dispatch(new ToAnotherPageAction('orders'))
+  public toOrders(): void {
+    this.userStorage$.dispatch(new ToAnotherPageAction('orders'))
   }
 
-  public toCustomers() {
-    this.storage$.dispatch(new ToAnotherPageAction('customers'))
+  public toCustomers(): void {
+    this.userStorage$.dispatch(new ToAnotherPageAction('customers'))
+  }
+
+  public logout(): void {
+    this.authStorage$.dispatch(new LogoutAndDeleteAction())
   }
 
 }

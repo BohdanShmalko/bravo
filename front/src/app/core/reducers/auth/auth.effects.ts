@@ -13,9 +13,9 @@ import {
 import {catchError, map, mergeMap} from 'rxjs/operators';
 import {
   authActionsType,
-  LoginAction,
+  LoginAction, LogoutAction,
   RemoveLoginErrorAction, RemoveRegistrationErrorAction,
-  SetDigitsErrorAction,
+  SetDigitsErrorAction, SetLoginDataAction,
   SetLoginErrorAction, SetRegistrationErrorAction
 } from '@core/reducers/auth/auth.actions';
 import {Observable, of} from 'rxjs';
@@ -80,6 +80,27 @@ export class AuthEffects {
       ))
     )
   )
+
+  private logout$: Observable<LogoutAction> = createEffect(() =>
+    this.actions$.pipe(
+      ofType(authActionsType.logoutAndDeleteLocalstorage),
+      map(() => {
+        this.authService.logoutUser();
+        this.router.navigate([ '/auth/login' ])
+        return new LogoutAction();
+      })
+    ))
+
+  private setLoginData$: Observable<SetLoginDataAction> = createEffect(() =>
+    this.actions$.pipe(
+      ofType(authActionsType.loadFromLocalStorage),
+      map(() => {
+        const isRegisteredUser: boolean = this.authService.isLoggedIn;
+        let status: string | null = this.authService.getStatus
+        if(status === null) status = ''
+        return new SetLoginDataAction({ status, isRegisteredUser });
+      })
+    ))
 
   constructor(private actions$: Actions, private authService: AuthService, private router: Router) {
   }

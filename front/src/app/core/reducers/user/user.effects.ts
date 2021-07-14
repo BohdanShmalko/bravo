@@ -1,9 +1,9 @@
 import {Injectable} from "@angular/core";
 import {Observable} from "rxjs";
-import {ChangeCurrentPageAction, userActionsType} from "@core/reducers/usrer/user.actions";
+import {ChangeCurrentPageAction, userActionsType} from "@core/reducers/user/user.actions";
 import {Actions, createEffect, ofType} from "@ngrx/effects";
 import {Router} from "@angular/router";
-import {PageType} from "@core/reducers/usrer/user.reducers";
+import {PageType} from "@core/reducers/user/user.reducers";
 import {map} from "rxjs/operators";
 
 @Injectable()

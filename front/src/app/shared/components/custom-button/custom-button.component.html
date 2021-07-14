@@ -1,7 +1,13 @@
 <div (click)="clickButton($event)"
-     [ngClass]="{ red : color === 'red', blue : color === 'blue', disabled : disabled, activeContainer : !disabled }"
+     [ngClass]="{
+     red : color === 'red',
+     blue : color === 'blue',
+     disabled : disabled,
+     activeContainer : !disabled,
+     invisible_block: color === 'invisible'
+     }"
      class="main-container">
   <mat-icon class="icon" *ngIf="icon">{{ icon }}</mat-icon>
-  <button [ngClass]="{red : color === 'red', blue : color === 'blue', activeBtn : !disabled}" class="btn">
+  <button [ngClass]="{red : color === 'red', blue : color === 'blue', invisible: color === 'invisible', activeBtn : !disabled}" class="btn">
     {{ text }}</button>
 </div>

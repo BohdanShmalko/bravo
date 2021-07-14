@@ -1,0 +1,85 @@
+@import 'variables';
+
+.main_container {
+  display: flex;
+  flex-direction: row;
+  flex: 1;
+  background-color: $auth_form_color;
+  border: 1px solid #E0E0E0;
+  box-sizing: border-box;
+  border-radius: 0px 0px 8px 8px;
+  height: 56px;
+}
+
+.separator {
+  flex: 1;
+}
+
+.content_container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  padding: 8px;
+}
+
+.text {
+  height: 20px;
+  font-family: Manrope;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 142%;
+  letter-spacing: 0.0168em;
+  font-feature-settings: 'tnum' on, 'lnum' on;
+  color: $unused_gray;
+  padding: 8.5px;
+}
+
+.separate_text {
+  margin-left: 23.5px;
+  margin-right: 11.5px;
+}
+
+.chooser_width {
+  width: 80px;
+  height: 40px;
+  border: 1px solid $border_untouched_color;
+  box-sizing: border-box;
+  border-radius: 8px;
+}
+
+.chooser_container {
+  margin-left: 3.5px;
+  display: flex;
+  flex-direction: row;
+}
+
+.chooser {
+  padding: 8px;
+  text-align: center;
+  font-family: Manrope;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 150%;
+}
+
+.button {
+  width: 32px;
+  height: 32px;
+  margin-left: 12px;
+  background-color: $auth_border_color;
+  border-radius: 18px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.icon {
+  font-size: 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: $untouched_color;
+}

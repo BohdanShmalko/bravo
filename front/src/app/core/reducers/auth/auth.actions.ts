@@ -5,6 +5,7 @@ import { AuthResponse, Code, EmailType, RegistrationType, Error } from '@core/se
 export enum authActionsType {
   logout = '[AUTH] logout', //to reducer
   login = '[AUTH] login', //to reducer
+  setLoginData = '[AUTH] set status and authorize', //to reducer
   sendLogin = '[AUTH] send login', //to effects
   sendRegistration = '[AUTH] send registration', //to effects
   sendLoginDigits = '[AUTH] send login digits', //to effects
@@ -15,6 +16,12 @@ export enum authActionsType {
   logoutAndDeleteLocalstorage = '[AUTH] logout and delete', //to effects
   removeLoginError = '[AUTH] remove login error', //to reducer
   removeRegistrationError = '[AUTH] remove registration error', //to reducer
+  loadFromLocalStorage = '[Auth] load status and authorize from localstorage', //to effect
+}
+
+export interface LoginData {
+  isRegisteredUser: boolean,
+  status: string,
 }
 
 export class LogoutAction implements Action {
@@ -25,6 +32,13 @@ export class LoginAction implements Action {
   readonly type = authActionsType.login;
 
   constructor( public payload: AuthResponse ) {
+  }
+}
+
+export class SetLoginDataAction implements Action {
+  readonly type = authActionsType.setLoginData;
+
+  constructor( public payload: LoginData ) {
   }
 }
 
@@ -89,6 +103,10 @@ export class RemoveRegistrationErrorAction implements Action {
   readonly type = authActionsType.removeRegistrationError;
 }
 
+export class LoadFromLocalstorageAction implements Action {
+  readonly type = authActionsType.loadFromLocalStorage;
+}
+
 export type AuthActions =
   LogoutAction |
   LoginAction |
@@ -101,4 +119,6 @@ export type AuthActions =
   SetDigitsErrorAction |
   LogoutAndDeleteAction |
   RemoveLoginErrorAction |
-  RemoveRegistrationErrorAction
+  RemoveRegistrationErrorAction |
+  SetLoginDataAction |
+  LoadFromLocalstorageAction;

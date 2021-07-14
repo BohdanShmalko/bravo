@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { UserState } from '@core/reducers/usrer/user.reducers';
-import { ChangeMenuStatusAction } from '@core/reducers/usrer/user.actions';
+import { UserState } from '@core/reducers/user/user.reducers';
+import { ChangeMenuStatusAction } from '@core/reducers/user/user.actions';
 
 @Component({
   selector: 'app-header',

@@ -53,3 +53,15 @@
   padding: 7px;
 }
 
+.invisible {
+  background: $invisible;
+  color: $black_color;
+}
+
+.invisible_block {
+  border: 1px solid $gray_for_button;
+  box-shadow: none;
+  background: $invisible;
+  color: $black_color;
+}
+

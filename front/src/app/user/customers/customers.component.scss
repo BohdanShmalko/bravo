@@ -1,4 +1,51 @@
+@import 'variables';
+
 .searcher {
   width: 350px;
   height: 40px;
+}
+
+.content {
+  margin-top: 24px;
+}
+
+table {
+  //text-align: center;
+  width: 100%;
+  box-shadow: none;
+  border-radius: 8px 8px 0px 0px;
+  overflow:hidden !important;
+  cursor: pointer;
+
+  th {
+    font-family: Manrope;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 14px;
+    line-height: 142%;
+
+    letter-spacing: 0.005em;
+    font-feature-settings: 'tnum' on, 'lnum' on;
+    color: $black_color;
+
+  }
+
+  th:hover {
+    border-bottom: 2px solid $touched_input_color;
+  }
+}
+
+.row {
+  font-family: Manrope;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 150%;
+
+  letter-spacing: 0.0168em;
+  font-feature-settings: 'tnum' on, 'lnum' on;
+}
+
+.row:hover {
+  background-color: $table_hover_color;
 }

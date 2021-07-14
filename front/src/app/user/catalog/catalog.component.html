@@ -1,5 +1,5 @@
 <app-header name="Catalog">
-  <app-header-button [active]="false" icon="file_upload" name="Replace Catalog">
+  <app-header-button (click)="clickHandler()" [active]="false" icon="file_upload" name="Replace Catalog">
   </app-header-button>
 
   <app-header-button [active]="false" color="blue" icon="add" name="add product">
