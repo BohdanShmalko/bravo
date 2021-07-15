@@ -3,8 +3,10 @@ import { NgModule } from '@angular/core';
 
 import { AddCustomerComponent } from './add-customer/add-customer.component';
 import { EditCustomerComponent } from './edit-customer/edit-customer.component';
-import {UserComponentsModule} from "../../components/index.module";
-import {SharedModule} from "@shared/shared.module";
+import { UserComponentsModule } from '../../components/index.module';
+import { SharedModule } from '@shared/shared.module';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import {MatInputModule} from "@angular/material/input";
 
 type ComponentsType =
   typeof AddCustomerComponent |
@@ -18,7 +20,7 @@ const components : ComponentsType[] = [
 @NgModule({
   declarations: [ components ],
   imports: [
-    MatDialogModule, UserComponentsModule, SharedModule
+    MatDialogModule, UserComponentsModule, SharedModule, MatCheckboxModule, MatInputModule
   ],
   exports: [ components ]
 })

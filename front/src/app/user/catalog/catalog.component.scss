@@ -1,5 +1,10 @@
+@import 'variables';
 
 .searcher {
   width: 350px;
   height: 40px;
+}
+
+.icon:hover {
+  color: $input_error_color;
 }

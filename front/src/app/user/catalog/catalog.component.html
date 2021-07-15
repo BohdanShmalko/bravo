@@ -1,15 +1,70 @@
 <app-header name="Catalog">
-  <app-header-button (click)="clickHandler()" [active]="false" icon="file_upload" name="Replace Catalog">
+  <app-header-button (click)="replaceCatalog()" [active]="false" icon="file_upload" name="Replace Catalog">
   </app-header-button>
 
-  <app-header-button [active]="false" color="blue" icon="add" name="add product">
+  <app-header-button (click)="addProduct()" [active]="false" color="blue" icon="add" name="add product">
   </app-header-button>
 </app-header>
 <div class="searcher">
   <app-header-input placeholder="Product Code, Name..." [(ngModel)]="val"></app-header-input>
 </div>
 
+<div class="content">
 
-<div>
+  <table mat-table matSort (matSortChange)="sortData($event)" [dataSource]="sortedData" class="mat-elevation-z8">
+    <ng-container matColumnDef="code">
+      <th mat-header-cell *matHeaderCellDef> Product Code </th>
+      <td (click)="dialogEdit(element)" mat-cell *matCellDef="let element"> {{element.code}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="name">
+      <th mat-sort-header="name" mat-header-cell *matHeaderCellDef> Name </th>
+      <td (click)="dialogEdit(element)" mat-cell *matCellDef="let element"> {{element.name}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="unit">
+      <th mat-header-cell *matHeaderCellDef> Unit </th>
+      <td (click)="dialogEdit(element)" mat-cell *matCellDef="let element"> {{element.unit}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="price">
+      <th mat-header-cell *matHeaderCellDef> Price </th>
+      <td (click)="dialogEdit(element)" mat-cell *matCellDef="let element"> {{element.price}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="availability">
+      <th mat-header-cell *matHeaderCellDef> Availability </th>
+      <td (click)="dialogEdit(element)" mat-cell *matCellDef="let element"> {{element.availability}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef> Actions </th>
+      <td class="icon" (click)="deleteProduct(element)" mat-cell *matCellDef="let element"> {{element.actions}}
+        <mat-icon>delete</mat-icon>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="visibleColumns"></tr>
+    <tr class="row" mat-row *matRowDef="let row; columns: visibleColumns;"></tr>
+
+  </table>
+
+  <app-empty-table *ngIf="dataTable.length === 0" name="customers">
+    <app-header-button (click)="replaceCatalog()" [active]="false" icon="file_upload" name="Replace Catalog">
+    </app-header-button>
+
+    <app-header-button (click)="addProduct()" [active]="false" color="blue" icon="add" name="add product">
+    </app-header-button>
+  </app-empty-table>
+
+  <app-custom-paginator
+    [itemsInPage]="10"
+    [itemsCount]="103"
+    (onChangeOption)="changeHowManyLoad($event)"
+    (onBack)="loadPageData($event)"
+    (onForward)="loadPageData($event)"
+    (onQuickBack)="loadPageData($event)"
+    (onQuickForward)="loadPageData($event)"
+  ></app-custom-paginator>
 
 </div>

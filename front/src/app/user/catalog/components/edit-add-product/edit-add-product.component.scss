@@ -1,0 +1,74 @@
+@import 'variables';
+
+.main_container {
+  width: 376px;
+}
+
+.double_input {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.half_input {
+  width: 180px;
+}
+
+.half_input:first-child {
+  margin-right: 16px;
+}
+
+.add_button {
+  width: 130px;
+  margin-top: 16px;
+}
+
+.space_top {
+  margin-top: 34px;
+}
+
+.close_button {
+  margin-right: 16px;
+  width: 90px;
+}
+
+.done_container {
+  width: 108px;
+}
+
+.add_unit_container {
+  display: flex;
+  flex-direction: row;
+  margin-top: 16px;
+  align-items: center;
+}
+
+.unit_add {
+  width: 180px;
+  margin-right: 16px;
+}
+
+.price_add {
+  width: 124px;
+  margin-right: 16px;
+}
+
+.add_button_container {
+  width: 177px;
+}
+
+.delete {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  cursor: pointer;
+  margin-top: 19px;
+}
+
+.delete:hover {
+  background-color: $hover_delete_color;
+  color: $red_button_color
+}

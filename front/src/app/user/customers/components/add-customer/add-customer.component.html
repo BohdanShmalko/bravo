@@ -1,41 +1,83 @@
-<div class="main_container">
-  <app-dialog-header name="Add Customer"></app-dialog-header>
+<mat-dialog-content>
+  <div class="main_container">
+    <app-dialog-header name="Add Customer"></app-dialog-header>
 
-  <div class="content">
-    <div class="no_input_container">
-      <app-custom-input
-        name="Customer No">
-      </app-custom-input>
+    <div class="content">
+      <div class="first_input_container input_container">
+        <app-custom-input
+          placeholder="BB-135"
+          name="Customer No">
+        </app-custom-input>
+      </div>
+
+      <div class="input_container">
+        <app-custom-input
+          placeholder="Barger Bar"
+          name="Name">
+        </app-custom-input>
+      </div>
+
+      <div class="input_container">
+        <app-custom-input
+          placeholder="Second Street 3421 Geneva"
+          name="Delivery Address">
+        </app-custom-input>
+      </div>
+
+      <div class="input_container">
+        <app-day-checker></app-day-checker>
+      </div>
+
+      <div class="input_container">
+        <app-custom-input
+          placeholder="Sam Smith"
+          name="Contact Name">
+        </app-custom-input>
+      </div>
+
+      <div class="input_container">
+        <app-custom-input
+          placeholder="Mobile phone"
+          name="Phone">
+        </app-custom-input>
+      </div>
+
+      <div class="check_container">
+        <mat-checkbox>Notify customer via text message</mat-checkbox>
+      </div>
+
+      <div class="textarea_container">
+        <app-custom-textarea
+          placeholder="some text"
+          name="Shortlisted Products"
+          [invalid]="''"
+        ></app-custom-textarea>
+      </div>
+
+
+
     </div>
 
-    <div class="name_input_container">
-      <app-custom-input
-        name="Name">
-      </app-custom-input>
-    </div>
+    <app-dialog-bottom>
+      <div class="buttons_container">
+        <div class="close_button">
+          <app-custom-button
+            mat-dialog-close
+            color="invisible"
+            text="Cancel">
+          </app-custom-button>
+        </div>
 
+        <div class="done_container">
+          <app-custom-button
+            icon="done"
+            [disabled]="true"
+            color="blue"
+            text="Replace Catalog">
+          </app-custom-button>
+        </div>
 
+      </div>
+    </app-dialog-bottom>
   </div>
-
-  <app-dialog-bottom>
-    <div class="buttons_container">
-      <div class="close_button">
-        <app-custom-button
-          mat-dialog-close
-          color="invisible"
-          text="Cancel">
-        </app-custom-button>
-      </div>
-
-      <div class="done_container">
-        <app-custom-button
-          icon="done"
-          [disabled]="true"
-          color="blue"
-          text="Replace Catalog">
-        </app-custom-button>
-      </div>
-
-    </div>
-  </app-dialog-bottom>
-</div>
+</mat-dialog-content>

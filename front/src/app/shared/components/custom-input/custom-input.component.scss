@@ -26,6 +26,7 @@
   font-size: 16px;
   line-height: 150%;
   background-color: $invisible;
+  width: 100%;
 }
 
 .focused_container {
@@ -54,6 +55,11 @@
 
 .success_text {
   color: $input_success_color;
+}
+
+.disabled_container {
+  background-color: $disabled_color;
+  font-weight: bold;
 }
 
 

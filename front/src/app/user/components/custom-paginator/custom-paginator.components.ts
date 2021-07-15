@@ -25,6 +25,7 @@ export class CustomPaginatorComponents implements OnInit{
   public set itemsSizeSet(size: number) {
     this.itemsSize = size;
     this.blockCount = Math.ceil(this.itemsCount / size);
+    this.currentBlock = 1;
     this.onChangeOption.emit(size);
   }
 

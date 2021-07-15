@@ -10,11 +10,12 @@
     [ngClass]="{
     focused_container : isFocused,
     success_container : !isFocused && success && !invalid,
-    error_container : !!invalid && !isFocused
+    error_container : !!invalid && !isFocused,
+    disabled_container: disabled
     }"
     class="input-container">
 
-    <input [type]="type" [(ngModel)]="value"
+    <input [disabled]="disabled" [type]="type" [(ngModel)]="value"
            [ngClass]="{ focused_cursor: isFocused }"
            class="input" [placeholder]="placeholder"
            (focus)="setFocus()" (blur)="isFocused = false">

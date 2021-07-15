@@ -58,10 +58,21 @@
   color: $black_color;
 }
 
+.invisible_blue {
+  background: $invisible;
+  color: $blue_button_color;
+  font-weight: bold;
+}
+
 .invisible_block {
   border: 1px solid $gray_for_button;
   box-shadow: none;
   background: $invisible;
   color: $black_color;
+}
+
+.invisible_blue_block {
+  color: $blue_button_color;
+  font-weight: bold;
 }
 

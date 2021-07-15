@@ -1,7 +1,10 @@
-import {Component, OnInit} from '@angular/core';
-import {Sort} from "@angular/material/sort";
-import {MatDialog} from "@angular/material/dialog";
-import {AddCustomerComponent} from "./components/add-customer/add-customer.component";
+import { Component, OnInit } from '@angular/core';
+import { Sort } from '@angular/material/sort';
+import { MatDialog } from '@angular/material/dialog';
+
+import { AddCustomerComponent } from './components/add-customer/add-customer.component';
+import { EditCustomerComponent } from './components/edit-customer/edit-customer.component';
+import { SortService } from '@core/services/sort/sort.service';
 
 export interface DataTableCustomers {
   no: string,
@@ -13,7 +16,7 @@ export interface DataTableCustomers {
 @Component({
   selector: 'app-customer',
   templateUrl: './customers.component.html',
-  styleUrls: ['./customers.component.scss']
+  styleUrls: ['./customers.component.scss', '../styles/common_page.components.scss']
 })
 export class CustomersComponents implements OnInit{
   public val:string = '';
@@ -33,23 +36,13 @@ export class CustomersComponents implements OnInit{
     this.val = template;
   }
 
-  sortData(sort: Sort) {
+  sortData(sort: Sort): void {
     const data = this.dataTable.slice();
-    if (!sort.active || sort.direction === '') {
-      this.sortedData = data;
-      return;
-    }
-
-    this.sortedData = data.sort((a, b) => {
-      const isAsc = sort.direction === 'asc';
-      switch (sort.active) {
-        case 'name': return compare(a.name, b.name, isAsc);
-        default: return 0;
-      }
-    });
+    if (this.sorter.isDirectionEmpty(sort)) this.sortedData = data;
+    else this.sortedData = data.sort(this.sorter.sortData(sort));
   }
 
-  constructor(public dialog: MatDialog) {
+  constructor(public dialog: MatDialog, private sorter: SortService) {
   }
 
   public ngOnInit(): void {
@@ -67,15 +60,13 @@ export class CustomersComponents implements OnInit{
   }
 
   public dialogEdit(event: DataTableCustomers) {
-    console.log(event)
+    this.dialog.open(EditCustomerComponent, {
+      data: event
+    })
   }
 
   public addCustomer():void {
     this.dialog.open(AddCustomerComponent)
   }
 
-}
-
-function compare(a: number | string, b: number | string, isAsc: boolean) {
-  return (a < b ? -1 : 1) * (isAsc ? 1 : -1);
 }

@@ -1,0 +1,41 @@
+<div class="main_container">
+
+  <div class="drag_container" *ngIf="!isLoaded; else prev">
+    <ngx-dropzone (change)="onSelect($event)">
+      <div class="drag_content">
+        <div class="header_content">
+          Drag or Click here to upload files
+        </div>
+        <div class="description_content">
+          Note, that only .CSV files are supported
+        </div>
+      </div>
+    </ngx-dropzone>
+  </div>
+
+  <ng-template #prev>
+    <div class="file_prev_container" [ngClass]="{ error_prev_container : messages.length !== 0 }">
+      <div class="icon_container">
+        <mat-icon class="icon_file">insert_drive_file</mat-icon>
+      </div>
+      <div class="text_file_container">
+        <div class="name_file">{{ file?.name }}</div>
+        <div class="size_file">{{ file?.size | byte }}</div>
+      </div>
+      <div class="close_file_container" (click)="removeFile()">
+        <mat-icon class="remove_file_icon">close</mat-icon>
+      </div>
+    </div>
+  </ng-template>
+
+  <div class="template_container" (click)="downloadTemplate()">
+    <div class="download_icon">
+      <mat-icon class="icon">file_download</mat-icon>
+    </div>
+    <div class="text_template">
+      <b>Download</b> <span class="black_text"> our Template as a help.</span>
+    </div>
+  </div>
+
+</div>
+

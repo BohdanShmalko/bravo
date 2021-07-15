@@ -1,0 +1,116 @@
+<mat-dialog-content>
+  <div class="main_container">
+    <app-dialog-header name="{{ data.type === 'add' ? 'Add' : 'Edit' }} Product"></app-dialog-header>
+
+    <div class="content">
+      <div class="first_input_container input_container">
+        <app-custom-input
+          placeholder="BB-135"
+          name="Product Code">
+        </app-custom-input>
+      </div>
+
+      <div class="input_container">
+        <app-custom-input
+          placeholder="Banana"
+          name="Name">
+        </app-custom-input>
+      </div>
+
+      <div class="input_container double_input">
+        <div class="half_input">
+          <app-custom-input
+            placeholder="kg"
+            name="Unit">
+          </app-custom-input>
+        </div>
+
+        <div class="half_input">
+          <app-custom-input
+            placeholder="100"
+            name="Price">
+          </app-custom-input>
+        </div>
+      </div>
+
+<!--      TODO *ngFor-->
+      <div class="add_unit_container">
+        <div class="unit_add">
+          <app-custom-input
+            [name]="'Unit-' + 2"
+          ></app-custom-input>
+        </div>
+        <div class="price_add">
+          <app-custom-input
+            name="Price"
+          ></app-custom-input>
+        </div>
+        <div class="delete" (click)="deleteUnit()">
+          <mat-icon class="delete_icon">delete</mat-icon>
+        </div>
+      </div>
+
+      <div class="add_button">
+        <app-custom-button
+          (onClick)="addUnit()"
+          color="invisibleBlue"
+          text="Add Unit"
+          icon="add"
+        ></app-custom-button>
+      </div>
+
+      <div class="input_container">
+        <app-custom-input
+          placeholder="In stock"
+          name="Availability">
+        </app-custom-input>
+      </div>
+
+      <div class="space_top">
+        <app-custom-input
+          placeholder="Exclusively for (Customer Numbers)">
+        </app-custom-input>
+      </div>
+
+      <div class="space_top">
+        <app-custom-input
+          placeholder="Replacement Products (SKUs)">
+        </app-custom-input>
+      </div>
+
+    </div>
+
+    <app-dialog-bottom>
+      <div class="buttons_container">
+        <div class="close_button">
+          <app-custom-button
+            mat-dialog-close
+            color="invisible"
+            text="Cancel">
+          </app-custom-button>
+        </div>
+
+
+        <div *ngIf="data.type === 'edit'; else addTemplate" class="done_container">
+          <app-custom-button
+            icon="done"
+            [disabled]="false"
+            color="blue"
+            text="Save">
+          </app-custom-button>
+        </div>
+
+        <ng-template #addTemplate>
+          <div class="add_button_container">
+            <app-custom-button
+              icon="add"
+              [disabled]="false"
+              color="blue"
+              text="Add Product">
+            </app-custom-button>
+          </div>
+        </ng-template>
+      </div>
+    </app-dialog-bottom>
+  </div>
+</mat-dialog-content>

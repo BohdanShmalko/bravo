@@ -1,13 +1,11 @@
-import { Component, Input } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-add-customer',
   templateUrl: './add-customer.component.html',
-    styleUrls: ['./add-customer.component.scss']
+    styleUrls: ['./add-customer.component.scss', '../../../styles/common_dialog.components.scss']
 })
 export class AddCustomerComponent {
-  @Input('name') name: string;
-
   constructor() {
   }
 

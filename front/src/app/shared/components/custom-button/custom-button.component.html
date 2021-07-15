@@ -4,10 +4,17 @@
      blue : color === 'blue',
      disabled : disabled,
      activeContainer : !disabled,
-     invisible_block: color === 'invisible'
+     invisible_block: color === 'invisible' || color === 'invisibleBlue',
+     invisible_blue_block: color === 'invisibleBlue'
      }"
      class="main-container">
   <mat-icon class="icon" *ngIf="icon">{{ icon }}</mat-icon>
-  <button [ngClass]="{red : color === 'red', blue : color === 'blue', invisible: color === 'invisible', activeBtn : !disabled}" class="btn">
+  <button [ngClass]="{
+    red : color === 'red',
+    blue : color === 'blue',
+    invisible: color === 'invisible',
+    invisible_blue : color === 'invisibleBlue',
+    activeBtn : !disabled
+     }" class="btn">
     {{ text }}</button>
 </div>

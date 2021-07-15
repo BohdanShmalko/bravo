@@ -5,7 +5,9 @@
 }
 
 .checkbox_container {
-  padding: 15px;
+  padding-right: 17px;
+  padding-left: 8px;
+  line-height: 2.5;
 }
 
 ::ng-deep .mat-checkbox-checked.mat-accent .mat-checkbox-ripple .mat-ripple-element {
@@ -15,4 +17,16 @@
 
 ::ng-deep .mat-checkbox-checked.mat-accent .mat-checkbox-background,.mat-checkbox-indeterminate.mat-accent .mat-checkbox-background {
   background-color: $touched_input_color;
+}
+
+.header {
+  ont-family: Manrope;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 12px;
+  line-height: 130%;
+
+  letter-spacing: 0.03em;
+  cplor: $untouched_color;
+  margin-left: 12px;
 }

@@ -1,0 +1,73 @@
+@import 'variables';
+
+
+.header {
+  font-size: 12px;
+  line-height: 130%;
+  font-family: Manrope;
+  font-style: normal;
+  font-weight: normal;
+  color: $untouched_color;
+  margin-left: 15px;
+}
+
+.textarea_container {
+  padding: 10px;
+  border: 1px solid $border_untouched_color;
+  border-radius: 8px;
+}
+
+.focused_container {
+  border: 1px solid $touched_input_color;
+}
+
+.focused_text {
+  color : $touched_input_color;
+}
+
+.error_container {
+  border: 1px solid $input_error_color;
+}
+
+.error_text {
+  color: $input_error_color;
+}
+
+.textarea {
+  min-width: 120px;
+  width: 100%;
+  border: none;
+  outline: none;
+  font-family: Manrope;
+  font-size: 16px;
+  line-height: 150%;
+  background-color: $invisible;
+  resize: none;
+  cursor: auto;
+  caret-color: $touched_input_color;
+
+  font-style: normal;
+  font-weight: normal;
+  letter-spacing: 0.0168em;
+  font-feature-settings: 'tnum' on, 'lnum' on;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-button:start:decrement,
+::-webkit-scrollbar-button:end:increment  {
+  height: 10px;
+  background-color: transparent;
+}
+::-webkit-scrollbar-track-piece  {
+  background-color: $invisible;
+  -webkit-border-radius: 16px;
+}
+::-webkit-scrollbar-thumb:vertical {
+  height: 10px;
+  background-color: $gray_for_button;
+  -webkit-border-radius: 16px;
+}

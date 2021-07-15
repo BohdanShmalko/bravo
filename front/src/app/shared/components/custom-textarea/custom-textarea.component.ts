@@ -2,24 +2,21 @@ import { Component, forwardRef, Input } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 @Component({
-  selector: 'app-custom-input',
-  templateUrl: './custom-input.component.html',
-  styleUrls: [ './custom-input.component.scss' ],
+  selector: 'app-custom-textarea',
+  templateUrl: './custom-textarea.component.html',
+  styleUrls: [ './custom-textarea.component.scss' ],
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => CustomInputComponent),
+      useExisting: forwardRef(() => CustomTextareaComponent),
       multi: true
     }
   ]
 })
-export class CustomInputComponent implements ControlValueAccessor {
-  @Input('success') success: boolean;
+export class CustomTextareaComponent implements ControlValueAccessor {
   @Input('invalid') invalid: string = '';
   @Input('placeholder') placeholder: string = '';
   @Input('name') name: string = ''
-  @Input('type') type: string = 'text';
-  @Input('disabled') disabled: boolean = false;
 
   public isFocused: boolean = false
 
