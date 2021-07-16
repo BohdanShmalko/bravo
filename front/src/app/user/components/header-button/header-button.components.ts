@@ -1,9 +1,9 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-header-button',
   templateUrl: './header-button.component.html',
-  styleUrls: [ './header-button.component.scss' ]
+  styleUrls: ['./header-button.component.scss']
 })
 export class HeaderButtonComponents {
   @Input('color') color: string;

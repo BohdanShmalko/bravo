@@ -3,8 +3,6 @@ import { CanActivate, Router } from '@angular/router';
 
 import { AuthService } from '@core/services/auth/auth.service';
 
-
-
 @Injectable({
   providedIn: 'root'
 })
@@ -17,7 +15,7 @@ export class UserCustomerGuard implements CanActivate {
     const userStatus = this._authService.getStatus;
     if (userStatus === 'admin') return true;
 
-    this._router.navigate([ '/user/orders' ]);
+    this._router.navigate(['/user/orders']);
     return false;
   }
 

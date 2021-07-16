@@ -11,7 +11,7 @@ export class AuthLoginGuard implements CanActivate {
   constructor(private _authService: AuthService, private _router: Router) {
   }
 
-  canActivate(): boolean {
+  public canActivate(): boolean {
     const userStatus = this._authService.getStatus;
     if (userStatus === '' || userStatus === null) return true;
 

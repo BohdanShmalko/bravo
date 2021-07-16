@@ -1,18 +1,18 @@
-<div class="main_container">
+<div class="main-container">
   <div
     [ngClass]="{
-    focused_text: isFocused,
-    error_text : !isFocused && !!invalid
+    'focused-text': isFocused,
+    'error-text' : !isFocused && !!invalid
     }"
     class="header">
     {{ name }}
   </div>
 
   <div
-    class="textarea_container"
+    class="textarea-container"
     [ngClass]="{
-    focused_container : isFocused,
-    error_container : !!invalid && !isFocused
+    'focused-container' : isFocused,
+    'error-container' : !!invalid && !isFocused
     }">
     <textarea
       [(ngModel)]="value"
@@ -20,7 +20,7 @@
       [placeholder]="placeholder" class="textarea"></textarea>
   </div>
 
-  <div *ngIf="!!invalid" class="header error_text">
+  <div *ngIf="!!invalid" class="header error-text">
     {{ invalid }}
   </div>
 </div>

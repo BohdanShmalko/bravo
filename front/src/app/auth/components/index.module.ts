@@ -7,9 +7,9 @@ import { PinInputComponent } from './pin-input/pin-input.component';
 
 
 @NgModule({
-  declarations: [ PinInputComponent ],
-  imports: [ CommonModule, MatIconModule, FormsModule ],
-  exports: [ PinInputComponent ]
+  declarations: [PinInputComponent],
+  imports: [CommonModule, MatIconModule, FormsModule],
+  exports: [PinInputComponent]
 })
 export class AuthComponentsModule {}
 

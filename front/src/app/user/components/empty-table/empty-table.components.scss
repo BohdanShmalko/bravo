@@ -1,7 +1,7 @@
 @import 'variables';
 
-.main_container {
-  background-color: $auth_form_color;
+.main-container {
+  background-color: $auth-form-color;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -22,7 +22,7 @@
   font-size: 20px;
   line-height: 138%;
   letter-spacing: 0.0075em;
-  color: $auth_description_color;
+  color: $auth-description-color;
 }
 
 .description {

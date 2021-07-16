@@ -1,12 +1,12 @@
 @import 'variables';
 
-.main_container {
+.main-container {
   display: flex;
   flex-direction: column;
   //width: 240px;
   height: 800px; //for desktop
-  background-color: $auth_form_color;
-  border-right: 1px solid $auth_border_color;
+  background-color: $auth-form-color;
+  border-right: 1px solid $auth-border-color;
 }
 
 .header {
@@ -14,15 +14,15 @@
   margin-bottom: 20px;
 }
 
-.buttons_container {
+.buttons-container {
   display: flex;
   flex-direction: column;
   flex: 1;
 }
 
-.main_buttons_container {
+.main-buttons-container {
   flex: 1;
 }
 
-.bottom_button_container {
+.bottom-button-container {
 }

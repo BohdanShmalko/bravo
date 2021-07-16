@@ -1,12 +1,12 @@
-<div class="main_container">
+<div class="main-container">
 
-  <div class="drag_container" *ngIf="!isLoaded; else prev">
+  <div class="drag-container" *ngIf="!isLoaded; else prev">
     <ngx-dropzone (change)="onSelect($event)">
-      <div class="drag_content">
-        <div class="header_content">
+      <div class="drag-content">
+        <div class="header-content">
           Drag or Click here to upload files
         </div>
-        <div class="description_content">
+        <div class="description-content">
           Note, that only .CSV files are supported
         </div>
       </div>
@@ -14,28 +14,33 @@
   </div>
 
   <ng-template #prev>
-    <div class="file_prev_container" [ngClass]="{ error_prev_container : messages.length !== 0 }">
-      <div class="icon_container">
-        <mat-icon class="icon_file">insert_drive_file</mat-icon>
+    <div class="file-prev-container" [ngClass]="{
+    'error-prev-container' : messages.length !== 0 && !disabled,
+    disabled: disabled }">
+      <div class="icon-container">
+        <mat-icon class="icon-file">insert_drive_file</mat-icon>
       </div>
-      <div class="text_file_container">
-        <div class="name_file">{{ file?.name }}</div>
-        <div class="size_file">{{ file?.size | byte }}</div>
+      <div class="text-file-container">
+        <div class="name-file">{{ file?.name }}</div>
+        <div class="size-file">{{ file?.size | byte }}</div>
       </div>
-      <div class="close_file_container" (click)="removeFile()">
-        <mat-icon class="remove_file_icon">close</mat-icon>
+      <div class="close-file-container" [ngClass]="{ 'disabled-button': disabled }" (click)="removeFile()">
+        <mat-icon class="remove-file-icon" >close</mat-icon>
       </div>
     </div>
+    <app-loader-error class="err-msg" *ngFor="let msg of messages" [message]="msg.message"></app-loader-error>
   </ng-template>
 
-  <div class="template_container" (click)="downloadTemplate()">
-    <div class="download_icon">
-      <mat-icon class="icon">file_download</mat-icon>
+  <a class="download-link" href="assets/template.csv" download>
+    <div class="template-container">
+      <div class="download-icon">
+        <mat-icon class="icon">file_download</mat-icon>
+      </div>
+      <div class="text-template">
+        <b>Download</b> <span class="black-text"> our Template as a help.</span>
+      </div>
     </div>
-    <div class="text_template">
-      <b>Download</b> <span class="black_text"> our Template as a help.</span>
-    </div>
-  </div>
+  </a>
 
 </div>
 

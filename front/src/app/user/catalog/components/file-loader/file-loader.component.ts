@@ -14,6 +14,7 @@ export class FileLoaderComponent {
 
   @Output('onFileLoad') onFileLoad: EventEmitter<File> = new EventEmitter<File>();
   @Input('messages') messages: ErrorMessageType[] = []
+  @Input('disabled') disabled: boolean = false
 
   public file: File | null = null;
   public isLoaded: boolean = false;
@@ -34,12 +35,10 @@ export class FileLoaderComponent {
     this.isLoaded = true
   }
 
-  public downloadTemplate(): void {
-
-  }
-
-  public removeFile() {
-    this.file = null;
-    this.isLoaded = false;
+  public removeFile(): void {
+    if(!this.disabled) {
+      this.file = null;
+      this.isLoaded = false;
+    }
   }
 }

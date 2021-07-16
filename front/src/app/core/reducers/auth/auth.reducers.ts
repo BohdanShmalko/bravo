@@ -1,5 +1,6 @@
 import { ActionReducer } from '@ngrx/store';
-import {AuthActions, authActionsType} from "@core/reducers/auth/auth.actions";
+
+import {AuthActions, authActionsType} from '@core/reducers/auth/auth.actions';
 
 export type AuthNodeType = 'auth';
 export const authNode: AuthNodeType = 'auth';

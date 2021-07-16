@@ -11,26 +11,26 @@
   margin-left: 15px;
 }
 
-.textarea_container {
+.textarea-container {
   padding: 10px;
-  border: 1px solid $border_untouched_color;
+  border: 1px solid $border-untouched-color;
   border-radius: 8px;
 }
 
-.focused_container {
-  border: 1px solid $touched_input_color;
+.focused-container {
+  border: 1px solid $touched-input-color;
 }
 
-.focused_text {
-  color : $touched_input_color;
+.focused-text {
+  color : $touched-input-color;
 }
 
-.error_container {
-  border: 1px solid $input_error_color;
+.error-container {
+  border: 1px solid $input-error-color;
 }
 
-.error_text {
-  color: $input_error_color;
+.error-text {
+  color: $input-error-color;
 }
 
 .textarea {
@@ -44,7 +44,7 @@
   background-color: $invisible;
   resize: none;
   cursor: auto;
-  caret-color: $touched_input_color;
+  caret-color: $touched-input-color;
 
   font-style: normal;
   font-weight: normal;
@@ -68,6 +68,6 @@
 }
 ::-webkit-scrollbar-thumb:vertical {
   height: 10px;
-  background-color: $gray_for_button;
+  background-color: $gray-for-button;
   -webkit-border-radius: 16px;
 }

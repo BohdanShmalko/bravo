@@ -1,7 +1,4 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import { Store } from '@ngrx/store';
-import { UserState } from '@core/reducers/user/user.reducers';
-import { ChangeMenuStatusAction } from '@core/reducers/user/user.actions';
 
 @Component({
   selector: 'app-custom-paginator',
@@ -32,14 +29,14 @@ export class CustomPaginatorComponents implements OnInit{
   constructor() {
   }
 
-  public firstPage():void {
+  public firstPage(): void {
     if (this.currentBlock !== 1) {
       this.currentBlock = 1;
       this.onQuickBack.emit(0)
     }
   }
 
-  public backPage():void {
+  public backPage(): void {
     if (this.currentBlock !== 1) {
       this.currentBlock--;
       let startWith: number = this.itemsSize * (this.currentBlock - 1);
@@ -47,7 +44,7 @@ export class CustomPaginatorComponents implements OnInit{
     }
   }
 
-  public nextPage():void {
+  public nextPage(): void {
     if (this.currentBlock !== this.blockCount) {
       let startWith: number = this.itemsSize * this.currentBlock;
       this.currentBlock++;
@@ -55,7 +52,7 @@ export class CustomPaginatorComponents implements OnInit{
     }
   }
 
-  public lastPage():void {
+  public lastPage(): void {
     if (this.currentBlock !== this.blockCount) {
       this.currentBlock = this.blockCount;
       let startWith: number = this.itemsCount - this.itemsSize;
@@ -63,7 +60,7 @@ export class CustomPaginatorComponents implements OnInit{
     }
   }
 
-  ngOnInit():void {
+  public ngOnInit(): void {
     this.blockCount = Math.ceil(this.itemsCount / this.itemsSize);
   }
 

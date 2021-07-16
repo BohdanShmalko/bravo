@@ -1,7 +1,7 @@
 @import 'variables';
 
 
-.main_container {
+.main-container {
   padding: 8px;
   cursor: pointer;
   border-radius: 8px;
@@ -9,19 +9,19 @@
   flex-direction: row;
 }
 
-.main_container:active {
+.main-container:active {
   opacity: 0.8;
 }
 
-.main_container:hover {
-  background-color: $active_background_color;
+.main-container:hover {
+  background-color: $active-background-color;
 }
 
-.icon_container {
+.icon-container {
   font-size: 16px;
 }
 
-.text_container {
+.text-container {
   font-family: Manrope;
   font-style: normal;
   font-weight: bold;
@@ -38,14 +38,14 @@
 }
 
 .black {
-  color: $auth_description_color;
+  color: $auth-description-color;
 }
 
 .blue {
-  color: $blue_button_color;
+  color: $blue-button-color;
 }
 
 .active {
-  background-color: $active_background_color;
+  background-color: $active-background-color;
 }
 

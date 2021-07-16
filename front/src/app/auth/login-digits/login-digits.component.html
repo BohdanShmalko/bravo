@@ -1,11 +1,11 @@
-<div class="main_container" *ngrxLet="loadingService.isLoading$ as isLoad">
-  <div class="header_container">
+<div class="main-container" *ngrxLet="loadingService.isLoading$ as isLoad">
+  <div class="header-container">
     Please check your email
   </div>
-  <div class="top_description_container">
+  <div class="top-description-container">
     We use this {{ pageType }} code so you don’t have to remember or type in yet another long password
   </div>
-  <div class="code_input_container">
+  <div class="code-input-container">
     <app-pin-input
       *ngrxLet="serverErrorMessage$ as error"
       [messageError]="error"
@@ -17,7 +17,7 @@
       <mat-spinner style="margin:0 auto;" diameter="25"></mat-spinner>
     </div>
   </div>
-  <div class="bottom_description_container" *ngIf="!isLoad">
+  <div class="bottom-description-container" *ngIf="!isLoad">
     We've sent a 6 digit {{ pageType }} code to example@email.com Can't find it? Check your spam folder.
   </div>
 </div>

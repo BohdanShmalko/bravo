@@ -1,12 +1,13 @@
-import {Component} from '@angular/core';
-import {Router} from '@angular/router';
-import {AbstractControl, FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {Observable} from "rxjs";
-import {select, Store} from "@ngrx/store";
-import {selectRegistrationError} from "@core/reducers/auth/auth.selectors";
-import {AuthState} from "@core/reducers/auth/auth.reducers";
-import { SendRegistrationAction} from "@core/reducers/auth/auth.actions";
-import {PlatformService, PlatformType} from "@core/services/platform/platform.service";
+import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Observable } from 'rxjs';
+import { select, Store } from '@ngrx/store';
+
+import { selectRegistrationError } from '@core/reducers/auth/auth.selectors';
+import { AuthState } from '@core/reducers/auth/auth.reducers';
+import { SendRegistrationAction } from '@core/reducers/auth/auth.actions';
+import { PlatformService, PlatformType } from '@core/services/platform/platform.service';
 
 @Component({
   selector: 'app-registration',
@@ -43,7 +44,7 @@ export class RegistrationComponents {
     return this.registrationForm.get('phone')
   }
 
-  public registrationServerError$: Observable<string> = this.storage$.pipe( select( selectRegistrationError ) )
+  public registrationServerError$: Observable<string> = this.storage$.pipe(select(selectRegistrationError))
 
   public registrationForm: FormGroup = this.fb.group({
     email: ['', [

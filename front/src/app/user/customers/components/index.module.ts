@@ -6,7 +6,7 @@ import { EditCustomerComponent } from './edit-customer/edit-customer.component';
 import { UserComponentsModule } from '../../components/index.module';
 import { SharedModule } from '@shared/shared.module';
 import { MatCheckboxModule } from '@angular/material/checkbox';
-import {MatInputModule} from "@angular/material/input";
+import { MatInputModule } from '@angular/material/input';
 
 type ComponentsType =
   typeof AddCustomerComponent |

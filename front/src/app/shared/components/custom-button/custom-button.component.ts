@@ -12,7 +12,7 @@ export class CustomButtonComponent {
   @Input('text') text : string = '';
   @Output() onClick = new EventEmitter<MouseEvent>()
 
-  clickButton(event: MouseEvent) {
+  public clickButton(event: MouseEvent): void {
     if (!this.disabled){
       this.onClick.emit(event)
     }

@@ -1,26 +1,26 @@
 @import 'variables';
 
-.main_container {
+.main-container {
   display: flex;
   flex-direction: row;
   flex: 1;
 }
 
-.left_part {
+.left-part {
   flex: 1;
   display: flex;
   flex-direction: row;
 }
 
-.icon_container {
-  color: $untouched_color;
+.icon-container {
+  color: $untouched-color;
   width: 20px;
   margin-top: 4px;
   margin-right: 18px;
   cursor: pointer;
 }
 
-.name_container {
+.name-container {
   font-family: Manrope;
   font-style: normal;
   font-weight: 600;

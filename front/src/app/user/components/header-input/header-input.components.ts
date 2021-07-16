@@ -1,5 +1,5 @@
-import {Component, Input, Output, EventEmitter, forwardRef} from '@angular/core';
-import {ControlValueAccessor, NG_VALUE_ACCESSOR} from "@angular/forms";
+import { Component, Input, forwardRef } from '@angular/core';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 @Component({
   selector: 'app-header-input',
@@ -18,14 +18,14 @@ export class HeaderInputComponents implements ControlValueAccessor {
   @Input('placeholder') placeholder: string = '';
 
   public isFocused: boolean = false
+  public val: string = '';
 
-  setFocus() {
+  public setFocus(): void {
     this.isFocused = true
     this.onTouched()
   }
-  public val: string = '';
 
-  set value(val : string) {
+  public set value(val : string) {
     if (val !== undefined && this.val !== val) {
       this.val = val
       this.onChange(val)
@@ -40,15 +40,15 @@ export class HeaderInputComponents implements ControlValueAccessor {
     this.value = value
   }
 
-  public registerOnChange(fn: (val: string) => void) {
+  public registerOnChange(fn: (val: string) => void): void {
     this.onChange = fn;
   }
 
-  public registerOnTouched(fn: () => void) {
+  public registerOnTouched(fn: () => void): void {
     this.onTouched = fn;
   }
 
-  del() {
+  public del(): void {
     this.value = ''
     this.onChange('')
     this.onTouched()

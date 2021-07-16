@@ -1,17 +1,18 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {select, Store} from "@ngrx/store";
-import {PageType, UserState} from "@core/reducers/user/user.reducers";
-import {Observable} from "rxjs";
-import {selectCurrentPage, selectIsOpenMenu} from "@core/reducers/user/user.selector";
-import { ToAnotherPageAction } from "@core/reducers/user/user.actions";
-import {selectUserStatus} from "@core/reducers/auth/auth.selectors";
-import {AuthState} from "@core/reducers/auth/auth.reducers";
-import {LoadFromLocalstorageAction, LogoutAndDeleteAction} from "@core/reducers/auth/auth.actions";
+import { Component } from '@angular/core';
+import { select, Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
+
+import { selectCurrentPage, selectIsOpenMenu } from '@core/reducers/user/user.selector';
+import { ToAnotherPageAction } from '@core/reducers/user/user.actions';
+import { selectUserStatus } from '@core/reducers/auth/auth.selectors';
+import { AuthState } from '@core/reducers/auth/auth.reducers';
+import { LogoutAndDeleteAction } from '@core/reducers/auth/auth.actions';
+import { PageType, UserState } from '@core/reducers/user/user.reducers';
 
 @Component({
   selector: 'app-menu',
   templateUrl: './menu.component.html',
-  styleUrls: [ './menu.component.scss' ]
+  styleUrls: ['./menu.component.scss']
 })
 export class MenuComponents{
   public currentPage$ : Observable<PageType> = this.userStorage$.pipe(select(selectCurrentPage))

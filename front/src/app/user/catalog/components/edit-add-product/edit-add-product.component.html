@@ -1,56 +1,58 @@
 <mat-dialog-content>
-  <div class="main_container">
+  <div class="main-container">
     <app-dialog-header name="{{ data.type === 'add' ? 'Add' : 'Edit' }} Product"></app-dialog-header>
 
     <div class="content">
-      <div class="first_input_container input_container">
+      <div class="first-input_container input-container">
         <app-custom-input
           placeholder="BB-135"
           name="Product Code">
         </app-custom-input>
       </div>
 
-      <div class="input_container">
+      <div class="input-container">
         <app-custom-input
           placeholder="Banana"
           name="Name">
         </app-custom-input>
       </div>
 
-      <div class="input_container double_input">
-        <div class="half_input">
+      <div class="input-container double-input">
+        <div class="half-input">
           <app-custom-input
             placeholder="kg"
             name="Unit">
           </app-custom-input>
         </div>
 
-        <div class="half_input">
+        <div class="half-input">
           <app-custom-input
-            placeholder="100"
+            placeholder="price"
             name="Price">
           </app-custom-input>
         </div>
       </div>
 
 <!--      TODO *ngFor-->
-      <div class="add_unit_container">
-        <div class="unit_add">
+      <div class="add-unit-container">
+        <div class="unit-add">
           <app-custom-input
+            placeholder="kg"
             [name]="'Unit-' + 2"
           ></app-custom-input>
         </div>
-        <div class="price_add">
+        <div class="price-add">
           <app-custom-input
+            placeholder="price"
             name="Price"
           ></app-custom-input>
         </div>
         <div class="delete" (click)="deleteUnit()">
-          <mat-icon class="delete_icon">delete</mat-icon>
+          <mat-icon class="delete-icon">delete</mat-icon>
         </div>
       </div>
 
-      <div class="add_button">
+      <div class="add-button">
         <app-custom-button
           (onClick)="addUnit()"
           color="invisibleBlue"
@@ -59,20 +61,20 @@
         ></app-custom-button>
       </div>
 
-      <div class="input_container">
+      <div class="input-container">
         <app-custom-input
           placeholder="In stock"
           name="Availability">
         </app-custom-input>
       </div>
 
-      <div class="space_top">
+      <div class="space-top">
         <app-custom-input
           placeholder="Exclusively for (Customer Numbers)">
         </app-custom-input>
       </div>
 
-      <div class="space_top">
+      <div class="space-top">
         <app-custom-input
           placeholder="Replacement Products (SKUs)">
         </app-custom-input>
@@ -81,8 +83,8 @@
     </div>
 
     <app-dialog-bottom>
-      <div class="buttons_container">
-        <div class="close_button">
+      <div class="buttons-container">
+        <div class="close-button">
           <app-custom-button
             mat-dialog-close
             color="invisible"
@@ -91,8 +93,9 @@
         </div>
 
 
-        <div *ngIf="data.type === 'edit'; else addTemplate" class="done_container">
+        <div *ngIf="data.type === 'edit'; else addTemplate" class="done-container">
           <app-custom-button
+            (onClick)="openSnackbar()"
             icon="done"
             [disabled]="false"
             color="blue"
@@ -101,8 +104,9 @@
         </div>
 
         <ng-template #addTemplate>
-          <div class="add_button_container">
+          <div class="add-button-container">
             <app-custom-button
+              (onClick)="openSnackbar()"
               icon="add"
               [disabled]="false"
               color="blue"

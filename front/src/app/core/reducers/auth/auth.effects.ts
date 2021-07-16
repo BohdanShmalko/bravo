@@ -1,6 +1,8 @@
-import {Injectable} from '@angular/core';
-import {Actions, createEffect, ofType} from '@ngrx/effects';
-import {Router} from '@angular/router';
+import { Injectable } from '@angular/core';
+import { Actions, createEffect, ofType } from '@ngrx/effects';
+import { Router } from '@angular/router';
+import { catchError, map, mergeMap } from 'rxjs/operators';
+import { Observable, of } from 'rxjs';
 
 import {
   AuthResponse,
@@ -10,7 +12,6 @@ import {
   RegistrationType,
   TokenType
 } from '@core/services/auth/auth.service';
-import {catchError, map, mergeMap} from 'rxjs/operators';
 import {
   authActionsType,
   LoginAction, LogoutAction,
@@ -18,7 +19,6 @@ import {
   SetDigitsErrorAction, SetLoginDataAction,
   SetLoginErrorAction, SetRegistrationErrorAction
 } from '@core/reducers/auth/auth.actions';
-import {Observable, of} from 'rxjs';
 
 @Injectable()
 export class AuthEffects {

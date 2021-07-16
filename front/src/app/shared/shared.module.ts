@@ -8,8 +8,8 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import * as fromComponents from './components';
 
 @NgModule({
-  declarations: [ ...fromComponents.components ],
-  imports: [ CommonModule, MatIconModule, FormsModule, ReactiveComponentModule, MatCheckboxModule ],
-  exports: [ ...fromComponents.components, MatIconModule ]
+  declarations: [...fromComponents.components],
+  imports: [CommonModule, MatIconModule, FormsModule, ReactiveComponentModule, MatCheckboxModule],
+  exports: [...fromComponents.components, MatIconModule]
 })
 export class SharedModule {}

@@ -10,6 +10,6 @@ export class PlatformService {
     const size = window.innerWidth;
     if(size <= 720 && size > 320) return 'tablet';
     if(size <= 320) return 'mobile';
-    return 'desktop'
+    return 'desktop';
   }
 }

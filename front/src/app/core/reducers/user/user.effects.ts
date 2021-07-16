@@ -1,10 +1,11 @@
-import {Injectable} from "@angular/core";
-import {Observable} from "rxjs";
-import {ChangeCurrentPageAction, userActionsType} from "@core/reducers/user/user.actions";
-import {Actions, createEffect, ofType} from "@ngrx/effects";
-import {Router} from "@angular/router";
-import {PageType} from "@core/reducers/user/user.reducers";
-import {map} from "rxjs/operators";
+import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import { Actions, createEffect, ofType } from '@ngrx/effects';
+import { Router } from '@angular/router';
+import { map } from 'rxjs/operators';
+
+import { ChangeCurrentPageAction, userActionsType } from '@core/reducers/user/user.actions';
+import { PageType } from '@core/reducers/user/user.reducers';
 
 @Injectable()
 export class UserEffects {

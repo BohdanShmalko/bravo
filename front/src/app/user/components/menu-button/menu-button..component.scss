@@ -1,25 +1,25 @@
-@import "variables";
+@import 'variables';
 
-.main_container {
+.main-container {
   display: flex;
   flex-direction: row;
   cursor: pointer;
-  color: $auth_description_color;
+  color: $auth-description-color;
   border-radius: 0px 12px 12px 0px;
 }
 
-.main_container:hover {
-  background-color: $active_background_color;
-  color: $touched_input_color;
+.main-container:hover {
+  background-color: $active-background-color;
+  color: $touched-input-color;
 }
 
-.icon_container {
+.icon-container {
   padding-left: 20px;
   padding-top: 10px;
   padding-bottom: 10px;
 }
 
-.text_container {
+.text-container {
   padding-top: 10px;
   padding-bottom: 10px;
   padding-left: 12px;
@@ -38,9 +38,9 @@
 }
 
 .active {
-  background-color: $active_background_color;
+  background-color: $active-background-color;
   //opacity: 0.5;
-  color: $touched_input_color;
+  color: $touched-input-color;
 }
 
 

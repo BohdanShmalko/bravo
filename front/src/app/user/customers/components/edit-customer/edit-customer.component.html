@@ -1,17 +1,17 @@
 <mat-dialog-content>
-    <div class="main_container">
+    <div class="main-container">
       <app-dialog-header name="Edit Customer"></app-dialog-header>
 
       <div class="content">
 
-        <div class="first_input_container input_container">
+        <div class="first-input-container input-container">
           <app-custom-input
             placeholder="BB-135"
             name="Customer No">
           </app-custom-input>
         </div>
 
-        <div class="input_container">
+        <div class="input-container">
           <app-custom-input
             [disabled]="true"
             placeholder="Barger Bar"
@@ -19,7 +19,7 @@
           </app-custom-input>
         </div>
 
-        <div class="input_container">
+        <div class="input-container">
           <app-custom-input
             [disabled]="true"
             placeholder="Second Street 3421 Geneva"
@@ -27,15 +27,15 @@
           </app-custom-input>
         </div>
 
-        <div class="input_container">
+        <div class="input-container">
           <app-day-checker></app-day-checker>
         </div>
 
       </div>
 
       <app-dialog-bottom>
-        <div class="buttons_container">
-          <div class="close_button">
+        <div class="buttons-container">
+          <div class="close-button">
             <app-custom-button
               mat-dialog-close
               color="invisible"
@@ -43,7 +43,7 @@
             </app-custom-button>
           </div>
 
-          <div class="done_container">
+          <div class="done-container">
             <app-custom-button
               icon="done"
               [disabled]="false"

@@ -8,8 +8,8 @@ export type MyPipesType = ( typeof ValidationErrorPipe | typeof BytePipe )[];
 const myPipes: MyPipesType = [ ValidationErrorPipe, BytePipe ];
 
 @NgModule({
-  declarations: [ myPipes ],
-  exports: [ myPipes ]
+  declarations: [myPipes],
+  exports: [myPipes]
 })
 export class MyPipesModule {
 }

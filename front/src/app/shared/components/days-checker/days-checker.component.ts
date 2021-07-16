@@ -14,7 +14,7 @@ export interface DaysType {
 @Component({
   selector: 'app-day-checker',
   templateUrl: './days-checker.component.html',
-  styleUrls: [ './days-checker.component.scss' ],
+  styleUrls: ['./days-checker.component.scss'],
   providers: [{
     provide: NG_VALUE_ACCESSOR,
     useExisting: forwardRef(() => DaysCheckerComponent),

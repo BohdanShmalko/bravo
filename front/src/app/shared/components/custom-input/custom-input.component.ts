@@ -17,19 +17,19 @@ export class CustomInputComponent implements ControlValueAccessor {
   @Input('success') success: boolean;
   @Input('invalid') invalid: string = '';
   @Input('placeholder') placeholder: string = '';
-  @Input('name') name: string = ''
+  @Input('name') name: string = '';
   @Input('type') type: string = 'text';
   @Input('disabled') disabled: boolean = false;
+  public val: string = '';
 
   public isFocused: boolean = false
 
-  setFocus() {
+  public setFocus(): void {
     this.isFocused = true
     this.onTouched()
   }
-  public val: string = '';
 
-  set value(val : string) {
+  public set value(val : string) {
     if (val !== undefined && this.val !== val) {
       this.val = val
       this.onChange(val)
@@ -45,11 +45,11 @@ export class CustomInputComponent implements ControlValueAccessor {
     this.value = value
   }
 
-  public registerOnChange(fn: (val: string) => void) {
+  public registerOnChange(fn: (val: string) => void): void {
     this.onChange = fn;
   }
 
-  public registerOnTouched(fn: () => void) {
+  public registerOnTouched(fn: () => void): void {
     this.onTouched = fn;
   }
 }

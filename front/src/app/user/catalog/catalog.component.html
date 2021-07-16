@@ -13,32 +13,55 @@
 
   <table mat-table matSort (matSortChange)="sortData($event)" [dataSource]="sortedData" class="mat-elevation-z8">
     <ng-container matColumnDef="code">
-      <th mat-header-cell *matHeaderCellDef> Product Code </th>
+      <th mat-header-cell *matHeaderCellDef> Product Code</th>
       <td (click)="dialogEdit(element)" mat-cell *matCellDef="let element"> {{element.code}} </td>
     </ng-container>
 
     <ng-container matColumnDef="name">
-      <th mat-sort-header="name" mat-header-cell *matHeaderCellDef> Name </th>
+      <th mat-header-cell *matHeaderCellDef> Name</th>
       <td (click)="dialogEdit(element)" mat-cell *matCellDef="let element"> {{element.name}} </td>
     </ng-container>
 
     <ng-container matColumnDef="unit">
-      <th mat-header-cell *matHeaderCellDef> Unit </th>
-      <td (click)="dialogEdit(element)" mat-cell *matCellDef="let element"> {{element.unit}} </td>
+      <th mat-header-cell *matHeaderCellDef> Unit</th>
+      <td (click)="dialogEdit(element)" mat-cell *matCellDef="let element"> {{element.unit[0]}}
+        <span class="more-unit" *ngIf="element.unit.length > 1">+{{ element.unit.length - 1 }} more</span>
+      </td>
     </ng-container>
 
     <ng-container matColumnDef="price">
-      <th mat-header-cell *matHeaderCellDef> Price </th>
+      <th mat-header-cell *matHeaderCellDef> Price</th>
       <td (click)="dialogEdit(element)" mat-cell *matCellDef="let element"> {{element.price}} </td>
     </ng-container>
 
     <ng-container matColumnDef="availability">
-      <th mat-header-cell *matHeaderCellDef> Availability </th>
+      <th mat-header-cell *matHeaderCellDef>
+        <span class="sort-icon-container">
+          <span class="text-sort">Availability</span>
+          <app-sort-icon
+            (menuOpened)="activeAvailabilityFilter = true"
+            (menuClosed)="activeAvailabilityFilter = false"
+            [matMenuTriggerFor]="menu" [active]="activeAvailabilityFilter">
+          </app-sort-icon>
+
+          <mat-menu #menu="matMenu" >
+            <section (click)="$event.stopPropagation()" class="section-box" [formGroup]="availabilityForm">
+              <p><mat-checkbox
+                formControlName="inStock">In stock</mat-checkbox></p>
+              <p><mat-checkbox
+                formControlName="outOfStock">Out of stock</mat-checkbox></p>
+              <p><mat-checkbox
+                formControlName="discontinued">Discontinued</mat-checkbox></p>
+            </section>
+          </mat-menu>
+
+        </span>
+      </th>
       <td (click)="dialogEdit(element)" mat-cell *matCellDef="let element"> {{element.availability}} </td>
     </ng-container>
 
     <ng-container matColumnDef="actions">
-      <th mat-header-cell *matHeaderCellDef> Actions </th>
+      <th mat-header-cell *matHeaderCellDef> Actions</th>
       <td class="icon" (click)="deleteProduct(element)" mat-cell *matCellDef="let element"> {{element.actions}}
         <mat-icon>delete</mat-icon>
       </td>
@@ -49,8 +72,8 @@
 
   </table>
 
-  <app-empty-table *ngIf="dataTable.length === 0" name="customers">
-    <app-header-button (click)="replaceCatalog()" [active]="false" icon="file_upload" name="Replace Catalog">
+  <app-empty-table *ngIf="dataTable.length === 0" name="catalog">
+    <app-header-button (click)="replaceCatalog()" [active]="false" icon="file-upload" name="Replace Catalog">
     </app-header-button>
 
     <app-header-button (click)="addProduct()" [active]="false" color="blue" icon="add" name="add product">

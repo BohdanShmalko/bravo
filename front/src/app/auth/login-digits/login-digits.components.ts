@@ -1,12 +1,11 @@
-import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute, Router} from '@angular/router';
-import {select, Store} from "@ngrx/store";
-import {Observable} from "rxjs";
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { select, Store } from '@ngrx/store';
 
-import {AuthState} from "@core/reducers/auth/auth.reducers";
-import {SendLoginDigitsAction, SendRegistrationDigitsAction} from "@core/reducers/auth/auth.actions";
-import {selectDigitError} from "@core/reducers/auth/auth.selectors";
-import {LoadingService} from "@core/services/loading/loading.service";
+import { AuthState } from '@core/reducers/auth/auth.reducers';
+import { SendLoginDigitsAction, SendRegistrationDigitsAction } from '@core/reducers/auth/auth.actions';
+import { selectDigitError } from '@core/reducers/auth/auth.selectors';
+import { LoadingService } from '@core/services/loading/loading.service';
 
 @Component({
   selector: 'app-registration-digits',
@@ -26,14 +25,14 @@ export class LoginDigitsComponents implements OnInit{
   ) {
   }
 
-  public ngOnInit() {
+  public ngOnInit(): void {
     const typeFromUrl = this.activatedRoute.snapshot.paramMap.get('type');
     if (typeFromUrl === 'registration' || typeFromUrl === 'login')
       this.pageType = typeFromUrl;
     else this.router.navigate([ '/auth/login' ])
   }
 
-  public onEvent(event : string) {
+  public onEvent(event : string): void {
     if (this.pageType === 'login')
       this.storage$.dispatch(new SendLoginDigitsAction({ secretKey: event }))
 

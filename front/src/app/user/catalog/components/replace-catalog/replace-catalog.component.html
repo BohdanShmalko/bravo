@@ -1,20 +1,20 @@
 <mat-dialog-content>
-  <div class="main_container">
+  <div class="main-container">
     <app-dialog-header name="Replace Catalog"></app-dialog-header>
 
     <div class="content">
       <div class="description">Drops the existing catalog and imports the new one</div>
-      <div class="loader_container">
-        <app-file-loader [messages]="errors" (onFileLoad)="onLoad($event)"></app-file-loader>
+      <div class="loader-container">
+        <app-file-loader [disabled]="false" [messages]="errors" (onFileLoad)="onLoad($event)"></app-file-loader>
       </div>
 
 
     </div>
 
     <app-dialog-bottom>
-      <div class="buttons_container">
+      <div class="buttons-container">
 
-        <div class="close_button">
+        <div class="close-button">
           <app-custom-button
             mat-dialog-close
             color="invisible"
@@ -22,7 +22,7 @@
           </app-custom-button>
         </div>
 
-        <div class="replace_button">
+        <div class="replace-button">
           <app-custom-button
             (onClick)="checkData()"
             [disabled]="!isLoadedFile || !!errors.length"

@@ -1,52 +1,52 @@
 <mat-dialog-content>
-  <div class="main_container">
+  <div class="main-container">
     <app-dialog-header name="Add Customer"></app-dialog-header>
 
     <div class="content">
-      <div class="first_input_container input_container">
+      <div class="first-input-container input-container">
         <app-custom-input
           placeholder="BB-135"
           name="Customer No">
         </app-custom-input>
       </div>
 
-      <div class="input_container">
+      <div class="input-container">
         <app-custom-input
           placeholder="Barger Bar"
           name="Name">
         </app-custom-input>
       </div>
 
-      <div class="input_container">
+      <div class="input-container">
         <app-custom-input
           placeholder="Second Street 3421 Geneva"
           name="Delivery Address">
         </app-custom-input>
       </div>
 
-      <div class="input_container">
+      <div class="input-container">
         <app-day-checker></app-day-checker>
       </div>
 
-      <div class="input_container">
+      <div class="input-container">
         <app-custom-input
           placeholder="Sam Smith"
           name="Contact Name">
         </app-custom-input>
       </div>
 
-      <div class="input_container">
+      <div class="input-container">
         <app-custom-input
           placeholder="Mobile phone"
           name="Phone">
         </app-custom-input>
       </div>
 
-      <div class="check_container">
+      <div class="check-container">
         <mat-checkbox>Notify customer via text message</mat-checkbox>
       </div>
 
-      <div class="textarea_container">
+      <div class="textarea-container">
         <app-custom-textarea
           placeholder="some text"
           name="Shortlisted Products"
@@ -59,8 +59,8 @@
     </div>
 
     <app-dialog-bottom>
-      <div class="buttons_container">
-        <div class="close_button">
+      <div class="buttons-container">
+        <div class="close-button">
           <app-custom-button
             mat-dialog-close
             color="invisible"
@@ -68,7 +68,7 @@
           </app-custom-button>
         </div>
 
-        <div class="done_container">
+        <div class="done-container">
           <app-custom-button
             icon="done"
             [disabled]="true"

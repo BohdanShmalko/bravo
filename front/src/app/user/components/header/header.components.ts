@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { Store } from '@ngrx/store';
+
 import { UserState } from '@core/reducers/user/user.reducers';
 import { ChangeMenuStatusAction } from '@core/reducers/user/user.actions';
 

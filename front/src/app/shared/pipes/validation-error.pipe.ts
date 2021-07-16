@@ -13,14 +13,14 @@ export class ValidationErrorPipe implements PipeTransform {
     'max-length': [ ' is too large', '(must be less than ', ' characters long)' ],
   };
 
-  lengthValid(value: string, type: ValidationType, another?: string): string {
+  private lengthValid(value: string, type: ValidationType, another?: string): string {
     let tmp: string = value + this.allErrors[ type ][ 0 ];
     if (another)
       tmp += this.allErrors[ type ][ 1 ] + another + this.allErrors[ type ][ 2 ];
     return tmp;
   }
 
-  transform(value: string, type: ValidationType, another?: string): string {
+  public transform(value: string, type: ValidationType, another?: string): string {
     switch (type) {
       case 'empty':
         return value + this.allErrors[ type ][ 0 ];

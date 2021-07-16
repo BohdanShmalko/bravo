@@ -8,7 +8,7 @@ import { UserComponentsModule } from './components/index.module';
   declarations: [
     UserComponents
   ],
-  imports: [ UserRoutingModule, UserComponentsModule ],
+  imports: [UserRoutingModule, UserComponentsModule],
   providers: []
 })
 export class UserModule { }

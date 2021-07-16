@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import {AuthState} from "@core/reducers/auth/auth.reducers";
-import {select, Store} from "@ngrx/store";
-import {SendLoginAction} from "@core/reducers/auth/auth.actions";
-import {selectLoginError} from "@core/reducers/auth/auth.selectors";
-import {Observable} from "rxjs";
+import { select, Store } from "@ngrx/store";
+import { Observable } from "rxjs";
+
+import { AuthState } from "@core/reducers/auth/auth.reducers";
+import { SendLoginAction } from "@core/reducers/auth/auth.actions";
+import { selectLoginError } from "@core/reducers/auth/auth.selectors";
 
 @Component({
   selector: 'app-login',

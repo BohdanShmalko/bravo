@@ -31,18 +31,18 @@ export class CustomersComponents implements OnInit{
 
   public sortedData: DataTableCustomers[];
 
+  constructor(private dialog: MatDialog, private sorter: SortService) {
+  }
+
   public set value(template: string) {
     //TODO get for template
     this.val = template;
   }
 
-  sortData(sort: Sort): void {
+  public sortData(sort: Sort): void {
     const data = this.dataTable.slice();
     if (this.sorter.isDirectionEmpty(sort)) this.sortedData = data;
     else this.sortedData = data.sort(this.sorter.sortData(sort));
-  }
-
-  constructor(public dialog: MatDialog, private sorter: SortService) {
   }
 
   public ngOnInit(): void {
@@ -51,15 +51,15 @@ export class CustomersComponents implements OnInit{
     this.customersCount = 0;
   }
 
-  public changeHowManyLoad(count: number) {
+  public changeHowManyLoad(count: number): void {
     this.howManyLoad = count
   }
 
-  public loadPageData(startWith: number) {
+  public loadPageData(startWith: number): void {
     //TODO to load customers
   }
 
-  public dialogEdit(event: DataTableCustomers) {
+  public dialogEdit(event: DataTableCustomers): void {
     this.dialog.open(EditCustomerComponent, {
       data: event
     })

@@ -1,9 +1,5 @@
 @import 'variables';
 
-.main_container {
-
-}
-
 ngx-dropzone::ng-deep {
   height: 130px;
   background: $active_background_color;
@@ -13,7 +9,7 @@ ngx-dropzone::ng-deep {
   border-radius: 6px;
 }
 
-.header_content {
+.header-content {
   font-family: Manrope;
   font-style: normal;
   font-weight: bold;
@@ -23,16 +19,16 @@ ngx-dropzone::ng-deep {
   letter-spacing: 0.005em;
   font-feature-settings: 'tnum' on, 'lnum' on;
 
-  color: $touched_input_color;
+  color: $touched-input-color;
   width: 268px;
   margin-left: 65px;
 }
 
-.description_content {
+.description-content {
   width: 225px;
   margin-left: 71px;
   margin-top: 6px;
-  color: $touched_input_color;
+  color: $touched-input-color;
 
   font-family: Manrope;
   font-style: normal;
@@ -44,7 +40,7 @@ ngx-dropzone::ng-deep {
   letter-spacing: 0.03em;
 }
 
-.drag_content {
+.drag-content {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -52,7 +48,7 @@ ngx-dropzone::ng-deep {
   text-align: center;
 }
 
-.template_container {
+.template-container {
   display: flex;
   flex-direction: row;
   color: $touched_input_color;
@@ -66,7 +62,7 @@ ngx-dropzone::ng-deep {
   margin-right: 12px;
 }
 
-.text_template {
+.text-template {
   font-family: Manrope;
   font-style: normal;
   font-size: 14px;
@@ -77,15 +73,15 @@ ngx-dropzone::ng-deep {
   font-feature-settings: 'tnum' on, 'lnum' on;
 }
 
-.black_text {
-  color: $auth_description_color;
+.black-text {
+  color: $auth-description-color;
 }
 
-.file_prev_container {
+.file-prev-container {
   width: 392px;
   height: 72px;
-  background-color: $active_background_color;
-  border: 1px dashed $touched_input_color;
+  background-color: $active-background-color;
+  border: 1px solid $touched-input-color;
   box-sizing: border-box;
   border-radius: 6px;
   display: flex;
@@ -93,28 +89,28 @@ ngx-dropzone::ng-deep {
   flex: 1;
 }
 
-.error_prev_container {
-  background-color: $hover_delete_color;
-  border: 1px dashed $red_button_color;
+.error-prev-container {
+  background-color: $hover-delete-color;
+  border: 1px solid $red-button-color;
 }
 
-.icon_container {
+.icon-container {
   margin-top: 23px;
   margin-left: 20px;
 }
 
-.icon_file {
+.icon-file {
   width: 30px;
   height: 30px;
 }
 
-.text_file_container {
+.text-file-container {
   margin-left: 12px;
   margin-top: 16px;
   flex: 1;
 }
 
-.name_file {
+.name-file {
   font-family: Manrope;
   font-style: normal;
   font-weight: bold;
@@ -124,7 +120,7 @@ ngx-dropzone::ng-deep {
   font-feature-settings: 'tnum' on, 'lnum' on;
 }
 
-.size_file {
+.size-file {
   font-family: Manrope;
   font-style: normal;
   font-weight: normal;
@@ -133,7 +129,7 @@ ngx-dropzone::ng-deep {
   letter-spacing: 0.03em;
 }
 
-.close_file_container {
+.close-file-container {
   margin-top: 24px;
   margin-right: 28px;
   height: 15px;
@@ -141,6 +137,19 @@ ngx-dropzone::ng-deep {
   cursor: pointer;
 }
 
-.remove_file_icon {
+.err-msg {
+  margin-top: 12px;
+}
 
+.download-link {
+  text-decoration: none;
+}
+
+.disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+.disabled-button {
+  cursor: default;
 }

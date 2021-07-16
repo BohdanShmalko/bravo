@@ -1,9 +1,9 @@
-<div class="main_container" [ngClass]="{focused_block : isFocused}">
-  <div class="loop_container" [ngClass]="{focused_icon : isFocused}">
+<div class="main-container" [ngClass]="{'focused-block' : isFocused}">
+  <div class="loop-container" [ngClass]="{'focused-icon' : isFocused}">
     <mat-icon class="icon">search</mat-icon>
   </div>
 
-  <div class="input_container">
+  <div class="input-container">
     <input
       [value]="val"
       [placeholder]="placeholder"
@@ -12,7 +12,7 @@
       [(ngModel)]="value">
   </div>
 
-  <div class="delete_container">
+  <div class="delete-container">
     <mat-icon (click)="del()" class="icon">close</mat-icon>
   </div>
 </div>

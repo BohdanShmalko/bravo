@@ -1,6 +1,7 @@
 import { Component, Inject } from '@angular/core';
-import { MAT_DIALOG_DATA } from "@angular/material/dialog";
-import { DataTableProducts } from "../../catalog.components";
+import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+
+import { DataTableProducts } from '../../catalog.components';
 
 @Component({
   selector: 'app-delete-product',

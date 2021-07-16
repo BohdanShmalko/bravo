@@ -1,0 +1,24 @@
+@import 'variables';
+
+
+.main-container {
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.main-container:hover, .active {
+  background-color: $active-background-color;
+  border-radius: 50%;
+  color: $touched-input-color;
+}
+
+.icon {
+  font-size: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

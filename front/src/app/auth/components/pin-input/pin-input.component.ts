@@ -1,5 +1,5 @@
 import { Component, Input, Output, EventEmitter, ViewChild, ElementRef, forwardRef } from '@angular/core';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR } from "@angular/forms";
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 @Component({
   selector: 'app-pin-input',
@@ -51,11 +51,11 @@ export class PinInputComponent implements ControlValueAccessor{
     else this.secondPin = value;
   }
 
-  public registerOnChange(fn: (val: string) => void) {
+  public registerOnChange(fn: (val: string) => void): void {
     this.onChange = fn;
   }
 
-  public registerOnTouched(fn: () => void) {
+  public registerOnTouched(fn: () => void): void {
     this.onTouched = fn;
   }
 

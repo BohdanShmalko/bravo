@@ -1,6 +1,6 @@
 @import 'variables';
 
-.main_container {
+.main-container {
   width: 440px;
   height: 400px;
   left: 500px;
@@ -8,15 +8,15 @@
 
   /* Basic / White */
 
-  background: $auth_form_color;
+  background: $auth-form-color;
   /* Secondary / 01 */
 
-  border: 1px solid $auth_border_color;
+  border: 1px solid $auth-border-color;
   box-sizing: border-box;
   border-radius: 8px;
 }
 
-.header_container {
+.header-container {
   width: 273px;
   height: 32px;
   margin-left: 84px;
@@ -34,7 +34,7 @@
   text-align: center;
 }
 
-.top_description_container {
+.top-description-container {
   margin-left: 48px;
   margin-top: 11px;
 
@@ -56,17 +56,17 @@
 
   /* Grey / 06 */
 
-  color: $auth_description_color;
+  color: $auth-description-color;
 }
 
-.code_input_container {
+.code-input-container {
   margin-left: 48px;
   margin-top: 22px;
   height: 64px;
 
 }
 
-.bottom_description_container {
+.bottom-description-container {
   margin-top: 24px;
   margin-left: 48px;
 
@@ -86,11 +86,11 @@
 
   /* Grey / 06 */
 
-  color: $auth_description_color;
+  color: $auth-description-color;
 }
 
 .spinner ::ng-deep .mat-progress-spinner circle, .mat-spinner circle {
-  stroke: $auth_description_color;
+  stroke: $auth-description-color;
 }
 
 .spinner {
@@ -99,23 +99,23 @@
 }
 
 @media (max-width: 320px) {
-  .main_container {
+  .main-container {
     width: 320px;
     border: none;
     padding: 16px;
     height: 450px;
   }
-  .header_container {
+  .header-container {
     margin-left: 8px;
   }
-  .top_description_container {
+  .top-description-container {
     width: 288px;
     margin-left: 0px;
   }
-  .code_input_container {
+  .code-input-container {
     margin-left: 0px;
   }
-  .bottom_description_container {
+  .bottom-description-container {
     width: 288px;
     margin-left: 0px;
   }

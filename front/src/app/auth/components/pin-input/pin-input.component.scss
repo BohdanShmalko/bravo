@@ -10,12 +10,12 @@
   margin-left: 15px;
 }
 
-.code_container {
+.code-container {
   display: flex;
   flex-direction: row;
 }
 
-.input_container {
+.input-container {
   width: 150px;
   border: 1px solid $border_untouched_color;
   border-radius: 8px;
@@ -28,7 +28,7 @@
   padding-top: 10px;
 }
 
-.input_class {
+.input-class {
   margin-left: 10px;
   width: 130px;
   border-radius: 8px;
@@ -40,21 +40,21 @@
   line-height: 150%;
 }
 
-.focused_text {
-  color: $touched_input_color;
+.focused-text {
+  color: $touched-input-color;
 }
 
-.focused_container {
-  border: 1px solid $touched_input_color;
-  caret-color: $touched_input_color;
+.focused-container {
+  border: 1px solid $touched-input-color;
+  caret-color: $touched-input-color;
 }
 
-.error_text {
-  color: $input_error_color;
+.error-text {
+  color: $input-error-color;
 }
 
-.error_container {
-  border: 1px solid $input_error_color;
+.error-container {
+  border: 1px solid $input-error-color;
 }
 
 .disabled {
@@ -62,7 +62,7 @@
 }
 
 @media (max-width: 320px) {
-  .input_class{
+  .input-class{
     width: 100px;
     letter-spacing: 20px;
   }

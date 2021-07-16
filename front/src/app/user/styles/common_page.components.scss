@@ -1,4 +1,4 @@
-@import 'src/styles/variables';
+@import 'variables';
 
 .searcher {
   width: 350px;
@@ -25,12 +25,12 @@ table {
 
     letter-spacing: 0.005em;
     font-feature-settings: 'tnum' on, 'lnum' on;
-    color: $black_color;
+    color: $black-color;
 
   }
 
   th:hover {
-    border-bottom: 2px solid $touched_input_color;
+    border-bottom: 2px solid $touched-input-color;
   }
 }
 
@@ -46,5 +46,15 @@ table {
 }
 
 .row:hover {
-  background-color: $table_hover_color;
+  background-color: $table-hover-color;
+}
+
+.sort-icon-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+  .text-sort {
+    margin-right: 10px;
+  }
 }

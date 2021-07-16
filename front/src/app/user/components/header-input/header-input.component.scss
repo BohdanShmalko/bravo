@@ -1,14 +1,14 @@
 @import 'variables';
 
-.main_container {
+.main-container {
   display: flex;
   flex-direction: row;
-  background-color: $auth_form_color;
+  background-color: $auth-form-color;
   flex: 1;
   box-sizing: border-box;
-  border: 1px solid $auth_border_color;
+  border: 1px solid $auth-border-color;
   border-radius: 8px;
-  caret-color: $touched_input_color;
+  caret-color: $touched-input-color;
 }
 
 .input-container {
@@ -27,28 +27,28 @@
 
 }
 
-.loop_container {
+.loop-container {
   padding-top: 10px;
   padding-bottom: 6px;
   padding-left: 14px;
-  color: $unused_gray;
+  color: $unused-gray;
 }
 .icon {
   font-size: 19px;
 }
 
-.delete_container {
+.delete-container {
   padding-top: 10px;
   padding-bottom: 6px;
   padding-right: 14px;
-  color: $unused_gray;
+  color: $unused-gray;
   cursor: pointer;
 }
 
-.focused_block {
-  border: 1.5px solid #1672EC;
+.focused-block {
+  border: 1.5px solid $touched-input-color;
 }
 
-.focused_icon {
-  color: #1672EC;
+.focused-icon {
+  color: $touched-input-color;
 }

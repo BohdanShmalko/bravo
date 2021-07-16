@@ -13,7 +13,7 @@ export class MenuButtonComponents {
   @Output('click') click = new EventEmitter<MouseEvent>();
 
 
-  public clickHandler(event : MouseEvent) {
+  public clickHandler(event : MouseEvent): void {
     this.click.emit(event);
   }
 }

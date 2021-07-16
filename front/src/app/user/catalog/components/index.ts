@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { MatDialogModule } from '@angular/material/dialog';
 import { CommonModule } from '@angular/common';
 import { NgxDropzoneModule } from 'ngx-dropzone';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 import { UserComponentsModule } from '../../components/index.module';
 import { SharedModule } from '@shared/shared.module';
@@ -9,21 +10,29 @@ import { EditAddProductComponent } from './edit-add-product/edit-add-product.com
 import { DeleteProductComponent } from './delete-product/delete-product.component';
 import { ReplaceCatalogComponent } from './replace-catalog/replace-catalog.component';
 import { FileLoaderComponent } from './file-loader/file-loader.component';
-import {MyPipesModule} from "@shared/pipes/my-pipes.module";
-import {FormsModule} from "@angular/forms";
+import { MyPipesModule } from '@shared/pipes/my-pipes.module';
+import { LoaderErrorComponent } from './loader-error/loader-error.component';
+import { WaitSnackbarComponent } from './wait-snackbar/wait-snackbar.component';
+import { DoneSnackbarComponent } from './done-snackbar/done-snackbar.component';
 
 
 type ComponentsType =
   typeof EditAddProductComponent |
   typeof DeleteProductComponent |
   typeof ReplaceCatalogComponent |
-  typeof FileLoaderComponent;
+  typeof FileLoaderComponent |
+  typeof LoaderErrorComponent |
+  typeof WaitSnackbarComponent |
+  typeof DoneSnackbarComponent;
 
 const components : ComponentsType[] = [
   EditAddProductComponent,
   DeleteProductComponent,
   ReplaceCatalogComponent,
-  FileLoaderComponent
+  FileLoaderComponent,
+  LoaderErrorComponent,
+  WaitSnackbarComponent,
+  DoneSnackbarComponent
 ];
 
 @NgModule({
@@ -35,6 +44,7 @@ const components : ComponentsType[] = [
     CommonModule,
     NgxDropzoneModule,
     MyPipesModule,
+    MatProgressSpinnerModule
   ],
   exports: [ components ]
 })

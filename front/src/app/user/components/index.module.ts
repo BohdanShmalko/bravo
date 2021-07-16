@@ -17,6 +17,7 @@ import { CustomPaginatorComponents } from './custom-paginator/custom-paginator.c
 import { EmptyTableComponents } from './empty-table/empty-table.components';
 import { DialogBottomComponent } from './dialog-bottom/dialog-bottom.component';
 import { DialogHeaderComponent } from './dialog-header/dialog-header.component';
+import { SortIconComponents } from './sort-icon/sort-icon.components';
 
 type ComponentsType =
   typeof MenuComponents |
@@ -27,7 +28,8 @@ type ComponentsType =
   typeof CustomPaginatorComponents |
   typeof EmptyTableComponents |
   typeof DialogBottomComponent |
-  typeof DialogHeaderComponent;
+  typeof DialogHeaderComponent |
+  typeof SortIconComponents;
 
 const components : ComponentsType[] = [
   MenuComponents,
@@ -39,6 +41,7 @@ const components : ComponentsType[] = [
   EmptyTableComponents,
   DialogBottomComponent,
   DialogHeaderComponent,
+  SortIconComponents,
 ];
 
 @NgModule({

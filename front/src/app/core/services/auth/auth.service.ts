@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
-import {DaysType} from '@shared/components';
+import { DaysType } from '@shared/components';
 
 export interface EmailType {
   email: string,
@@ -48,43 +48,43 @@ export class AuthService {
   private _TOKEN = 'token';
   private _STATUS = 'status';
 
-  constructor( private http: HttpClient ) {
+  constructor(private http: HttpClient) {
   }
 
-  registrationUser( user: RegistrationType ): Observable< TokenType > {
-    return this.http.post< TokenType >( this._registrationURL, user )
+  public registrationUser(user: RegistrationType): Observable<TokenType> {
+    return this.http.post<TokenType>( this._registrationURL, user )
   }
 
-  loginUser( user: EmailType ): Observable< TokenType > {
-    return this.http.post< TokenType >( this._loginURL, user )
+  public loginUser(user: EmailType): Observable<TokenType> {
+    return this.http.post<TokenType>( this._loginURL, user )
   }
 
-  sendLoginCode( secretKey: Code ): Observable< AuthResponse > {
-    return this.http.post< AuthResponse >( this._sendLoginCodeURL, secretKey )
+  public sendLoginCode(secretKey: Code): Observable<AuthResponse> {
+    return this.http.post<AuthResponse>( this._sendLoginCodeURL, secretKey )
   }
 
-  sendRegistrationCode( secretKey: Code ): Observable< AuthResponse > {
-    return this.http.post< AuthResponse >( this._sendRegistrationCodeURL, secretKey )
+  public sendRegistrationCode(secretKey: Code): Observable<AuthResponse> {
+    return this.http.post<AuthResponse>( this._sendRegistrationCodeURL, secretKey )
   }
 
-  storeResponse( data: AuthResponse ): void {
+  public storeResponse(data: AuthResponse): void {
     localStorage.setItem(this._TOKEN, data.token)
     localStorage.setItem(this._STATUS, data.status)
   }
 
-  get isLoggedIn(): boolean {
+  public get isLoggedIn(): boolean {
     return !!localStorage.getItem(this._TOKEN)
   }
 
-  get getToken(): string | null {
+  public get getToken(): string | null {
     return localStorage.getItem(this._TOKEN)
   }
 
-  get getStatus(): string | null {
+  public get getStatus(): string | null {
     return localStorage.getItem(this._STATUS)
   }
 
-  logoutUser(): void {
+  public logoutUser(): void {
     localStorage.removeItem(this._TOKEN)
     localStorage.removeItem(this._STATUS)
   }

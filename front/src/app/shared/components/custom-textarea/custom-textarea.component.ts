@@ -16,17 +16,17 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 export class CustomTextareaComponent implements ControlValueAccessor {
   @Input('invalid') invalid: string = '';
   @Input('placeholder') placeholder: string = '';
-  @Input('name') name: string = ''
+  @Input('name') name: string = '';
+  public val: string = '';
 
   public isFocused: boolean = false
 
-  setFocus() {
+  public setFocus(): void {
     this.isFocused = true
     this.onTouched()
   }
-  public val: string = '';
 
-  set value(val : string) {
+  public set value(val : string) {
     if (val !== undefined && this.val !== val) {
       this.val = val
       this.onChange(val)

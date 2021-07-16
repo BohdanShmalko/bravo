@@ -1,5 +1,6 @@
 import { ActionReducer } from '@ngrx/store';
-import {UserActions, userActionsType} from "@core/reducers/user/user.actions";
+
+import { UserActions, userActionsType } from '@core/reducers/user/user.actions';
 
 export type UserNodeType = 'user';
 export const userNode: UserNodeType = 'user';

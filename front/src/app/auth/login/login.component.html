@@ -1,7 +1,7 @@
-<div class="main_container">
-  <div class="header_text">Log In</div>
-  <div class="content_container">
-    <div class="input_container" [formGroup]="loginForm">
+<div class="main-container">
+  <div class="header-text">Log In</div>
+  <div class="content-container">
+    <div class="input-container" [formGroup]="loginForm">
       <app-custom-input
         type="email"
         formControlName="email"
@@ -11,10 +11,10 @@
         placeholder="email@email.com" name="Your Email">
       </app-custom-input>
     </div>
-    <div class="text_container">
+    <div class="text-container">
       Enter the email you signed up with to receive your login code
     </div>
-    <div class="button_container">
+    <div class="button-container">
       <app-custom-button
         [disabled]="!formIsInvalid"
         (onClick)="clickHandler()" text="Log In">

@@ -25,10 +25,10 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [ RouterModule.forRoot(routes) ],
-  exports: [ RouterModule ]
+  imports: [RouterModule.forRoot(routes)],
+  exports: [RouterModule]
 })
 export class AppRoutingModule {
 }
 export type AppRoutingComponentsType = typeof PageNotFoundComponent | typeof DigitsViewComponent;
-export const AppRoutingComponents : AppRoutingComponentsType[] = [ PageNotFoundComponent, DigitsViewComponent ];
+export const AppRoutingComponents : AppRoutingComponentsType[] = [PageNotFoundComponent, DigitsViewComponent];

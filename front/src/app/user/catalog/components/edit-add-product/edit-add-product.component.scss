@@ -1,59 +1,59 @@
 @import 'variables';
 
-.main_container {
+.main-container {
   width: 376px;
 }
 
-.double_input {
+.double-input {
   display: flex;
   flex-direction: row;
   justify-content: center;
 }
 
-.half_input {
+.half-input {
   width: 180px;
 }
 
-.half_input:first-child {
+.half-input:first-child {
   margin-right: 16px;
 }
 
-.add_button {
+.add-button {
   width: 130px;
   margin-top: 16px;
 }
 
-.space_top {
+.space-top {
   margin-top: 34px;
 }
 
-.close_button {
+.close-button {
   margin-right: 16px;
   width: 90px;
 }
 
-.done_container {
+.done-container {
   width: 108px;
 }
 
-.add_unit_container {
+.add-unit-container {
   display: flex;
   flex-direction: row;
   margin-top: 16px;
   align-items: center;
 }
 
-.unit_add {
+.unit-add {
   width: 180px;
   margin-right: 16px;
 }
 
-.price_add {
+.price-add {
   width: 124px;
   margin-right: 16px;
 }
 
-.add_button_container {
+.add-button-container {
   width: 177px;
 }
 
@@ -69,6 +69,6 @@
 }
 
 .delete:hover {
-  background-color: $hover_delete_color;
-  color: $red_button_color
+  background-color: $hover-delete-color;
+  color: $red-button-color
 }
