@@ -24,14 +24,14 @@
 
     <ng-container matColumnDef="unit">
       <th mat-header-cell *matHeaderCellDef> Unit</th>
-      <td (click)="dialogEdit(element)" mat-cell *matCellDef="let element"> {{element.unit[0]}}
-        <span class="more-unit" *ngIf="element.unit.length > 1">+{{ element.unit.length - 1 }} more</span>
+      <td (click)="dialogEdit(element)" mat-cell *matCellDef="let element"> {{element.units[0]?.unit}}
+        <span class="more-unit" *ngIf="element.units.length > 1">+{{ element.units.length - 1 }} more</span>
       </td>
     </ng-container>
 
     <ng-container matColumnDef="price">
       <th mat-header-cell *matHeaderCellDef> Price</th>
-      <td (click)="dialogEdit(element)" mat-cell *matCellDef="let element"> {{element.price}} </td>
+      <td (click)="dialogEdit(element)" mat-cell *matCellDef="let element"> {{element.units[0]?.price}} </td>
     </ng-container>
 
     <ng-container matColumnDef="availability">

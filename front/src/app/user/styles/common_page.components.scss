@@ -1,4 +1,5 @@
 @import 'variables';
+@import 'mixins';
 
 .searcher {
   width: 350px;
@@ -12,13 +13,12 @@
 table {
   width: 100%;
   box-shadow: none;
-  border-radius: 8px 8px 0px 0px;
+  border-radius: 8px 8px;
   overflow:hidden !important;
   cursor: pointer;
 
   th {
-    font-family: Manrope;
-    font-style: normal;
+   @include font;
     font-weight: bold;
     font-size: 14px;
     line-height: 142%;
@@ -35,9 +35,7 @@ table {
 }
 
 .row {
-  font-family: Manrope;
-  font-style: normal;
-  font-weight: normal;
+  @include font;
   font-size: 16px;
   line-height: 150%;
 
@@ -50,8 +48,7 @@ table {
 }
 
 .sort-icon-container {
-  display: flex;
-  flex-direction: row;
+  @include flex-row;
   align-items: center;
 
   .text-sort {

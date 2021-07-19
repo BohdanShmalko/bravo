@@ -9,4 +9,42 @@ module.exports = db => ({
         `SELECT * FROM Customers WHERE no = $1;`,
         [no]
     ).then(data => data.rows),
+
+    getUserIdByNo: (no) => db.query(
+        `SELECT user_id AS "id" FROM Customers WHERE no = $1;`,
+        [no]
+    ).then(data => data.rows),
+
+    getById: (id) => db.query(
+        `SELECT * FROM Customers WHERE id = $1;`,
+        [id]
+    ).then(data => data.rows),
+
+    getMany: (start, howMany) => db.query(
+        `SELECT id, no, name, address, delivery_days AS "deliveryDays" 
+            FROM Customers LIMIT $2 OFFSET $1;`,
+        [start, howMany]
+    ),
+
+    updateCustomer: ({ id, no, deliveryDays }) => db.query(
+        `UPDATE Customers SET no = $2, delivery_days = $3 WHERE id = $1;`,
+        [id, no, deliveryDays]
+    ),
+
+    getManyLike: (template, start, howMany) => db.query(
+        `SELECT id, no, name, address, delivery_days AS "deliveryDays"
+        FROM Customers 
+        where no ~* '${template}' 
+        OR name ~* '${template}'
+        OR address ~* '${template}'
+        OR contact_name ~* '${template}' 
+        OR contact_name ~* '${template}' 
+        OR mobile_phone ~* '${template}' 
+        LIMIT $2 OFFSET $1; `,
+        [start, howMany]
+    ),
+
+    getAllNo: () => db.query(
+        `SELECT no FROM Customers;`
+    ).then(data => data.rows),
 })

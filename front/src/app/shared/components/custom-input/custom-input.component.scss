@@ -1,28 +1,26 @@
 @import 'variables';
+@import 'mixins';
 
 .name-class {
+  @include font;
   font-size: 12px;
   line-height: 130%;
-  font-family: Manrope;
-  font-style: normal;
-  font-weight: normal;
   color: $untouched_color;
   margin-left: 15px;
 }
 
 .input-container {
-  display: flex;
-  flex-direction: row;
+  @include flex-row;
   padding: 10px;
   border: 1px solid $border-untouched-color;
   border-radius: 8px;
 }
 
 .input {
+  @include font;
   flex: 1;
   border: none;
   outline: none;
-  font-family: Manrope;
   font-size: 16px;
   line-height: 150%;
   background-color: $invisible;
@@ -53,7 +51,7 @@
   border: 1px solid $input-success-color;
 }
 
-.success_text {
+.success-text {
   color: $input-success-color;
 }
 

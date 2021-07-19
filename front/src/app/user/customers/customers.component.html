@@ -1,6 +1,6 @@
 <app-header name="Customer">
-  <app-header-button (click)="addCustomer()" [active]="false" color="blue" icon="add" name="add customer">
-  </app-header-button>
+<!--  <app-header-button (click)="addCustomer()" [active]="false" color="blue" icon="add" name="add customer">-->
+<!--  </app-header-button>-->
 </app-header>
 
 <div class="searcher">
@@ -27,7 +27,7 @@
 
     <ng-container matColumnDef="deliveryDays">
       <th mat-header-cell *matHeaderCellDef> Delivery Days </th>
-      <td mat-cell *matCellDef="let element"> {{element.deliveryDays}} </td>
+      <td mat-cell *matCellDef="let element"> {{element.deliveryDays | days}} </td>
     </ng-container>
 
     <tr mat-header-row *matHeaderRowDef="visibleColumns"></tr>
@@ -36,13 +36,14 @@
   </table>
 
 <app-empty-table *ngIf="dataTable.length === 0" name="customers">
-  <app-header-button [active]="false" color="blue" icon="add" name="add customer">
-  </app-header-button>
+<!--  <app-header-button [active]="false" color="blue" icon="add" name="add customer">-->
+<!--  </app-header-button>-->
 </app-empty-table>
 
   <app-custom-paginator
-    [itemsInPage]="10"
-    [itemsCount]="103"
+    *ngrxLet="customersCount$ as count"
+    [itemsInPage]="sortedData.length"
+    [itemsCount]="count"
     (onChangeOption)="changeHowManyLoad($event)"
     (onBack)="loadPageData($event)"
     (onForward)="loadPageData($event)"

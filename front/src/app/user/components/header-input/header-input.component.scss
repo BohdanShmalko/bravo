@@ -1,8 +1,8 @@
 @import 'variables';
+@import 'mixins';
 
 .main-container {
-  display: flex;
-  flex-direction: row;
+  @include flex-row;
   background-color: $auth-form-color;
   flex: 1;
   box-sizing: border-box;
@@ -16,9 +16,9 @@
 }
 
 .input {
+  @include font;
   border: none;
   outline: none;
-  font-family: Manrope;
   font-size: 16px;
   line-height: 150%;
   background-color: $invisible;

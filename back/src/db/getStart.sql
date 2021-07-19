@@ -45,8 +45,7 @@ CREATE TABLE Orders
     orderate_date BIGSERIAL   NOT NULL,
     notes         TEXT        NULL,
     items         INT         NOT NULL,
-    product_id    INT         NOT NULL REFERENCES Products (id) ON DELETE CASCADE,
-    customer_id   INT         NULL
+    customer_id   INT         NOT NULL REFERENCES Customers (id) ON DELETE CASCADE
 );
 
 CREATE TABLE Replacements
@@ -70,6 +69,13 @@ CREATE TABLE Exclusive
     percent    double precision NOT NULL,
     product_id INT              NOT NULL REFERENCES Products (id) ON DELETE CASCADE,
     user_id    INT              NOT NULL REFERENCES Users (id) ON DELETE CASCADE
+);
+
+CREATE TABLE Exclusive
+(
+    id         SERIAL           NOT NULL PRIMARY KEY,
+    order_id INT              NOT NULL REFERENCES Orders (id) ON DELETE CASCADE,
+    unit_id    INT              NOT NULL REFERENCES Units (id) ON DELETE CASCADE
 );
 
 INSERT INTO Users (email, status, creation_date)

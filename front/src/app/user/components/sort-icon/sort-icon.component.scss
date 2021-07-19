@@ -1,11 +1,11 @@
 @import 'variables';
-
+@import 'mixins';
 
 .main-container {
+  @include flex-column;
   width: 24px;
   height: 24px;
   cursor: pointer;
-  display: flex;
   justify-content: center;
   align-items: center;
 }
@@ -17,8 +17,8 @@
 }
 
 .icon {
+  @include flex-column;
   font-size: 20px;
-  display: flex;
   justify-content: center;
   align-items: center;
 }

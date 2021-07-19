@@ -1,8 +1,5 @@
 @import 'variables';
-
-.main-container {
-
-}
+@import 'mixins';
 
 .checkbox-container {
   padding-right: 17px;
@@ -20,9 +17,7 @@
 }
 
 .header {
-  ont-family: Manrope;
-  font-style: normal;
-  font-weight: normal;
+  @include font;
   font-size: 12px;
   line-height: 130%;
 

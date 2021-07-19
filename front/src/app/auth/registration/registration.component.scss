@@ -1,6 +1,8 @@
 @import 'variables';
+@import 'mixins';
 
 .main-container {
+  @include flex-column;
   margin-top: 50px;
   background: $auth-form-color;
   width: 440px;
@@ -8,23 +10,19 @@
   border: 1px solid $auth-border-color;
   box-sizing: border-box;
   border-radius: 8px;
-  display: flex;
-  flex-direction: column;
   align-items: center;
   padding: 48px;
 }
 
 .header-text {
-  font-family: Manrope;
-  font-style: normal;
+  @include font;
   font-weight: 600;
   font-size: 24px;
   line-height: 132%;
 }
 
 .content-container {
-  display: flex;
-  flex-direction: column;
+  @include flex-column;
   justify-content: center;
 }
 
@@ -33,12 +31,10 @@
 }
 
 .text-container {
+  @include font;
   margin-top: 20px;
   padding-left: 50px;
   padding-right: 50px;
-  font-family: Manrope;
-  font-style: normal;
-  font-weight: normal;
   font-size: 12px;
   line-height: 130%;
   text-align: center;
@@ -50,23 +46,21 @@
   margin-top: 30px;
 }
 
-message-error {
+.message-error {
+  @include font;
   font-size: 12px;
   color: $input-error-color;
   line-height: 130%;
-  font-family: Manrope;
-  font-style: normal;
-  font-weight: normal;
   margin-left: 15px;
 }
 
 @media (max-width: 320px) {
-  .main_container {
+  .main-container {
     width: 320px;
     border: none;
     padding: 16px;
   }
   ::ng-deep .mat-horizontal-stepper-header {
-    width: 0px !important;
+    width: 0 !important;
   }
 }

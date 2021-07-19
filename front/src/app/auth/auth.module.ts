@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { ReactiveComponentModule } from '@ngrx/component';
 import { MatStepperModule } from '@angular/material/stepper';

@@ -1,12 +1,10 @@
 @import 'variables';
-
+@import 'mixins';
 
 .header {
+  @include font;
   font-size: 12px;
   line-height: 130%;
-  font-family: Manrope;
-  font-style: normal;
-  font-weight: normal;
   color: $untouched_color;
   margin-left: 15px;
 }
@@ -34,11 +32,11 @@
 }
 
 .textarea {
+  @include font;
   min-width: 120px;
   width: 100%;
   border: none;
   outline: none;
-  font-family: Manrope;
   font-size: 16px;
   line-height: 150%;
   background-color: $invisible;

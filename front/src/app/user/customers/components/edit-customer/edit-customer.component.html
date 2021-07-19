@@ -1,12 +1,13 @@
 <mat-dialog-content>
-    <div class="main-container">
+    <div class="main-container" [formGroup]="customerForm">
       <app-dialog-header name="Edit Customer"></app-dialog-header>
 
       <div class="content">
 
         <div class="first-input-container input-container">
           <app-custom-input
-            placeholder="BB-135"
+            formControlName="no"
+            [placeholder]="BB-135"
             name="Customer No">
           </app-custom-input>
         </div>
@@ -45,6 +46,7 @@
 
           <div class="done-container">
             <app-custom-button
+              (onClick)="saveData()"
               icon="done"
               [disabled]="false"
               color="blue"

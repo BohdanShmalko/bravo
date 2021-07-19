@@ -31,4 +31,4 @@ ALTER ROLE bravouser createrole createdb;
 
 ## Datalogic model
 
-![datalogic model](...)
+![datalogic model](https://github.com/BohdanShmalko/bravo/blob/main/back/assets/model.png?raw=true)

@@ -1,13 +1,13 @@
 @import 'variables';
+@import 'mixins';
 
 .main-container {
-  display: flex;
-  flex-direction: row;
+  @include flex-row;
   flex: 1;
   background-color: $auth-form-color;
   border: 1px solid $auth-form-color;
   box-sizing: border-box;
-  border-radius: 0px 0px 8px 8px;
+  border-radius: 0 0 8px 8px;
   height: 56px;
 }
 
@@ -16,17 +16,14 @@
 }
 
 .content-container {
-  display: flex;
-  flex-direction: row;
+  @include flex-row;
   justify-content: center;
   padding: 8px;
 }
 
 .text {
+  @include font;
   height: 20px;
-  font-family: Manrope;
-  font-style: normal;
-  font-weight: normal;
   font-size: 14px;
   line-height: 142%;
   letter-spacing: 0.0168em;
@@ -49,28 +46,25 @@
 }
 
 .chooser-container {
+  @include flex-row;
   margin-left: 3.5px;
-  display: flex;
-  flex-direction: row;
 }
 
 .chooser {
+  @include font;
   padding: 8px;
   text-align: center;
-  font-family: Manrope;
-  font-style: normal;
-  font-weight: normal;
   font-size: 16px;
   line-height: 150%;
 }
 
 .button {
+  @include flex-column;
   width: 32px;
   height: 32px;
   margin-left: 12px;
   background-color: $auth-border-color;
   border-radius: 18px;
-  display: flex;
   justify-content: center;
   align-items: center;
   cursor: pointer;

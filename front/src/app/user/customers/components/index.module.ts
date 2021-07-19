@@ -7,6 +7,8 @@ import { UserComponentsModule } from '../../components/index.module';
 import { SharedModule } from '@shared/shared.module';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatInputModule } from '@angular/material/input';
+import {ReactiveFormsModule} from "@angular/forms";
+import {ReactiveComponentModule} from "@ngrx/component";
 
 type ComponentsType =
   typeof AddCustomerComponent |
@@ -20,7 +22,8 @@ const components : ComponentsType[] = [
 @NgModule({
   declarations: [ components ],
   imports: [
-    MatDialogModule, UserComponentsModule, SharedModule, MatCheckboxModule, MatInputModule
+    MatDialogModule, UserComponentsModule, SharedModule, MatCheckboxModule, MatInputModule, ReactiveFormsModule,
+    ReactiveComponentModule,
   ],
   exports: [ components ]
 })

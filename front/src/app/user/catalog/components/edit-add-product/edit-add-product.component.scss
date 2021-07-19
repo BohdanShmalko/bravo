@@ -1,12 +1,12 @@
 @import 'variables';
+@import 'mixins';
 
 .main-container {
   width: 376px;
 }
 
 .double-input {
-  display: flex;
-  flex-direction: row;
+  @include flex-row;
   justify-content: center;
 }
 
@@ -37,8 +37,7 @@
 }
 
 .add-unit-container {
-  display: flex;
-  flex-direction: row;
+  @include flex-row;
   margin-top: 16px;
   align-items: center;
 }
@@ -58,9 +57,9 @@
 }
 
 .delete {
+  @include flex-column;
   width: 40px;
   height: 40px;
-  display: flex;
   justify-content: center;
   align-items: center;
   border-radius: 50%;

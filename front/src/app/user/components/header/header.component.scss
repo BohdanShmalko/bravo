@@ -1,15 +1,9 @@
 @import 'variables';
+@import 'mixins';
 
-.main-container {
-  display: flex;
-  flex-direction: row;
+.main-container, .left-part {
+  @include flex-row;
   flex: 1;
-}
-
-.left-part {
-  flex: 1;
-  display: flex;
-  flex-direction: row;
 }
 
 .icon-container {
@@ -21,14 +15,12 @@
 }
 
 .name-container {
-  font-family: Manrope;
-  font-style: normal;
+  @include font;
   font-weight: 600;
   font-size: 24px;
   line-height: 132%;
 }
 
 .content {
-  display: flex;
-  flex-direction: row;
+  @include flex-row;
 }

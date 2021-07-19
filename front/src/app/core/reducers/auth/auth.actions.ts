@@ -1,6 +1,7 @@
 import { Action } from '@ngrx/store';
 
 import { AuthResponse, Code, EmailType, RegistrationType, Error } from '@core/services/auth/auth.service';
+import { StatusType } from '@core/reducers/auth/auth.reducers';
 
 export enum authActionsType {
   logout = '[AUTH] logout', //to reducer
@@ -21,7 +22,7 @@ export enum authActionsType {
 
 export interface LoginData {
   isRegisteredUser: boolean,
-  status: string,
+  status: StatusType,
 }
 
 export class LogoutAction implements Action {

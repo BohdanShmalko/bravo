@@ -1,18 +1,16 @@
 @import 'variables';
+@import 'mixins';
 
 .name {
+  @include font;
   font-size: 12px;
   line-height: 130%;
-  font-family: Manrope;
-  font-style: normal;
-  font-weight: normal;
   color: $untouched_color;
   margin-left: 15px;
 }
 
 .code-container {
-  display: flex;
-  flex-direction: row;
+  @include flex-row;
 }
 
 .input-container {
@@ -29,12 +27,12 @@
 }
 
 .input-class {
+  @include font;
   margin-left: 10px;
   width: 130px;
   border-radius: 8px;
   border: none;
   outline: none;
-  font-family: Manrope;
   font-size: 30px;
   letter-spacing: 30px;
   line-height: 150%;

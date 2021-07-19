@@ -1,6 +1,8 @@
 import { Component, forwardRef } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
+export type OneDayType = 'mon' | 'tue' | 'wed' | 'thu' | 'fri' | 'sat' | 'san';
+
 export interface DaysType {
   mon : boolean,
   tue : boolean,

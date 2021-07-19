@@ -35,9 +35,9 @@ export class SnackbarService {
     };
 
     if (type === 'done')
-      snackbar.openFromComponent(DoneSnackbarComponent, {...settings, panelClass: 'doneSnack'});
+      snackbar.openFromComponent(DoneSnackbarComponent, {...settings, panelClass: 'done-snack'});
 
     if (type === 'wait')
-      snackbar.openFromComponent(WaitSnackbarComponent, {...settings, panelClass: 'waitSnack'});
+      snackbar.openFromComponent(WaitSnackbarComponent, {...settings, panelClass: 'wait-snack'});
   }
 }

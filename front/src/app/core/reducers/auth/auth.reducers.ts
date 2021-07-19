@@ -5,9 +5,11 @@ import {AuthActions, authActionsType} from '@core/reducers/auth/auth.actions';
 export type AuthNodeType = 'auth';
 export const authNode: AuthNodeType = 'auth';
 
+export type StatusType = 'admin' | 'customer' | '';
+
 export interface AuthState {
   isRegisteredUser: boolean,
-  status: string,
+  status: StatusType,
   loginError: string,
   registrationError: string,
   digitError: string

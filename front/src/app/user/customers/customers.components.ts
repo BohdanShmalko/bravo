@@ -1,16 +1,23 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import { Sort } from '@angular/material/sort';
 import { MatDialog } from '@angular/material/dialog';
 
-import { AddCustomerComponent } from './components/add-customer/add-customer.component';
+//import { AddCustomerComponent } from './components/add-customer/add-customer.component';
 import { EditCustomerComponent } from './components/edit-customer/edit-customer.component';
 import { SortService } from '@core/services/sort/sort.service';
+import { DaysType } from'@shared/components';
+import { select, Store } from '@ngrx/store';
+import { UserState } from '@core/reducers/user/user.reducers';
+import { GetCustomersAction, GetCustomersLikeAction } from '@core/reducers/user/user.actions';
+import { selectCustomers, selectCustomersSize } from '@core/reducers/user/user.selector';
+import { Subscription } from 'rxjs';
 
 export interface DataTableCustomers {
+  id?: number,
   no: string,
   name: string,
   address: string,
-  deliveryDays: string
+  deliveryDays: DaysType
 }
 
 @Component({
@@ -18,24 +25,32 @@ export interface DataTableCustomers {
   templateUrl: './customers.component.html',
   styleUrls: ['./customers.component.scss', '../styles/common_page.components.scss']
 })
-export class CustomersComponents implements OnInit{
+export class CustomersComponents implements OnInit, OnDestroy{
   public val:string = '';
   public howManyLoad: number = 5;
-  public customersCount: number;
+  public customersCount$ = this.userStorage.pipe(select(selectCustomersSize));
   public visibleColumns: string[] = ['no', 'name', 'address', 'deliveryDays'];
-  public dataTable: DataTableCustomers[] = [
-    { no: 'my no', name: 'my name 1', address: 'my address', deliveryDays: 'some days' },
-    { no: 'my no', name: 'my name 3', address: 'my address', deliveryDays: 'some days' },
-    { no: 'my no', name: 'my name 2', address: 'my address', deliveryDays: 'some days' }
-  ]
+  public dataTable: DataTableCustomers[] = []
+  private dataObserver: Subscription = this.userStorage.pipe(select( selectCustomers )).subscribe((data: DataTableCustomers[]) => {
+    this.dataTable = data;
+    this.sortedData = data;
+  })
 
   public sortedData: DataTableCustomers[];
+  private loadType: 'simple' | 'like' = 'simple';
 
-  constructor(private dialog: MatDialog, private sorter: SortService) {
+  constructor(private dialog: MatDialog, private sorter: SortService, private userStorage: Store<UserState>) {
   }
 
   public set value(template: string) {
-    //TODO get for template
+    if(template !== ''){
+      this.loadType = 'like';
+      this.userStorage.dispatch(new GetCustomersLikeAction({ start: 0, howMany: this.howManyLoad, template }))
+    }
+    else {
+      this.loadType = 'simple';
+      this.userStorage.dispatch(new GetCustomersAction({ start: 0, howMany: this.howManyLoad }))
+    }
     this.val = template;
   }
 
@@ -47,8 +62,11 @@ export class CustomersComponents implements OnInit{
 
   public ngOnInit(): void {
     this.sortedData = this.dataTable.slice();
-    //TODO to load customers
-    this.customersCount = 0;
+    this.userStorage.dispatch(new GetCustomersAction({ start: 0, howMany: this.howManyLoad }))
+  }
+
+  public ngOnDestroy(): void {
+    this.dataObserver.unsubscribe();
   }
 
   public changeHowManyLoad(count: number): void {
@@ -56,7 +74,7 @@ export class CustomersComponents implements OnInit{
   }
 
   public loadPageData(startWith: number): void {
-    //TODO to load customers
+    this.userStorage.dispatch(new GetCustomersAction({ start: startWith, howMany: this.howManyLoad }))
   }
 
   public dialogEdit(event: DataTableCustomers): void {
@@ -65,8 +83,8 @@ export class CustomersComponents implements OnInit{
     })
   }
 
-  public addCustomer():void {
-    this.dialog.open(AddCustomerComponent)
-  }
+  // public addCustomer():void {
+  //   this.dialog.open(AddCustomerComponent)
+  // }
 
 }

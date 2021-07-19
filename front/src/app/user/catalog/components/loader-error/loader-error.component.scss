@@ -1,9 +1,9 @@
 @import 'variables';
+@import 'mixins';
 
 .main-container {
+  @include flex-row;
   color : $red-button-color;
-  display: flex;
-  flex-direction: row;
 }
 
 .icon {
@@ -13,9 +13,7 @@
 }
 
 .text {
-  font-family: Manrope;
-  font-style: normal;
-  font-weight: normal;
+  @include font;
   font-size: 14px;
   line-height: 142%;
 

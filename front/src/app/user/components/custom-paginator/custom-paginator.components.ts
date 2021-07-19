@@ -1,11 +1,11 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {AfterViewInit, Component, EventEmitter, Input, OnChanges, OnInit, Output} from '@angular/core';
 
 @Component({
   selector: 'app-custom-paginator',
   templateUrl: './custom-paginator.component.html',
   styleUrls: ['./custom-paginator.component.scss']
 })
-export class CustomPaginatorComponents implements OnInit{
+export class CustomPaginatorComponents implements OnChanges{
   @Input('itemsInPage') itemsInPage: number = 0;
   @Input('itemsCount') itemsCount: number = 0;
   @Output('onChangeOption') onChangeOption: EventEmitter<number> = new EventEmitter<number>();
@@ -37,7 +37,7 @@ export class CustomPaginatorComponents implements OnInit{
   }
 
   public backPage(): void {
-    if (this.currentBlock !== 1) {
+    if (this.currentBlock > 1) {
       this.currentBlock--;
       let startWith: number = this.itemsSize * (this.currentBlock - 1);
       this.onForward.emit(startWith);
@@ -45,7 +45,7 @@ export class CustomPaginatorComponents implements OnInit{
   }
 
   public nextPage(): void {
-    if (this.currentBlock !== this.blockCount) {
+    if (this.currentBlock < this.blockCount) {
       let startWith: number = this.itemsSize * this.currentBlock;
       this.currentBlock++;
       this.onForward.emit(startWith);
@@ -60,8 +60,8 @@ export class CustomPaginatorComponents implements OnInit{
     }
   }
 
-  public ngOnInit(): void {
-    this.blockCount = Math.ceil(this.itemsCount / this.itemsSize);
+  public ngOnChanges(): void {
+    this.itemsSizeSet = 5; //???
   }
 
 }

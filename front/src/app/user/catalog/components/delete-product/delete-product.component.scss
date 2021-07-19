@@ -1,3 +1,5 @@
+@import 'mixins';
+
 .main-container {
   width: 440px;
 }
@@ -12,14 +14,11 @@
 }
 
 .description {
+  @include font;
   margin-top: 16px;
   width: 392px;
-  font-family: Manrope;
-  font-style: normal;
-  font-weight: normal;
   font-size: 16px;
   line-height: 150%;
   letter-spacing: 0.0168em;
   font-feature-settings: 'tnum' on, 'lnum' on;
-
 }

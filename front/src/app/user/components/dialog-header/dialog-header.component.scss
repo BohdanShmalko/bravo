@@ -1,6 +1,7 @@
+@import 'mixins';
+
 .main-container {
-  display: flex;
-  flex-direction: row;
+  @include flex-row;
   flex: 1;
 }
 
@@ -9,9 +10,8 @@
 }
 
 .header {
+  @include font;
   height: 32px;
-  font-family: Manrope;
-  font-style: normal;
   font-weight: 600;
   font-size: 24px;
   line-height: 132%;

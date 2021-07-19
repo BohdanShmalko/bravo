@@ -1,3 +1,5 @@
+@import 'mixins';
+
 .main-container {
   width: 376px;
   height: 780px;
@@ -22,9 +24,8 @@
 }
 
 .check-container {
+  @include font;
   margin-top: 23px;
-  font-family: Manrope;
-  font-style: normal;
   font-weight: bold;
   font-size: 16px;
   line-height: 150%;

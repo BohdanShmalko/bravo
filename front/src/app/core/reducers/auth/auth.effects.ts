@@ -19,6 +19,7 @@ import {
   SetDigitsErrorAction, SetLoginDataAction,
   SetLoginErrorAction, SetRegistrationErrorAction
 } from '@core/reducers/auth/auth.actions';
+import { StatusType } from '@core/reducers/auth/auth.reducers';
 
 @Injectable()
 export class AuthEffects {
@@ -96,7 +97,7 @@ export class AuthEffects {
       ofType(authActionsType.loadFromLocalStorage),
       map(() => {
         const isRegisteredUser: boolean = this.authService.isLoggedIn;
-        let status: string | null = this.authService.getStatus
+        let status: StatusType | null = this.authService.getStatus
         if(status === null) status = ''
         return new SetLoginDataAction({ status, isRegisteredUser });
       })

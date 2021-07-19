@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 import { DaysType } from '@shared/components';
+import { StatusType } from '@core/reducers/auth/auth.reducers';
 
 export interface EmailType {
   email: string,
@@ -10,7 +11,7 @@ export interface EmailType {
 
 export interface AuthResponse {
   token: string,
-  status: string
+  status: StatusType
 }
 
 export interface TokenType {
@@ -80,8 +81,8 @@ export class AuthService {
     return localStorage.getItem(this._TOKEN)
   }
 
-  public get getStatus(): string | null {
-    return localStorage.getItem(this._STATUS)
+  public get getStatus(): StatusType | null {
+    return localStorage.getItem(this._STATUS) as StatusType;
   }
 
   public logoutUser(): void {

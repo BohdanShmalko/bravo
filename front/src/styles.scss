@@ -11,7 +11,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   line-height: 150%;
 }
 
-@mixin snackbarGlobalClass {
+@mixin snackbar-global-class {
   .main-container {
     display: flex;
     flex-direction: row;
@@ -60,12 +60,12 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   }
 }
 
-.doneSnack.mat-snack-bar-container {
-  @include snackbarGlobalClass;
+.done-snack.mat-snack-bar-container {
+  @include snackbar-global-class;
   background-color: $done-background;
 }
 
-.waitSnack.mat-snack-bar-container {
-  @include snackbarGlobalClass;
+.wait-snack.mat-snack-bar-container {
+  @include snackbar-global-class;
   background-color: $wait-background;
 }
