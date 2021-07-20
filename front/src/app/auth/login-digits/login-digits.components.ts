@@ -15,12 +15,12 @@ import { LoadingService } from '@core/services/loading/loading.service';
 export class LoginDigitsComponents implements OnInit{
   public pageType: 'registration' | 'login';
 
-  public serverErrorMessage$ = this.storage$.pipe( select( selectDigitError ) )
+  public serverErrorMessage$ = this.storage.pipe( select( selectDigitError ) )
 
   constructor(
     private activatedRoute : ActivatedRoute,
     private router : Router,
-    private storage$: Store<AuthState>,
+    private storage: Store<AuthState>,
     public loadingService: LoadingService
   ) {
   }
@@ -34,10 +34,10 @@ export class LoginDigitsComponents implements OnInit{
 
   public onEvent(event : string): void {
     if (this.pageType === 'login')
-      this.storage$.dispatch(new SendLoginDigitsAction({ secretKey: event }))
+      this.storage.dispatch(new SendLoginDigitsAction({ secretKey: event }))
 
     if (this.pageType === 'registration')
-      this.storage$.dispatch(new SendRegistrationDigitsAction({ secretKey: event }))
+      this.storage.dispatch(new SendRegistrationDigitsAction({ secretKey: event }))
 
   }
 

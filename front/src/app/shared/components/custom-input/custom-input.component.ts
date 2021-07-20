@@ -1,4 +1,4 @@
-import { Component, forwardRef, Input } from '@angular/core';
+import {Component, forwardRef, Input, OnInit} from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 @Component({
@@ -20,7 +20,8 @@ export class CustomInputComponent implements ControlValueAccessor {
   @Input('name') name: string = '';
   @Input('type') type: string = 'text';
   @Input('disabled') disabled: boolean = false;
-  public val: string = '';
+  @Input('defaultValue') defaultValue: string = '';
+  public val: string;
 
   public isFocused: boolean = false
 
@@ -29,12 +30,9 @@ export class CustomInputComponent implements ControlValueAccessor {
     this.onTouched()
   }
 
-  public set value(val : string) {
-    if (val !== undefined && this.val !== val) {
-      this.val = val
-      this.onChange(val)
+  setValue() {
+      this.onChange(this.val)
       this.onTouched()
-    }
   }
 
 
@@ -42,7 +40,8 @@ export class CustomInputComponent implements ControlValueAccessor {
   public onTouched: () => void = () => {};
 
   public writeValue(value: string): void{
-    this.value = value
+    this.val = value;
+    this.setValue()
   }
 
   public registerOnChange(fn: (val: string) => void): void {
@@ -52,4 +51,5 @@ export class CustomInputComponent implements ControlValueAccessor {
   public registerOnTouched(fn: () => void): void {
     this.onTouched = fn;
   }
+
 }

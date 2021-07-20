@@ -18,7 +18,7 @@ edit customer | /admin/editCustomer | PUT | {id, no, deliveryDays} | YES | {mess
 get customers like template | /admin/getCustomersLike/:template/:start/:howMany | GET | ----- | YES | {size, data: [{ no, name, address, deliveryDays }]}/{message : "error"}
 get products | /admin/getProducts/:start/:howMany | GET | ----- | YES | {size, data: [{id, code, name, units: [{unit, price}], availability}]}/{message : "error"}
 delete product | /admin/deleteProduct/:id | DELETE | ----- | YES | {message: "ok"}/{message : "error"}
-add product | /admin/addProduct | POST | {code, name, units: [{unit, price}], availability, exclusive: ["no"], replacement: ["code"]} | YES | {message: "ok"}/{message : "error"}
+add product | /admin/addProduct | POST | {code, name, units: [{unit, price}], availability, exclusive: ["no"], replacement: ["code"]} | YES | {id}/{message : "error"}
 edit product | /admin/addProduct | PUT | {id, code, name, units: [{unit, price}], availability, exclusive: ["no"], replacement: ["code"]} | YES | {message: "ok"}/{message : "error"}
 all customers no | /admin/allCustomerNo | GET | ----- | YES | ["no"]/{message : "error"}
 all products code | /admin/allProductsCode | GET | ----- | YES | ["code"]/{message : "error"}

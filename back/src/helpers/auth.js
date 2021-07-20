@@ -45,7 +45,10 @@ const checkSendRegistrationBody = req => {
 
 const existNo = async (req) => {
     const [existingNo] = await customerRepo(req.db).getByNo(req.body.no);
-    return existingNo;
+    const [existingId] = await customerRepo(req.db).getById(req.body.id);
+    if(!existingNo) return false;
+    if(!existingId) return false;
+    return existingNo.id !== existingId.id;
 }
 
 const tokenSendRegistration = req => {

@@ -7,10 +7,10 @@ import { EditCustomerComponent } from './components/edit-customer/edit-customer.
 import { SortService } from '@core/services/sort/sort.service';
 import { DaysType } from'@shared/components';
 import { select, Store } from '@ngrx/store';
-import { UserState } from '@core/reducers/user/user.reducers';
-import { GetCustomersAction, GetCustomersLikeAction } from '@core/reducers/user/user.actions';
-import { selectCustomers, selectCustomersSize } from '@core/reducers/user/user.selector';
 import { Subscription } from 'rxjs';
+import { CustomersState } from '@core/reducers/customers/customers.reducers';
+import { selectCustomers, selectCustomersSize } from '@core/reducers/customers/customers.selector';
+import { GetCustomersAction, GetCustomersLikeAction } from '@core/reducers/customers/customers.actions';
 
 export interface DataTableCustomers {
   id?: number,
@@ -32,26 +32,28 @@ export class CustomersComponents implements OnInit, OnDestroy{
   public visibleColumns: string[] = ['no', 'name', 'address', 'deliveryDays'];
   public dataTable: DataTableCustomers[] = []
   private dataObserver: Subscription = this.userStorage.pipe(select( selectCustomers )).subscribe((data: DataTableCustomers[]) => {
-    this.dataTable = data;
-    this.sortedData = data;
+      this.dataTable = data;
+      this.sortedData = data;
   })
 
   public sortedData: DataTableCustomers[];
   private loadType: 'simple' | 'like' = 'simple';
 
-  constructor(private dialog: MatDialog, private sorter: SortService, private userStorage: Store<UserState>) {
+  constructor(private dialog: MatDialog, private sorter: SortService, private userStorage: Store<CustomersState>) {
   }
 
   public set value(template: string) {
-    if(template !== ''){
-      this.loadType = 'like';
-      this.userStorage.dispatch(new GetCustomersLikeAction({ start: 0, howMany: this.howManyLoad, template }))
+    if(!(template.indexOf('/') + 1)){ //!!!
+      if(template !== ''){
+        this.loadType = 'like';
+        this.userStorage.dispatch(new GetCustomersLikeAction({ start: 0, howMany: this.howManyLoad, template }))
+      }
+      else {
+        this.loadType = 'simple';
+        this.userStorage.dispatch(new GetCustomersAction({ start: 0, howMany: this.howManyLoad }))
+      }
+      this.val = template;
     }
-    else {
-      this.loadType = 'simple';
-      this.userStorage.dispatch(new GetCustomersAction({ start: 0, howMany: this.howManyLoad }))
-    }
-    this.val = template;
   }
 
   public sortData(sort: Sort): void {
@@ -71,10 +73,17 @@ export class CustomersComponents implements OnInit, OnDestroy{
 
   public changeHowManyLoad(count: number): void {
     this.howManyLoad = count
+    if(this.loadType === 'like')
+      this.userStorage.dispatch(new GetCustomersLikeAction({ start: 0, howMany: count, template: this.val }))
+    if(this.loadType === 'simple')
+      this.userStorage.dispatch(new GetCustomersAction({ start: 0, howMany: count }))
   }
 
   public loadPageData(startWith: number): void {
-    this.userStorage.dispatch(new GetCustomersAction({ start: startWith, howMany: this.howManyLoad }))
+    if(this.loadType === 'like')
+      this.userStorage.dispatch(new GetCustomersLikeAction({ start: startWith, howMany: this.howManyLoad, template: this.val }))
+    if(this.loadType === 'simple')
+      this.userStorage.dispatch(new GetCustomersAction({ start: startWith, howMany: this.howManyLoad }))
   }
 
   public dialogEdit(event: DataTableCustomers): void {

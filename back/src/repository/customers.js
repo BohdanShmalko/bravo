@@ -47,4 +47,19 @@ module.exports = db => ({
     getAllNo: () => db.query(
         `SELECT no FROM Customers;`
     ).then(data => data.rows),
+
+    allCustomersSize: () => db.query(
+        `SELECT COUNT(id) FROM Customers;`
+    ).then(data => data.rows[0].count),
+
+    likeCustomersSize: (template) => db.query(
+        `SELECT COUNT(id)
+        FROM Customers 
+        where no ~* '${template}' 
+        OR name ~* '${template}'
+        OR address ~* '${template}'
+        OR contact_name ~* '${template}' 
+        OR contact_name ~* '${template}' 
+        OR mobile_phone ~* '${template}';`
+    ).then(data => data.rows[0].count),
 })

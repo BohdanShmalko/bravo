@@ -7,7 +7,7 @@
       <div class="text">Items per page:</div>
       <div class="chooser-width">
         <div class="chooser">
-          <mat-select [(ngModel)]="itemsSizeSet" placeholder="5">
+          <mat-select [(ngModel)]="itemsSize" (ngModelChange)="setItemSize()" placeholder="5">
             <mat-option *ngFor="let num of optionsPage" [value]="num">{{ num }}</mat-option>
           </mat-select>
         </div>

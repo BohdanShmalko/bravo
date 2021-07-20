@@ -1,3 +1,28 @@
+const queryLike = (availability, template = '') => {
+    let queryString = '';
+    if (availability.inStock) queryString += `availability = 'in stock'`
+
+    if (availability.outOfStock) {
+        if (queryString) queryString += ' OR ';
+        queryString += `availability = 'out of stock'`
+    }
+
+    if (availability.discontinued) {
+        if (queryString) queryString += ' OR ';
+        queryString += `availability = 'discontinued'`
+    }
+
+    if (!queryString) queryString = '1 = 0'
+
+    if(template) {
+        queryString += `AND (code ~* '${template}' 
+        OR name ~* '${template}'
+        OR availability ~* '${template}')`
+    }
+
+    return queryString
+}
+
 module.exports = db => ({
     deleteAll: () => db.query(
         `DELETE
@@ -57,28 +82,29 @@ module.exports = db => ({
         [id, code, name, availability]
     ),
 
-    sortedByAvailability: async (availability, start, howMany) => {
-        let queryString = '';
-        if (availability.inStock) queryString += `availability = 'in stock'`
-
-        if (availability.outOfStock) {
-            if (queryString) queryString += ' OR ';
-            queryString += `availability = 'out of stock'`
-        }
-
-        if (availability.discontinued) {
-            if (queryString) queryString += ' OR ';
-            queryString += `availability = 'discontinued'`
-        }
-
-        if (!queryString) queryString = '1 = 0'
-
-        return db.query(
+    sortedByAvailability: async (availability, start, howMany, template) =>  db.query(
             `SELECT id, code, name, availability
         FROM Products 
-        WHERE 0 = 0 AND ${queryString} 
+        WHERE 0 = 0 AND ${queryLike(availability, template)} 
         LIMIT $2 OFFSET $1;`,
             [start, howMany]
-        )
-    }
+        ),
+
+    allProductsSize: () => db.query(
+        `SELECT COUNT(id) FROM Products;`
+    ).then(data => data.rows[0].count),
+
+    availabilityProductsSize: (availability, template) => db.query(
+        `SELECT COUNT(id)
+        FROM Products 
+        WHERE 0 = 0 AND ${queryLike(availability, template)}`
+    ).then(data => data.rows[0].count),
+
+    likeProductsSize: (template) => db.query(
+        `SELECT COUNT(id)
+        FROM Products 
+        where code ~* '${template}' 
+        OR name ~* '${template}'
+        OR availability ~* '${template}';`,
+    ),
 })

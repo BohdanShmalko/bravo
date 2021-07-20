@@ -15,7 +15,7 @@
     }"
     class="input-container">
 
-    <input [disabled]="disabled" [type]="type" [(ngModel)]="value"
+    <input [disabled]="disabled" [type]="type" [(ngModel)]="val" (ngModelChange)="setValue()"
            [ngClass]="{ 'focused-cursor': isFocused }"
            class="input" [placeholder]="placeholder"
            (focus)="setFocus()" (blur)="isFocused = false">

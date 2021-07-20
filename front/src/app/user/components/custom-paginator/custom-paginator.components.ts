@@ -1,4 +1,10 @@
-import {AfterViewInit, Component, EventEmitter, Input, OnChanges, OnInit, Output} from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  EventEmitter,
+  Input, OnChanges, OnInit,
+  Output, SimpleChanges,
+} from '@angular/core';
 
 @Component({
   selector: 'app-custom-paginator',
@@ -7,7 +13,7 @@ import {AfterViewInit, Component, EventEmitter, Input, OnChanges, OnInit, Output
 })
 export class CustomPaginatorComponents implements OnChanges{
   @Input('itemsInPage') itemsInPage: number = 0;
-  @Input('itemsCount') itemsCount: number = 0;
+  @Input('itemsCount') itemsCount: number = 1;
   @Output('onChangeOption') onChangeOption: EventEmitter<number> = new EventEmitter<number>();
   @Output('onQuickBack') onQuickBack: EventEmitter<number> = new EventEmitter<number>();
   @Output('onQuickForward') onQuickForward: EventEmitter<number> = new EventEmitter<number>();
@@ -19,14 +25,13 @@ export class CustomPaginatorComponents implements OnChanges{
   public currentBlock: number = 1;
   public optionsPage: number[] = [ 5, 10, 20, 50, 100 ]
 
-  public set itemsSizeSet(size: number) {
-    this.itemsSize = size;
-    this.blockCount = Math.ceil(this.itemsCount / size);
-    this.currentBlock = 1;
-    this.onChangeOption.emit(size);
+  constructor() {
   }
 
-  constructor() {
+  public setItemSize():void {
+    this.blockCount = Math.ceil(this.itemsCount / this.itemsSize);
+    this.currentBlock = 1;
+    this.onChangeOption.emit(this.itemsSize);
   }
 
   public firstPage(): void {
@@ -60,8 +65,10 @@ export class CustomPaginatorComponents implements OnChanges{
     }
   }
 
-  public ngOnChanges(): void {
-    this.itemsSizeSet = 5; //???
+  ngOnChanges(changes: SimpleChanges) {
+    if(changes.itemsCount) {
+      this.setItemSize()
+    }
   }
 
 }

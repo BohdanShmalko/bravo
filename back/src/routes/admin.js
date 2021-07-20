@@ -61,8 +61,8 @@ router.post('/replaceCatalog', async (req, res) => {
 
 router.post('/addProduct', async (req, res) => {
     if(checkAddProductBody(req)) return send400(res, 'Invalid data');
-    await addToCatalog(req, req.body);
-    res.send({ message: 'ok' })
+    const id = await addToCatalog(req, req.body);
+    res.send({ id })
 })
 
 router.delete('/deleteProduct/:id', async (req, res) => {

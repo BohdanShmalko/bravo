@@ -13,6 +13,8 @@ export interface ErrorMessageType {
 export class FileLoaderComponent {
 
   @Output('onFileLoad') onFileLoad: EventEmitter<File> = new EventEmitter<File>();
+  @Output('onDataLoad') onDataLoad: EventEmitter<string | ArrayBuffer | null> =
+    new EventEmitter<string | ArrayBuffer | null>();
   @Input('messages') messages: ErrorMessageType[] = []
   @Input('disabled') disabled: boolean = false
 
@@ -33,6 +35,13 @@ export class FileLoaderComponent {
     this.file = file;
     this.onFileLoad.emit(file);
     this.isLoaded = true
+
+    let fileReader = new FileReader();
+    fileReader.onload = (e) => {
+      this.onDataLoad.emit(fileReader.result);
+    }
+    if(this.file)
+      fileReader.readAsText(this.file, 'UTF-8');
   }
 
   public removeFile(): void {

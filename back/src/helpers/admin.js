@@ -7,8 +7,9 @@ const replacementsRepo = require('../repository/replacements');
 const getManyCustomers = async (req) => {
     const { start, howMany } = req.params;
     const rowData = await customerRepo(req.db).getMany(start, howMany);
+    const size = await customerRepo(req.db).allCustomersSize();
     const data = rowData.rows.map(obj => ({ ...obj, deliveryDays: JSON.parse(obj.deliveryDays) }))
-    return { size: rowData.rowCount, data }
+    return { size, data }
 }
 
 const checkEditCustomerBody = req => {
@@ -29,8 +30,9 @@ const existId = async (req) => {
 const getManyCustomersLike = async (req) => {
     const { start, howMany, template } = req.params;
     const rowData = await customerRepo(req.db).getManyLike(template, start, howMany);
+    const size = await customerRepo(req.db).likeCustomersSize(template);
     const data = rowData.rows.map(obj => ({ ...obj, deliveryDays: JSON.parse(obj.deliveryDays) }))
-    return { size: rowData.rowCount, data }
+    return { size, data }
 }
 
 const checkReplaceCatalogBody = req => {
@@ -70,6 +72,7 @@ const addToCatalog = async (req, element) => {
     await addAllUnits(units, db, idRow.id);
     await addAllExsclusive(exclusive, db, idRow.id);
     await addAllReplacement(replacement, db, idRow.id);
+    return idRow.id;
 }
 
 const replaceCatalog = async (req) => {
@@ -115,15 +118,17 @@ const formDataProducts = async (rowData, req) => {
 const getManyProducts = async (req) => {
     const { start, howMany } = req.params;
     const rowData = await productsRepo(req.db).getManyProducts(start, howMany)
+    const size = await productsRepo(req.db).allProductsSize();
     const data = await formDataProducts(rowData, req);
-    return { size: rowData.rowCount, data }
+    return { size, data }
 }
 
 const getManyProductsLike = async (req) => {
     const { start, howMany, template } = req.params;
     const rowData = await productsRepo(req.db).getManyProductsLike(template, start, howMany)
+    const size = await productsRepo(req.db).likeProductsSize(template);
     const data = await formDataProducts(rowData, req);
-    return { size: rowData.rowCount, data }
+    return { size, data }
 }
 
 const checkEditProductBody = req => {
@@ -148,10 +153,11 @@ const checkSortAvailabilityBody = req => {
 }
 
 const getSortedData = async (req) => {
-    const { data, start, howMany } = req.body;
-    const rowData = await productsRepo(req.db).sortedByAvailability(data, start, howMany);
+    const { data, start, howMany, template } = req.body;
+    const rowData = await productsRepo(req.db).sortedByAvailability(data, start, howMany, template);
+    const size = await productsRepo(req.db).availabilityProductsSize(data, template);
     const endData = await formDataProducts(rowData, req);
-    return { size: rowData.rowCount, data: endData }
+    return { size, data: endData }
 }
 
 module.exports = {

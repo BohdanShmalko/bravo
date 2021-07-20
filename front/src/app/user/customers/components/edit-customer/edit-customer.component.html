@@ -7,7 +7,10 @@
         <div class="first-input-container input-container">
           <app-custom-input
             formControlName="no"
-            [placeholder]="BB-135"
+            [invalid]=
+              "no?.touched && no?.errors?.required ? 'no can not be empty' : '' +
+               no?.touched && no?.errors?.maxlength ? 'no is very long' : '' + serverError"
+            placeholder="BB-135"
             name="Customer No">
           </app-custom-input>
         </div>
@@ -15,7 +18,7 @@
         <div class="input-container">
           <app-custom-input
             [disabled]="true"
-            placeholder="Barger Bar"
+            [placeholder]="data.name"
             name="Name">
           </app-custom-input>
         </div>
@@ -23,13 +26,13 @@
         <div class="input-container">
           <app-custom-input
             [disabled]="true"
-            placeholder="Second Street 3421 Geneva"
+            [placeholder]="data.address"
             name="Delivery Address">
           </app-custom-input>
         </div>
 
         <div class="input-container">
-          <app-day-checker></app-day-checker>
+          <app-day-checker formControlName="deliveryDays"></app-day-checker>
         </div>
 
       </div>
@@ -48,7 +51,7 @@
             <app-custom-button
               (onClick)="saveData()"
               icon="done"
-              [disabled]="false"
+              [disabled]="customerForm.invalid"
               color="blue"
               text="Save">
             </app-custom-button>

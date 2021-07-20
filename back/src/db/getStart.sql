@@ -71,7 +71,7 @@ CREATE TABLE Exclusive
     user_id    INT              NOT NULL REFERENCES Users (id) ON DELETE CASCADE
 );
 
-CREATE TABLE Exclusive
+CREATE TABLE Goods
 (
     id         SERIAL           NOT NULL PRIMARY KEY,
     order_id INT              NOT NULL REFERENCES Orders (id) ON DELETE CASCADE,
@@ -80,3 +80,158 @@ CREATE TABLE Exclusive
 
 INSERT INTO Users (email, status, creation_date)
 VALUES ('bshmalko97@gmail.com', 'admin', 1625555312792);
+
+INSERT INTO Users (email, status, creation_date)
+VALUES ('ggave197@gmail.com', 'customers', 1625555312792);
+
+-- TEST USERS
+
+INSERT INTO Users (email, status, creation_date)
+VALUES ('ggave1@gmail.com', 'customers', 1625555312792);
+
+INSERT INTO Users (email, status, creation_date)
+VALUES ('ggave2@gmail.com', 'customers', 1625555312792);
+
+INSERT INTO Users (email, status, creation_date)
+VALUES ('ggave3@gmail.com', 'customers', 1625555312792);
+
+INSERT INTO Users (email, status, creation_date)
+VALUES ('ggave4@gmail.com', 'customers', 1625555312792);
+
+INSERT INTO Users (email, status, creation_date)
+VALUES ('ggave5@gmail.com', 'customers', 1625555312792);
+
+INSERT INTO Users (email, status, creation_date)
+VALUES ('ggave6@gmail.com', 'customers', 1625555312792);
+
+INSERT INTO Users (email, status, creation_date)
+VALUES ('ggave7@gmail.com', 'customers', 1625555312792);
+
+INSERT INTO Users (email, status, creation_date)
+VALUES ('ggave8@gmail.com', 'customers', 1625555312792);
+
+INSERT INTO Users (email, status, creation_date)
+VALUES ('ggave9@gmail.com', 'customers', 1625555312792);
+
+INSERT INTO Users (email, status, creation_date)
+VALUES ('ggave10@gmail.com', 'customers', 1625555312792);
+
+-- TEST CUSTOMERS
+
+INSERT INTO Customers (no, name, address, contact_name, delivery_days, mobile_phone, user_id)
+VALUES ('test-no-1', 'Name1', 'address 1', 'Mr. Name1', '{"mon":true,"tue":false,"wed":true,"thu":true,"fri":false,"sat":false,"san":false}', '123456789', 3);
+
+INSERT INTO Customers (no, name, address, contact_name, delivery_days, mobile_phone, user_id)
+VALUES ('test-no-2', 'Name2', 'address 2', 'Mr. Name2', '{"mon":true,"tue":false,"wed":true,"thu":true,"fri":false,"sat":false,"san":false}', '123456789', 4);
+
+INSERT INTO Customers (no, name, address, contact_name, delivery_days, mobile_phone, user_id)
+VALUES ('test-no-3', 'Name1', 'address 10', 'Mr. Name3', '{"mon":true,"tue":false,"wed":true,"thu":true,"fri":false,"sat":false,"san":false}', '123456789', 5);
+
+INSERT INTO Customers (no, name, address, contact_name, delivery_days, mobile_phone, user_id)
+VALUES ('test-no-4', 'Name1', 'address 3', 'Mr. Name4', '{"mon":true,"tue":false,"wed":true,"thu":true,"fri":false,"sat":false,"san":false}', '123456789', 6);
+
+INSERT INTO Customers (no, name, address, contact_name, delivery_days, mobile_phone, user_id)
+VALUES ('test-no-5', 'Name1', 'address 4', 'Mr. Name5', '{"mon":true,"tue":false,"wed":true,"thu":true,"fri":false,"sat":false,"san":false}', '123456789', 7);
+
+INSERT INTO Customers (no, name, address, contact_name, delivery_days, mobile_phone, user_id)
+VALUES ('test-no-6', 'Name1', 'address 5', 'Mr. Name6', '{"mon":true,"tue":false,"wed":true,"thu":true,"fri":false,"sat":false,"san":false}', '123456789', 8);
+
+INSERT INTO Customers (no, name, address, contact_name, delivery_days, mobile_phone, user_id)
+VALUES ('test-no-7', 'Name1', 'address 6', 'Mr. Name7', '{"mon":true,"tue":false,"wed":true,"thu":true,"fri":false,"sat":false,"san":false}', '123456789', 9);
+
+INSERT INTO Customers (no, name, address, contact_name, delivery_days, mobile_phone, user_id)
+VALUES ('test-no-9', 'Name1', 'address 7', 'Mr. Name8', '{"mon":true,"tue":false,"wed":true,"thu":true,"fri":false,"sat":false,"san":false}', '123456789', 10);
+
+INSERT INTO Customers (no, name, address, contact_name, delivery_days, mobile_phone, user_id)
+VALUES ('test-no-10', 'Name1', 'address 8', 'Mr. Name9', '{"mon":true,"tue":false,"wed":true,"thu":true,"fri":false,"sat":false,"san":false}', '123456789', 11);
+
+INSERT INTO Customers (no, name, address, contact_name, delivery_days, mobile_phone, user_id)
+VALUES ('test-no-8', 'Name1', 'address 9', 'Mr. Name10', '{"mon":true,"tue":false,"wed":true,"thu":true,"fri":false,"sat":false,"san":false}', '123456789', 12);
+
+-- TEST PRODUCTS
+INSERT INTO Products (name, code, availability)
+VALUES ('product1', 'prd-1', 'in stock');
+
+INSERT INTO Products (name, code, availability)
+VALUES ('product2', 'prd-2', 'out of stock');
+
+INSERT INTO Products (name, code, availability)
+VALUES ('product3', 'prd-3', 'in stock');
+
+INSERT INTO Products (name, code, availability)
+VALUES ('product4', 'prd-4', 'out of stock');
+
+INSERT INTO Products (name, code, availability)
+VALUES ('product5', 'prd-5', 'in stock');
+
+INSERT INTO Products (name, code, availability)
+VALUES ('product6', 'prd-6', 'out of stock');
+
+INSERT INTO Products (name, code, availability)
+VALUES ('product7', 'prd-7', 'discontinued');
+
+INSERT INTO Products (name, code, availability)
+VALUES ('product8', 'prd-8', 'discontinued');
+
+INSERT INTO Products (name, code, availability)
+VALUES ('product9', 'prd-9', 'in stock');
+
+INSERT INTO Products (name, code, availability)
+VALUES ('product10', 'prd-10', 'in stock');
+
+INSERT INTO Units (unit, price, product_id)
+VALUES ('kg', '100', 1);
+
+INSERT INTO Units (unit, price, product_id)
+VALUES ('l', '150', 1);
+
+INSERT INTO Units (unit, price, product_id)
+VALUES ('box', '50', 1);
+
+INSERT INTO Units (unit, price, product_id)
+VALUES ('kg', '100', 5);
+
+INSERT INTO Units (unit, price, product_id)
+VALUES ('kg', '100', 6);
+
+INSERT INTO Units (unit, price, product_id)
+VALUES ('kg', '100', 7);
+
+INSERT INTO Units (unit, price, product_id)
+VALUES ('kg', '100', 8);
+
+INSERT INTO Units (unit, price, product_id)
+VALUES ('kg', '100', 9);
+
+INSERT INTO Units (unit, price, product_id)
+VALUES ('kg', '100', 10);
+
+INSERT INTO Units (unit, price, product_id)
+VALUES ('kg', '100', 2);
+
+INSERT INTO Units (unit, price, product_id)
+VALUES ('kg', '100', 3);
+
+INSERT INTO Units (unit, price, product_id)
+VALUES ('kg', '100', 4);
+
+INSERT INTO Replacements (replace_to_id, product_id)
+VALUES (1, 2);
+
+INSERT INTO Replacements (replace_to_id, product_id)
+VALUES (3, 2);
+
+INSERT INTO Replacements (replace_to_id, product_id)
+VALUES (4, 2);
+
+INSERT INTO Replacements (replace_to_id, product_id)
+VALUES (9, 7);
+
+INSERT INTO Exclusive (percent, product_id, user_id)
+VALUES (10, 10, 2);
+
+INSERT INTO Exclusive (percent, product_id, user_id)
+VALUES (10, 1, 2);
+
+INSERT INTO Exclusive (percent, product_id, user_id)
+VALUES (10, 3, 3);
