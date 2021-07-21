@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Sort } from '@angular/material/sort';
 import { MatDialog } from '@angular/material/dialog';
 
@@ -7,7 +7,7 @@ import { EditCustomerComponent } from './components/edit-customer/edit-customer.
 import { SortService } from '@core/services/sort/sort.service';
 import { DaysType } from'@shared/components';
 import { select, Store } from '@ngrx/store';
-import { Subscription } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { CustomersState } from '@core/reducers/customers/customers.reducers';
 import { selectCustomers, selectCustomersSize } from '@core/reducers/customers/customers.selector';
 import { GetCustomersAction, GetCustomersLikeAction } from '@core/reducers/customers/customers.actions';
@@ -28,7 +28,7 @@ export interface DataTableCustomers {
 export class CustomersComponents implements OnInit, OnDestroy{
   public val:string = '';
   public howManyLoad: number = 5;
-  public customersCount$ = this.userStorage.pipe(select(selectCustomersSize));
+  public customersCount$: Observable<number> = this.userStorage.pipe(select(selectCustomersSize));
   public visibleColumns: string[] = ['no', 'name', 'address', 'deliveryDays'];
   public dataTable: DataTableCustomers[] = []
   private dataObserver: Subscription = this.userStorage.pipe(select( selectCustomers )).subscribe((data: DataTableCustomers[]) => {

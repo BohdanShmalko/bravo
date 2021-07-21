@@ -1,14 +1,14 @@
-import {Component, Inject, OnDestroy} from '@angular/core';
-import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
+import { Component, Inject, OnDestroy } from '@angular/core';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { AbstractControl, FormBuilder, Validators } from '@angular/forms';
-import {Subscription} from 'rxjs';
-import {select, Store} from '@ngrx/store';
+import { Subscription } from 'rxjs';
+import { select, Store } from '@ngrx/store';
 
 import { DataTableCustomers } from '../../customers.components';
 import { EditAddProductComponent } from '../../../catalog/components/edit-add-product/edit-add-product.component';
-import { CustomersState } from "@core/reducers/customers/customers.reducers";
-import { selectCustomersError } from "@core/reducers/customers/customers.selector";
-import { EditCustomerAction } from "@core/reducers/customers/customers.actions";
+import { CustomersState } from '@core/reducers/customers/customers.reducers';
+import { selectCustomersError } from '@core/reducers/customers/customers.selector';
+import { EditCustomerAction } from '@core/reducers/customers/customers.actions';
 
 @Component({
   selector: 'app-edit-customer',

@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 
 import { SortService } from '@core/services/sort/sort.service';
@@ -19,8 +19,8 @@ export interface OrderData {
   templateUrl: './orders.component.html',
   styleUrls: ['./orders.component.scss', '../styles/common_page.components.scss']
 })
-export class OrdersComponents implements OnInit{
-  public val:string = '';
+export class OrdersComponents implements OnInit {
+  public val: string = '';
   public howManyLoad: number = 5;
   public customersCount: number;
   public visibleColumns: string[] = [

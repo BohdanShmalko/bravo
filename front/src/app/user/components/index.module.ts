@@ -45,7 +45,7 @@ const components : ComponentsType[] = [
 ];
 
 @NgModule({
-  declarations: [ components ],
+  declarations: [components],
   imports: [
     CommonModule,
     MatIconModule,
@@ -56,6 +56,6 @@ const components : ComponentsType[] = [
     MatSelectModule,
     MatDialogModule
   ],
-  exports: [ components ]
+  exports: [components]
 })
 export class UserComponentsModule {}

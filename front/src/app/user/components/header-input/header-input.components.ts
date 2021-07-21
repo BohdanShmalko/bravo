@@ -1,4 +1,4 @@
-import { Component, Input, forwardRef } from '@angular/core';
+import { Component, Input, forwardRef, EventEmitter, Output } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 @Component({
@@ -14,8 +14,8 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
   ]
 })
 export class HeaderInputComponents implements ControlValueAccessor {
-
   @Input('placeholder') placeholder: string = '';
+  @Output('onBlur') onBlur: EventEmitter<void> = new EventEmitter<void>();
 
   public isFocused: boolean = false
   public val: string = '';
@@ -46,6 +46,11 @@ export class HeaderInputComponents implements ControlValueAccessor {
 
   public registerOnTouched(fn: () => void): void {
     this.onTouched = fn;
+  }
+
+  public blur():void {
+    this.isFocused = false;
+    this.onBlur.emit();
   }
 
   public del(): void {

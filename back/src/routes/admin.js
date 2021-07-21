@@ -20,7 +20,8 @@ const {
     checkEditProductBody,
     editProduct,
     checkSortAvailabilityBody,
-    getSortedData
+    getSortedData,
+    checkExitCode
 } = require('../helpers/admin');
 const {
     send400,
@@ -92,6 +93,8 @@ router.get('/getProductsLike/:template/:start/:howMany', async (req, res) => {
 
 router.put('/editProduct', async (req, res) => {
     if(checkEditProductBody(req)) return send400(res, 'Invalid data');
+    const code = await checkExitCode(req);
+    if(code) return send400(res, 'This code is already exist');
     await editProduct(req);
     res.send({ message: 'ok' })
 })

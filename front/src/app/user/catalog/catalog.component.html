@@ -1,17 +1,25 @@
 <app-header name="Catalog">
-  <app-header-button (click)="replaceCatalog()" [active]="false" icon="file_upload" name="Replace Catalog">
+  <app-header-button
+    *ngIf="userStatus === 'admin'"
+    (click)="replaceCatalog()"
+    [active]="false"
+    icon="file_upload" name="Replace Catalog">
   </app-header-button>
 
-  <app-header-button (click)="addProduct()" [active]="false" color="blue" icon="add" name="add product">
+  <app-header-button
+    *ngIf="userStatus === 'admin'"
+    (click)="addProduct()"
+    [active]="false"
+    color="blue" icon="add" name="add product">
   </app-header-button>
 </app-header>
 <div class="searcher">
-  <app-header-input placeholder="Product Code, Name..." [(ngModel)]="value"></app-header-input>
+  <app-header-input placeholder="Product Code, Name..." [(ngModel)]="value" ></app-header-input>
 </div>
 
 <div class="content">
 
-  <table mat-table matSort (matSortChange)="sortData($event)" [dataSource]="sortedData" class="mat-elevation-z8">
+  <table mat-table matSort [dataSource]="sortedData" class="mat-elevation-z8">
     <ng-container matColumnDef="code">
       <th mat-header-cell *matHeaderCellDef> Product Code</th>
       <td (click)="dialogEdit(element)" mat-cell *matCellDef="let element"> {{element.code}} </td>
@@ -73,10 +81,18 @@
   </table>
 
   <app-empty-table *ngIf="dataTable.length === 0" name="catalog">
-    <app-header-button (click)="replaceCatalog()" [active]="false" icon="file_upload" name="Replace Catalog">
+    <app-header-button
+      *ngIf="userStatus === 'admin'"
+      (click)="replaceCatalog()"
+      [active]="false"
+      icon="file_upload" name="Replace Catalog">
     </app-header-button>
 
-    <app-header-button (click)="addProduct()" [active]="false" color="blue" icon="add" name="add product">
+    <app-header-button
+      *ngIf="userStatus === 'admin'"
+      (click)="addProduct()"
+      [active]="false"
+      color="blue" icon="add" name="add product">
     </app-header-button>
   </app-empty-table>
 

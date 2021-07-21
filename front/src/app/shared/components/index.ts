@@ -4,6 +4,8 @@ import { LogoComponent } from '@shared/components/logo/logo.component';
 import { DigitsViewComponent } from '@shared/components/digits-view/digits-view.component';
 import { DaysCheckerComponent } from '@shared/components/days-checker/days-checker.component';
 import { CustomTextareaComponent } from '@shared/components/custom-textarea/custom-textarea.component';
+import { CustomChipsInputComponent } from '@shared/components/custom-chips-input/custom-chips-input.component';
+import { CustomSelectComponent } from '@shared/components/custom-select/custom-select.component';
 
 export type SharedComponentsType =
   | typeof CustomButtonComponent
@@ -11,14 +13,18 @@ export type SharedComponentsType =
   | typeof LogoComponent
   | typeof DigitsViewComponent
   | typeof DaysCheckerComponent
-  | typeof CustomTextareaComponent;
+  | typeof CustomTextareaComponent
+  | typeof CustomChipsInputComponent
+  | typeof CustomSelectComponent;
 
 export const components: SharedComponentsType[] = [
   CustomButtonComponent,
   CustomInputComponent,
   LogoComponent,
   DaysCheckerComponent,
-  CustomTextareaComponent
+  CustomTextareaComponent,
+  CustomChipsInputComponent,
+  CustomSelectComponent
 ];
 
 export * from '@shared/components/page-not-found/page-not-found.component';

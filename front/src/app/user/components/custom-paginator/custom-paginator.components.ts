@@ -1,8 +1,7 @@
 import {
-  AfterViewInit,
   Component,
   EventEmitter,
-  Input, OnChanges, OnInit,
+  Input, OnChanges,
   Output, SimpleChanges,
 } from '@angular/core';
 
@@ -65,8 +64,10 @@ export class CustomPaginatorComponents implements OnChanges{
     }
   }
 
+  private isLoaded: boolean = false;
   ngOnChanges(changes: SimpleChanges) {
-    if(changes.itemsCount) {
+    if(changes.itemsCount && changes.itemsCount.currentValue && !this.isLoaded) {
+      this.isLoaded = true;
       this.setItemSize()
     }
   }

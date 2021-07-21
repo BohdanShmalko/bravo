@@ -38,8 +38,6 @@ module.exports = db => ({
         OR name ~* '${template}'
         OR address ~* '${template}'
         OR contact_name ~* '${template}' 
-        OR contact_name ~* '${template}' 
-        OR mobile_phone ~* '${template}' 
         LIMIT $2 OFFSET $1; `,
         [start, howMany]
     ),
@@ -58,8 +56,6 @@ module.exports = db => ({
         where no ~* '${template}' 
         OR name ~* '${template}'
         OR address ~* '${template}'
-        OR contact_name ~* '${template}' 
-        OR contact_name ~* '${template}' 
-        OR mobile_phone ~* '${template}';`
+        OR contact_name ~* '${template}';`
     ).then(data => data.rows[0].count),
 })

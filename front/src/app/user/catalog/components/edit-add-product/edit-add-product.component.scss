@@ -40,6 +40,8 @@
   @include flex-row;
   margin-top: 16px;
   align-items: center;
+  height: 79px;
+  align-items: flex-start;
 }
 
 .unit-add {
@@ -71,3 +73,4 @@
   background-color: $hover-delete-color;
   color: $red-button-color
 }
+

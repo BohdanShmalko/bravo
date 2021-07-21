@@ -1,8 +1,8 @@
-import {Component, Inject} from '@angular/core';
-import {MAT_SNACK_BAR_DATA, MatSnackBarRef} from '@angular/material/snack-bar';
+import { Component, Inject } from '@angular/core';
+import { MAT_SNACK_BAR_DATA, MatSnackBarRef } from '@angular/material/snack-bar';
 
 import { DoneSnackbarComponent } from '../done-snackbar/done-snackbar.component';
-import {SnackbarDataType} from "@core/services/snackbar/snackbar.service";
+import { SnackbarDataType } from '@core/services/snackbar/snackbar.service';
 
 @Component({
   selector: 'app-wait-snackbar',

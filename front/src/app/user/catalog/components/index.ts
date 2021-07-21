@@ -14,7 +14,7 @@ import { MyPipesModule } from '@shared/pipes/my-pipes.module';
 import { LoaderErrorComponent } from './loader-error/loader-error.component';
 import { WaitSnackbarComponent } from './wait-snackbar/wait-snackbar.component';
 import { DoneSnackbarComponent } from './done-snackbar/done-snackbar.component';
-
+import { ReactiveFormsModule } from '@angular/forms';
 
 type ComponentsType =
   typeof EditAddProductComponent |
@@ -44,7 +44,8 @@ const components : ComponentsType[] = [
     CommonModule,
     NgxDropzoneModule,
     MyPipesModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    ReactiveFormsModule
   ],
   exports: [ components ]
 })

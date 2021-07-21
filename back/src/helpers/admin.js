@@ -135,6 +135,11 @@ const checkEditProductBody = req => {
     return checkAddProductBody(req) || !req.body.id
 }
 
+const checkExitCode = async (req) => {
+    const [code] = await productsRepo(req.db).getIdByCode(req.body.code);
+    return code;
+}
+
 const editProduct = async (req) => {
     const { db } = req;
     const { id, code, name, units, availability, exclusive, replacement } = req.body;
@@ -178,5 +183,6 @@ module.exports = {
     checkEditProductBody,
     editProduct,
     checkSortAvailabilityBody,
-    getSortedData
+    getSortedData,
+    checkExitCode
 }

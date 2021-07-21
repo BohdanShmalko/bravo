@@ -1,53 +1,49 @@
 <mat-dialog-content>
-  <div class="main-container">
+  <div class="main-container" [formGroup]="productForm">
     <app-dialog-header name="{{ data.type === 'add' ? 'Add' : 'Edit' }} Product"></app-dialog-header>
 
     <div class="content">
       <div class="first-input_container input-container">
         <app-custom-input
+          formControlName="code"
           placeholder="BB-135"
-          name="Product Code">
+          name="Product Code"
+          [invalid]="codeError"
+        >
         </app-custom-input>
       </div>
 
       <div class="input-container">
         <app-custom-input
+          formControlName="name"
           placeholder="Banana"
-          name="Name">
+          name="Name"
+          [invalid]="nameError"
+        >
         </app-custom-input>
       </div>
 
-      <div class="input-container double-input">
-        <div class="half-input">
-          <app-custom-input
-            placeholder="kg"
-            name="Unit">
-          </app-custom-input>
-        </div>
+      <div
+        formArrayName="units"
+        *ngFor="let unitControl of units.controls; let i=index" class="add-unit-container">
 
-        <div class="half-input">
+        <div [ngClass]="{'unit-add': i !== 0, 'half-input': i === 0}" [formGroupName]="i">
           <app-custom-input
-            placeholder="price"
-            name="Price">
-          </app-custom-input>
-        </div>
-      </div>
-
-<!--      TODO *ngFor-->
-      <div class="add-unit-container">
-        <div class="unit-add">
-          <app-custom-input
+            formControlName="unit"
             placeholder="kg"
+            [invalid]="getUnitError(i)"
             [name]="'Unit-' + 2"
           ></app-custom-input>
         </div>
-        <div class="price-add">
+        <div [ngClass]="{'price-add': i !== 0, 'half-input': i === 0}" [formGroupName]="i">
           <app-custom-input
+            formControlName="price"
             placeholder="price"
             name="Price"
+            [invalid]="getPriceError(i)"
           ></app-custom-input>
         </div>
-        <div class="delete" (click)="deleteUnit()">
+        <div *ngIf="i !== 0" class="delete" (click)="deleteUnit(i)">
           <mat-icon class="delete-icon">delete</mat-icon>
         </div>
       </div>
@@ -62,22 +58,29 @@
       </div>
 
       <div class="input-container">
-        <app-custom-input
-          placeholder="In stock"
-          name="Availability">
-        </app-custom-input>
+        <app-custom-select
+          [invalid]="availabilityError"
+          formControlName="availability" title="Availability"
+          [options]="['in stock', 'out of stock', 'discontinued']"></app-custom-select>
       </div>
 
       <div class="space-top">
-        <app-custom-input
-          placeholder="Exclusively for (Customer Numbers)">
-        </app-custom-input>
+        <app-custom-chips-input
+          [default]="data?.data?.exclusive"
+          [all]="['1','2','3']"
+          (onSelect)="setExclusively($event)"
+          placeholder="New Exclusively for"
+          title="Exclusively for (Customer Numbers)"></app-custom-chips-input>
       </div>
 
-      <div class="space-top">
-        <app-custom-input
-          placeholder="Replacement Products (SKUs)">
-        </app-custom-input>
+
+      <div class="space-top" >
+        <app-custom-chips-input
+          [default]="data?.data?.replacement"
+          [all]="['1','2','3']"
+          (onSelect)="setReplacement($event)"
+          placeholder="New Replacement Products"
+          title="Replacement Products (SKUs)"></app-custom-chips-input>
       </div>
 
     </div>
@@ -97,7 +100,7 @@
           <app-custom-button
             (onClick)="openSnackbar()"
             icon="done"
-            [disabled]="false"
+            [disabled]="productForm.invalid"
             color="blue"
             text="Save">
           </app-custom-button>
@@ -108,7 +111,7 @@
             <app-custom-button
               (onClick)="openSnackbar()"
               icon="add"
-              [disabled]="false"
+              [disabled]="productForm.invalid"
               color="blue"
               text="Add Product">
             </app-custom-button>
