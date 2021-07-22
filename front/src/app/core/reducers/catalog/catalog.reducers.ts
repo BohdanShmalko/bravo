@@ -37,11 +37,13 @@ export const catalogReducer: ActionReducer<CatalogState, CatalogActions> =
           catalog: state.catalog.filter((obj: DataTableProducts) => obj.id !== action.payload.id),
           catalogSize: state.catalogSize - 1
         }
+      case catalogActionsType.addProductToState:
+        return { ...state, catalogEditError: state.catalogEditError.trim() ? ' ' : state.catalogEditError + ' ' }
       case catalogActionsType.editProductFromState:
         return { ...state, catalog: state.catalog.map((obj : DataTableProducts) => {
           if(obj.id === action.payload.id) return { ...obj, ...action.payload };
             return obj;
-          }), catalogEditError: state.catalogEditError + ' ' }
+          }), catalogEditError: state.catalogEditError.trim() ? ' ' : state.catalogEditError + ' ' }
       case catalogActionsType.setAllCustomerNo: return { ...state, allCustomersNo: action.payload }
       case catalogActionsType.setAllProductsCode: return { ...state, allProductsCode: action.payload }
       case catalogActionsType.setCatalogEditError: return { ...state, catalogEditError: action.payload }

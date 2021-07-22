@@ -3,6 +3,7 @@ import { MatDialogRef } from '@angular/material/dialog';
 
 import { ErrorMessageType } from '../file-loader/file-loader.component';
 import { SnackbarService } from '@core/services/snackbar/snackbar.service';
+import {RowsCsvType, ValidateCsv} from '@core/services/validate-csv/validate-csv';
 
 @Component({
   selector: 'app-replace-catalog',
@@ -18,10 +19,12 @@ export class ReplaceCatalogComponent {
     // { type: 'some', message: 'some error message' },
     // { type: 'some', message: 'some error message' }
   ];
+  public checkedCsv: boolean = false;
 
   constructor(
     private dialogRef: MatDialogRef<ReplaceCatalogComponent>,
-    private snackbarService: SnackbarService) {
+    private snackbarService: SnackbarService,
+    private validatorCsv: ValidateCsv) {
   }
 
   public clickHandler(): void {
@@ -40,5 +43,12 @@ export class ReplaceCatalogComponent {
       'Catalog Replace',
       'The file is being processed. It may take several seconds.'
     )
+  }
+
+  public loadedData(data: string | ArrayBuffer | null): void {
+    this.checkedCsv = true;
+    const format: RowsCsvType[] = [];
+    const errors = this.validatorCsv.validate(data, format)
+    this.checkedCsv = false;
   }
 }

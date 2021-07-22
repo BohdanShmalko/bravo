@@ -1,16 +1,42 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { AbstractControl, FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {Observable, Subscription} from 'rxjs';
+import { select, Store } from '@ngrx/store';
 
-import { DialogData } from '../../catalog.components';
+import { DataTableProducts, DialogData } from '../../catalog.components';
 import { SnackbarService } from '@core/services/snackbar/snackbar.service';
+import { CatalogState } from '@core/reducers/catalog/catalog.reducers';
+import {
+  selectCatalogAllCustomersNo,
+  selectCatalogAllProductsCode,
+  selectCatalogEditError
+} from '@core/reducers/catalog/catalog.selector';
+import {
+  AddProductAction,
+  EditProductAction,
+  GetAllCustomerNoAction, GetAllProductsCodeAction
+} from '@core/reducers/catalog/catalog.actions';
 
 @Component({
   selector: 'app-edit-product',
   templateUrl: './edit-add-product.component.html',
     styleUrls: [ './edit-add-product.component.scss', '../../../styles/common_dialog.components.scss' ]
 })
-export class EditAddProductComponent implements OnInit{
+export class EditAddProductComponent implements OnInit, OnDestroy{
+  public serverMessage$: Subscription = this.catalogStorage.pipe(select(selectCatalogEditError)).subscribe((data: string) => {
+    if(this.sendToServer){
+      this.sendToServer = false;
+      if(!data.trim()) this.openSnackbar();
+    }
+    if(data.trim()) this.serverError = data;
+  })
+
+  public allCustomersNo$: Observable<string[]> = this.catalogStorage.pipe(select(selectCatalogAllCustomersNo))
+  public allProductsCode$: Observable<string[]> = this.catalogStorage.pipe(select(selectCatalogAllProductsCode))
+
+  public serverError: string = '';
+  private sendToServer: boolean = false
   public productForm: FormGroup;
   public exclusively: string[] = [];
   public replacement: string[] = [];
@@ -20,10 +46,13 @@ export class EditAddProductComponent implements OnInit{
     private dialogRef: MatDialogRef<EditAddProductComponent>,
     private snackbarService: SnackbarService,
     private fb: FormBuilder,
+    private catalogStorage: Store<CatalogState>
   ) {
   }
 
   public ngOnInit(): void {
+    this.catalogStorage.dispatch(new GetAllCustomerNoAction());
+    this.catalogStorage.dispatch(new GetAllProductsCodeAction());
     const isTypeEdit: boolean = this.data.type === 'edit';
     const units = [];
     if(isTypeEdit)
@@ -42,6 +71,10 @@ export class EditAddProductComponent implements OnInit{
       units: this.fb.array(units),
       availability: [isTypeEdit ? this.data?.data.availability: '', [Validators.required]],
     })
+  }
+
+  public ngOnDestroy(): void {
+    this.serverMessage$.unsubscribe();
   }
 
   public get units(): FormArray {
@@ -77,7 +110,7 @@ export class EditAddProductComponent implements OnInit{
     return error;
   }
 
-  public get getUnitError() {
+  public get getUnitError(): (i: number) => string {
     return (i: number) => {
       const unit = this.units.controls[i].get('unit');
       let error = '';
@@ -88,7 +121,7 @@ export class EditAddProductComponent implements OnInit{
     }
   }
 
-  public get getPriceError() {
+  public get getPriceError(): (i: number) => string {
     return (i: number) => {
       const unit = this.units.controls[i].get('price');
       let error = '';
@@ -99,6 +132,12 @@ export class EditAddProductComponent implements OnInit{
     }
   }
 
+  public get getFilteredArr(): (all: string[], some?: string[]) => string[] {
+    return (all: string[], some?: string[]) =>
+      all.filter((element: string) => !some || some.indexOf(element) < 0);
+  }
+
+
   public addUnit(): void {
     this.units.push(this.fb.group({ unit: ['', [Validators.required]], price: ['', [Validators.required]] }));
   }
@@ -107,9 +146,8 @@ export class EditAddProductComponent implements OnInit{
     this.units.removeAt(i);
   }
 
-  public openSnackbar(): void {
-    //this.dialogRef.close();
-    console.log({ id: this.data.data.id, ...this.productForm.value, exclusively: this.exclusively, replacement: this.replacement })
+  private openSnackbar(): void {
+    this.dialogRef.close();
     if(this.data.type === 'add') this.snackbarService.open(
       'done',
       'Product Add',
@@ -129,5 +167,23 @@ export class EditAddProductComponent implements OnInit{
 
   public setReplacement(event: string[]): void{
     this.replacement = event;
+  }
+
+  private get productData(): DataTableProducts {
+    return {
+      id: this.data?.data?.id,
+      ...this.productForm.value,
+      exclusive: this.exclusively,
+      replacement: this.replacement }
+  }
+
+  public addCatalog(): void {
+    this.sendToServer = true;
+    this.catalogStorage.dispatch(new AddProductAction(this.productData));
+  }
+
+  public editCatalog(): void {
+    this.sendToServer = true;
+    this.catalogStorage.dispatch(new EditProductAction(this.productData));
   }
 }

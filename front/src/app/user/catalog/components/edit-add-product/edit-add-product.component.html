@@ -8,7 +8,7 @@
           formControlName="code"
           placeholder="BB-135"
           name="Product Code"
-          [invalid]="codeError"
+          [invalid]="codeError + serverError"
         >
         </app-custom-input>
       </div>
@@ -64,20 +64,20 @@
           [options]="['in stock', 'out of stock', 'discontinued']"></app-custom-select>
       </div>
 
-      <div class="space-top">
+      <div class="space-top" *ngrxLet="allCustomersNo$ as customers">
         <app-custom-chips-input
           [default]="data?.data?.exclusive"
-          [all]="['1','2','3']"
+          [all]="getFilteredArr(customers, data?.data?.exclusive)"
           (onSelect)="setExclusively($event)"
           placeholder="New Exclusively for"
           title="Exclusively for (Customer Numbers)"></app-custom-chips-input>
       </div>
 
 
-      <div class="space-top" >
+      <div class="space-top" *ngrxLet="allProductsCode$ as products">
         <app-custom-chips-input
           [default]="data?.data?.replacement"
-          [all]="['1','2','3']"
+          [all]="getFilteredArr(products, data?.data?.replacement)"
           (onSelect)="setReplacement($event)"
           placeholder="New Replacement Products"
           title="Replacement Products (SKUs)"></app-custom-chips-input>
@@ -98,7 +98,7 @@
 
         <div *ngIf="data.type === 'edit'; else addTemplate" class="done-container">
           <app-custom-button
-            (onClick)="openSnackbar()"
+            (onClick)="editCatalog()"
             icon="done"
             [disabled]="productForm.invalid"
             color="blue"
@@ -109,7 +109,7 @@
         <ng-template #addTemplate>
           <div class="add-button-container">
             <app-custom-button
-              (onClick)="openSnackbar()"
+              (onClick)="addCatalog()"
               icon="add"
               [disabled]="productForm.invalid"
               color="blue"

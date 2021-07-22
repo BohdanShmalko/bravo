@@ -1,4 +1,14 @@
-import {Component, ElementRef, EventEmitter, forwardRef, Input, OnInit, Output, ViewChild} from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  EventEmitter,
+  forwardRef,
+  Input,
+  OnChanges,
+  OnInit,
+  Output, SimpleChanges,
+  ViewChild
+} from '@angular/core';
 import {MatAutocompleteSelectedEvent} from "@angular/material/autocomplete";
 import {ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR} from "@angular/forms";
 import {MatChipInputEvent} from "@angular/material/chips";
@@ -10,7 +20,7 @@ import {Observable} from "rxjs";
   templateUrl: './custom-chips-input.component.html',
   styleUrls: [ './custom-chips-input.component.scss' ],
 })
-export class CustomChipsInputComponent implements OnInit{
+export class CustomChipsInputComponent implements OnInit, OnChanges{
   @Input('placeholder') placeholder: string = '';
   @Input('default') default?: string[] = [];
   @Input('all') all?: string[] = [];
@@ -33,11 +43,13 @@ export class CustomChipsInputComponent implements OnInit{
     this.filteredFruits = this.fruitCtrl.valueChanges.pipe(
       startWith(null),
       map((fruit: string | null) => fruit ? this._filter(fruit) : this.notUsedFruits.slice()));
+  }
 
-    if(this.default)
-      this.usedFruits = this.default;
-    if(this.all)
-      this.notUsedFruits = this.all;
+  public ngOnChanges(changes: SimpleChanges) {
+    if(changes.all && changes.all.currentValue)
+      this.notUsedFruits = changes.all.currentValue;
+    if(changes.default && changes.default.currentValue)
+      this.usedFruits = changes.default.currentValue;
   }
 
   public get getPlaceholder(): string {
@@ -77,10 +89,10 @@ export class CustomChipsInputComponent implements OnInit{
     const value: string = event.option.viewValue;
     const itemIndex = this.notUsedFruits.indexOf(value);
     if (itemIndex >= 0) {
+      this.fruitInput.nativeElement.value = '';
       this.usedFruits.push(value);
       this.setValue();
       this.notUsedFruits.splice(itemIndex, 1);
-      this.fruitInput.nativeElement.value = '';
     }
     this.fruitCtrl.setValue(null);
   }

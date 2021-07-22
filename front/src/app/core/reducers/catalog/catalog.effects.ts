@@ -14,13 +14,12 @@ import {
   DeleteProductFromStateAction,
   EditProductFromStateAction,
   SetAllCustomerNoAction, SetAllProductsCodeAction,
-  SetCatalogAddErrorAction,
   SetCatalogEditErrorAction, SetCatalogReplaceErrorAction
 } from '@core/reducers/catalog/catalog.actions';
 import { Observable, of } from 'rxjs';
 import { catchError, map, mergeMap } from 'rxjs/operators';
-import { MessageType } from '@core/services/admin/admin-customers.service';
 import { DataTableProducts } from '../../../user/catalog/catalog.components';
+import {HttpErrorResponse} from "@angular/common/http";
 
 @Injectable()
 export class CatalogEffects {
@@ -43,13 +42,14 @@ export class CatalogEffects {
         ))
     ))
 
-  private addProduct$: Observable<AddProductToStateAction | SetCatalogAddErrorAction> = createEffect(() =>
+  private addProduct$: Observable<AddProductToStateAction | SetCatalogEditErrorAction> = createEffect(() =>
     this.actions$.pipe(
       ofType(catalogActionsType.addProduct),
       mergeMap((data: { payload: DataTableProducts }) =>
         this.adminCatalogService.addProduct(data.payload).pipe(
           map((dataId: IdType) => new AddProductToStateAction({...data.payload, ...dataId})),
-          catchError((errMsg: { error: MessageType }) => of(new SetCatalogAddErrorAction(errMsg.error.message)))
+          catchError((errMsg: HttpErrorResponse) =>  of(new SetCatalogEditErrorAction(errMsg.error.message)))
+
         ))
     ))
 
@@ -59,7 +59,7 @@ export class CatalogEffects {
       mergeMap((data: { payload: DataTableProducts }) =>
         this.adminCatalogService.editProduct(data.payload).pipe(
           map(() => new EditProductFromStateAction(data.payload)),
-          catchError((errMsg: { error: MessageType }) => of(new SetCatalogEditErrorAction(errMsg.error.message)))
+          catchError((errMsg: HttpErrorResponse) => of(new SetCatalogEditErrorAction(errMsg.error.message)))
         ))
     ))
 
@@ -87,7 +87,7 @@ export class CatalogEffects {
       mergeMap((data: { payload: DataTableProducts[] }) =>
         this.adminCatalogService.replaceCatalog(data.payload).pipe(
           map(() => new SetCatalogReplaceErrorAction('')),
-          catchError((errMsg: { error: MessageType }) => of(new SetCatalogReplaceErrorAction(errMsg.error.message)))
+          catchError((errMsg: HttpErrorResponse) => of(new SetCatalogReplaceErrorAction(errMsg.error.message)))
         ))
     ))
 

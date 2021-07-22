@@ -3,6 +3,10 @@ const productsRepo = require('../repository/products');
 const unitsRepo = require('../repository/units');
 const exsclusiveRepo = require('../repository/exsclusive');
 const replacementsRepo = require('../repository/replacements');
+const ordersRepo = require('../repository/orders')
+const goodsRepo = require('../repository/goods')
+
+const TWO_DAYS = 2 * 1000 * 60 * 60 * 24;
 
 const getManyCustomers = async (req) => {
     const { start, howMany } = req.params;
@@ -104,38 +108,17 @@ const getAllProductsCode = async (req) => {
     return data.map(obj => obj.code);
 }
 
-const formDataProducts = async (rowData, req) => {
-    const data = []
-    for (let i = 0; i < rowData.rowCount; i++) {
-        const dataUnit = rowData.rows[i];
-        const units = await unitsRepo(req.db).getAllById(dataUnit.id);
-        dataUnit.units = units;
-        data.push(dataUnit);
-    }
-    return data;
-}
-
-const getManyProducts = async (req) => {
-    const { start, howMany } = req.params;
-    const rowData = await productsRepo(req.db).getManyProducts(start, howMany)
-    const size = await productsRepo(req.db).allProductsSize();
-    const data = await formDataProducts(rowData, req);
-    return { size, data }
-}
-
-const getManyProductsLike = async (req) => {
-    const { start, howMany, template } = req.params;
-    const rowData = await productsRepo(req.db).getManyProductsLike(template, start, howMany)
-    const size = await productsRepo(req.db).likeProductsSize(template);
-    const data = await formDataProducts(rowData, req);
-    return { size, data }
-}
-
 const checkEditProductBody = req => {
     return checkAddProductBody(req) || !req.body.id
 }
 
 const checkExitCode = async (req) => {
+    const [code] = await productsRepo(req.db).getIdByCode(req.body.code);
+    if(!code) return false;
+    return code.id !== req.body.id;
+}
+
+const checkExitCodeAdd = async (req) => {
     const [code] = await productsRepo(req.db).getIdByCode(req.body.code);
     return code;
 }
@@ -152,17 +135,60 @@ const editProduct = async (req) => {
     await addAllReplacement(replacement, db, id);
 }
 
-const checkSortAvailabilityBody = req => {
-    const { data, start, howMany } = req.body;
-    return !data || !start.toString() || !howMany.toString();
+const getOrders = async (req) => {
+    const ordersDb = ordersRepo(req.db);
+    const ordersMainData = await ordersDb.getMainData();
+    const result = [];
+    for (let i = 0; i < ordersMainData.length; i++) {
+        let { address, orderNo } = ordersMainData[i];
+        if(!address)
+            [{ address }] = await ordersDb.getCustomerAddressByOrderId(orderNo);
+        const products = await ordersDb.getProducts(orderNo);
+        result.push({ ...ordersMainData[i], address, products })
+    }
+    return result;
 }
 
-const getSortedData = async (req) => {
-    const { data, start, howMany, template } = req.body;
-    const rowData = await productsRepo(req.db).sortedByAvailability(data, start, howMany, template);
-    const size = await productsRepo(req.db).availabilityProductsSize(data, template);
-    const endData = await formDataProducts(rowData, req);
-    return { size, data: endData }
+const checkChangeOrderStatus = async (req) => {
+    const { status, orderNo } = req.body;
+    if(!status || !orderNo) return 'Invalid data';
+    const [currentStatus] = await ordersRepo(req.db).getStatusById(orderNo);
+    if(status === 'cancel' && currentStatus.status !== 'new') return 'You can not cancel order if status not new'
+}
+
+const changeOrderStatus = async (req) => {
+    const { status, orderNo } = req.body;
+    await ordersRepo(req.db).updateStatus(status, orderNo);
+}
+
+const checkCreateOrderBody = req => {
+    const { customerNo, items, products } = req.body;
+    if(!customerNo || !items || !products.length) return true;
+}
+
+const createOrder = async (req) => {
+    const { customerNo, items, notes, reqDelivery, products, address } = req.body;
+    const status = 'new';
+    const ordered = new Date().getTime();
+    let newReqDelivery = reqDelivery;
+    if(!newReqDelivery) newReqDelivery = new Date().getTime() + TWO_DAYS;
+
+    const [result] = await ordersRepo(req.db).createOrder({
+        reqDelivery: newReqDelivery,
+        status,
+        address,
+        customerId: customerNo,
+        items,
+        notes,
+        ordered
+    })
+
+    for(let i = 0; i < products.length; i++) {
+        const { code, unit, quantity } = products[i];
+        const [productId] = await productsRepo(req.db).getIdByCode(code);
+        const [unitId] = await unitsRepo(req.db).getIdByProductAndUnit(productId.id, unit);
+        await goodsRepo(req.db).addGood(unitId.id, result.id, quantity)
+    }
 }
 
 module.exports = {
@@ -178,11 +204,13 @@ module.exports = {
     deleteProduct,
     getAllCustomersNo,
     getAllProductsCode,
-    getManyProducts,
-    getManyProductsLike,
     checkEditProductBody,
     editProduct,
-    checkSortAvailabilityBody,
-    getSortedData,
-    checkExitCode
+    checkExitCode,
+    checkExitCodeAdd,
+    getOrders,
+    checkChangeOrderStatus,
+    changeOrderStatus,
+    checkCreateOrderBody,
+    createOrder
 }

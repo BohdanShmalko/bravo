@@ -6,7 +6,7 @@ module.exports = db => ({
     ),
 
     deleteReplacementsById: (id) => db.query(
-        `DELETE FROM Replacements WHERE id = $1;`,
+        `DELETE FROM Replacements WHERE product_id = $1;`,
         [id]
     )
 })

@@ -106,5 +106,5 @@ module.exports = db => ({
         where code ~* '${template}' 
         OR name ~* '${template}'
         OR availability ~* '${template}';`,
-    ),
+    ).then(data => data.rows[0].count),
 })

@@ -20,7 +20,7 @@ get products | /admin/getProducts/:start/:howMany | GET | ----- | YES | {size, d
 delete product | /admin/deleteProduct/:id | DELETE | ----- | YES | {message: "ok"}/{message : "error"}
 add product | /admin/addProduct | POST | {code, name, units: [{unit, price}], availability, exclusive: ["no"], replacement: ["code"]} | YES | {id}/{message : "error"}
 edit product | /admin/addProduct | PUT | {id, code, name, units: [{unit, price}], availability, exclusive: ["no"], replacement: ["code"]} | YES | {message: "ok"}/{message : "error"}
-all customers no | /admin/allCustomerNo | GET | ----- | YES | ["no"]/{message : "error"}
+all customers no | /admin/allCustomersNo | GET | ----- | YES | ["no"]/{message : "error"}
 all products code | /admin/allProductsCode | GET | ----- | YES | ["code"]/{message : "error"}
 replace products table | /admin/replaceCatalog | POST | [{code, name, units: [{unit, price}], availability, exclusive: ["no"], replacement: ["code"]}] | YES | {message: "ok"}/{message : "error"}
 get sorted by availability data | /admin/sortAvailability | POST | {start, howMany, inStock:{inStock, outOfStock, discontinued}} | YES | {size, data: [{id, code, name, units: [{unit, price}], availability}]}/{message : "error"}

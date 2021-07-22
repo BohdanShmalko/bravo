@@ -5,7 +5,11 @@
     <div class="content">
       <div class="description">Drops the existing catalog and imports the new one</div>
       <div class="loader-container">
-        <app-file-loader [disabled]="false" [messages]="errors" (onFileLoad)="onLoad($event)"></app-file-loader>
+        <app-file-loader
+          (onDataLoad)="loadedData($event)"
+          [disabled]="checkedCsv"
+          [messages]="errors"
+          (onFileLoad)="onLoad($event)"></app-file-loader>
       </div>
 
 

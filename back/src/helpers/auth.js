@@ -3,6 +3,7 @@ const jwt = require('jsonwebtoken');
 const usersRepo = require('../repository/users');
 const customerRepo = require('../repository/customers');
 const { SECRET_KEY } = require('../config');
+const { existNo } = require('./common');
 
 const FRESH_TOKEN_TIME = 1000 * 60 * 15;
 const URL_BASE = 'http://localhost:4200/digitsView/';
@@ -43,14 +44,6 @@ const checkSendRegistrationBody = req => {
     return !email || !name || !address || !contactName || !days || !no;
 }
 
-const existNo = async (req) => {
-    const [existingNo] = await customerRepo(req.db).getByNo(req.body.no);
-    const [existingId] = await customerRepo(req.db).getById(req.body.id);
-    if(!existingNo) return false;
-    if(!existingId) return false;
-    return existingNo.id !== existingId.id;
-}
-
 const tokenSendRegistration = req => {
     const { email, name, address, contactName, days, no, mobilePhone } = req.body;
     const payload = {
@@ -87,8 +80,6 @@ const loginToken = req => {
     console.log(payload)
     return jwt.sign(payload, SECRET_KEY);
 }
-
-const send400 = (res, message) => res.status(400).send({ message });
 
 const checkRegistrationTokenParams = req => {
     const { email, name, address, contactName, days , tokenSecretKey, sendingTime, no } = req.jwtParams;
@@ -127,7 +118,6 @@ module.exports =
         checkTokenLife,
         checkSecretKey,
         loginToken,
-        send400,
         checkRegistrationTokenParams,
         createNewUser,
         registrationToken

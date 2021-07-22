@@ -15,18 +15,21 @@ const {
     deleteProduct,
     getAllCustomersNo,
     getAllProductsCode,
-    getManyProducts,
-    getManyProductsLike,
     checkEditProductBody,
     editProduct,
-    checkSortAvailabilityBody,
-    getSortedData,
-    checkExitCode
+    checkExitCode,
+    checkExitCodeAdd,
+    getOrders,
+    checkChangeOrderStatus,
+    changeOrderStatus,
+    checkCreateOrderBody,
+    createOrder
 } = require('../helpers/admin');
 const {
     send400,
     existNo
-} = require('../helpers/auth')
+} = require('../helpers/common')
+
 
 router.use(verifyToken)
 router.use(checkUserStatus('admin'))
@@ -62,6 +65,8 @@ router.post('/replaceCatalog', async (req, res) => {
 
 router.post('/addProduct', async (req, res) => {
     if(checkAddProductBody(req)) return send400(res, 'Invalid data');
+    const code = await checkExitCodeAdd(req);
+    if(code) return send400(res, 'This code is already exist');
     const id = await addToCatalog(req, req.body);
     res.send({ id })
 })
@@ -81,16 +86,6 @@ router.get('/allProductsCode', async (req, res) => {
     res.send(data);
 })
 
-router.get('/getProducts/:start/:howMany', async (req, res) => {
-    const data = await getManyProducts(req);
-    res.send(data);
-})
-
-router.get('/getProductsLike/:template/:start/:howMany', async (req, res) => {
-    const data = await getManyProductsLike(req);
-    res.send(data);
-})
-
 router.put('/editProduct', async (req, res) => {
     if(checkEditProductBody(req)) return send400(res, 'Invalid data');
     const code = await checkExitCode(req);
@@ -99,11 +94,25 @@ router.put('/editProduct', async (req, res) => {
     res.send({ message: 'ok' })
 })
 
-router.post('/sortAvailability', async (req, res) => {
-    if(checkSortAvailabilityBody(req)) return send400(res, 'Invalid data');
-
-    const data = await getSortedData(req);
-    res.send(data)
+router.get('/getOrders', async (req, res) => {
+    const data = await getOrders(req);
+    res.send(data);
 })
+
+router.put('/changeOrderStatus', async (req, res) => {
+    const error = await checkChangeOrderStatus(req);
+    if(error) send400(res, error);
+
+    await changeOrderStatus(req);
+    res.send({ message: 'ok' })
+})
+
+router.post('/createOrder', async (req, res) => {
+    if(checkCreateOrderBody(req)) return send400(res, 'Invalid data');
+
+    await createOrder(req);
+    res.send({ message: 'ok' })
+})
+
 
 module.exports = router

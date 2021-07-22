@@ -9,18 +9,20 @@ const {
     tokenSendLogin,
     sendSecretKey,
     checkSendRegistrationBody,
-    existNo,
     tokenSendRegistration,
     checkSecretKeyBody,
     checkLoginTokenParams,
     checkTokenLife,
     checkSecretKey,
     loginToken,
-    send400,
     checkRegistrationTokenParams,
     createNewUser,
     registrationToken
 } = require('../helpers/auth')
+const {
+    send400,
+    existNo
+} = require('../helpers/common')
 
 router.post('/sendLogin', generator, sendEmail, async (req, res) => {
     if(!checkSendLoginBody(req)) return send400(res, 'Invalid data');

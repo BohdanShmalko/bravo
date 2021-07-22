@@ -64,11 +64,11 @@ export class CustomPaginatorComponents implements OnChanges{
     }
   }
 
-  private isLoaded: boolean = false;
   ngOnChanges(changes: SimpleChanges) {
-    if(changes.itemsCount && changes.itemsCount.currentValue && !this.isLoaded) {
-      this.isLoaded = true;
-      this.setItemSize()
+    if(changes.itemsCount && changes.itemsCount.currentValue) {
+      this.itemsCount = changes.itemsCount.currentValue;
+      this.blockCount = Math.ceil(this.itemsCount / this.itemsSize);
+      this.currentBlock = 1;
     }
   }
 

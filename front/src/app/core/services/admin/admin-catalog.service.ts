@@ -26,22 +26,23 @@ export interface SortAvailabilityType {
 })
 export class AdminCatalogService {
   private _basicURL = 'http://localhost:3001/admin/';
+  private _basicCommonURL = 'http://localhost:3001/common/';
   private _getProductsName = 'getProducts';
-  private _deleteProductName = 'deleteProduct';
+  private _deleteProductName = this._basicURL + 'deleteProduct/';
   private _getProductsLikeName = 'getProductsLike';
 
   private _addProductURL = this._basicURL + 'addProduct';
   private _editProductURL = this._basicURL + 'editProduct';
-  private _allCustomerNoURL = this._basicURL + 'allCustomerNo';
-  private _allProductCodeURL = this._basicURL + 'allProductCode';
+  private _allCustomersNoURL = this._basicURL + 'allCustomersNo';
+  private _allProductsCodeURL = this._basicURL + 'allProductsCode';
   private _replaceCatalogURL = this._basicURL + 'replaceCatalog';
-  private _sortAvailabilityURL = this._basicURL + 'sortAvailability';
+  private _sortAvailabilityURL = this._basicCommonURL + 'sortAvailability';
 
   constructor(private http: HttpClient) {
   }
 
   private _urlBuilder(name: string, ...params: string[]): string {
-    return this._basicURL + name + '/' + params.join('/')
+    return this._basicCommonURL + name + '/' + params.join('/')
   }
 
   public getProducts(start: number, howMany: number): Observable<CatalogResponse> {
@@ -51,7 +52,7 @@ export class AdminCatalogService {
 
   public deleteProduct(id: number): Observable<MessageType> {
     return this.http.delete<MessageType>(
-      this._urlBuilder(this._deleteProductName, id.toString()) )
+      this._deleteProductName + id.toString() )
   }
 
   public addProduct(data: DataTableProducts): Observable<IdType> {
@@ -63,11 +64,11 @@ export class AdminCatalogService {
   }
 
   public allCustomerNo(): Observable<string[]> {
-    return this.http.get<string[]>(this._allCustomerNoURL)
+    return this.http.get<string[]>(this._allCustomersNoURL)
   }
 
   public allProductCode(): Observable<string[]> {
-    return this.http.get<string[]>(this._allProductCodeURL)
+    return this.http.get<string[]>(this._allProductsCodeURL)
   }
 
   public replaceCatalog(data: DataTableProducts[]): Observable<MessageType> {

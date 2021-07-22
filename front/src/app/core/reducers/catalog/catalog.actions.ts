@@ -60,7 +60,7 @@ export class GetAllCustomerNoAction implements Action {
   readonly type = catalogActionsType.getAllCustomerNo;
 }
 
-export class GetAllProductsCodeNoAction implements Action {
+export class GetAllProductsCodeAction implements Action {
   readonly type = catalogActionsType.getAllProductsCode;
 }
 
@@ -154,7 +154,7 @@ export type CatalogActions =
   AddProductAction |
   EditProductAction |
   GetAllCustomerNoAction |
-  GetAllProductsCodeNoAction |
+  GetAllProductsCodeAction |
   ReplaceCatalogAction |
   SortAvailabilityAction |
   GetProductsLikeAction |

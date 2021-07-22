@@ -39,10 +39,10 @@ CREATE TABLE Customers
 CREATE TABLE Orders
 (
     id            SERIAL      NOT NULL PRIMARY KEY,
-    no            VARCHAR(255) NOT NULL UNIQUE,
+    address       VARCHAR(255) NULL,
     status        VARCHAR(50) NOT NULL,
     req_delivery  BIGSERIAL   NOT NULL,
-    orderate_date BIGSERIAL   NOT NULL,
+    orderete_date BIGSERIAL   NOT NULL,
     notes         TEXT        NULL,
     items         INT         NOT NULL,
     customer_id   INT         NOT NULL REFERENCES Customers (id) ON DELETE CASCADE
@@ -74,6 +74,7 @@ CREATE TABLE Exclusive
 CREATE TABLE Goods
 (
     id         SERIAL           NOT NULL PRIMARY KEY,
+    quantity INT NOT NULL,
     order_id INT              NOT NULL REFERENCES Orders (id) ON DELETE CASCADE,
     unit_id    INT              NOT NULL REFERENCES Units (id) ON DELETE CASCADE
 );
@@ -235,3 +236,41 @@ VALUES (10, 1, 2);
 
 INSERT INTO Exclusive (percent, product_id, user_id)
 VALUES (10, 3, 3);
+
+-- TEST ORDERS
+
+INSERT INTO Orders (address, status, notes, items, customer_id, req_delivery, orderete_date)
+VALUES (NULL, 'new', NULL, 19, 1, 1626957601479, 1626957601678);
+
+INSERT INTO Orders (address, status, notes, items, customer_id, req_delivery, orderete_date)
+VALUES ('some test address 2', 'canceled', NULL, 3, 1, 1626957601479, 1626957601678);
+
+INSERT INTO Orders (address, status, notes, items, customer_id, req_delivery, orderete_date)
+VALUES ('some test address 3', 'in process', NULL, 15, 1, 1626957601479, 1626957601678);
+
+INSERT INTO Orders (address, status, notes, items, customer_id, req_delivery, orderete_date)
+VALUES (NULL, 'delivered', 'my notes', 15, 2, 1626957601479, 1626957601678);
+
+INSERT INTO Orders (address, status, notes, items, customer_id, req_delivery, orderete_date)
+VALUES ('some test address 5', 'completed', 'my notes', 15, 3, 1626957601479, 1626957601678);
+
+INSERT INTO Orders (address, status, notes, items, customer_id, req_delivery, orderete_date)
+VALUES ('some test address 6', 'new', 'my notes', 15, 4, 1626957601479, 1626957601678);
+
+INSERT INTO Goods (quantity, order_id, unit_id)
+VALUES (19, 1, 1);
+
+INSERT INTO Goods (quantity, order_id, unit_id)
+VALUES (19, 1, 7);
+
+INSERT INTO Goods (quantity, order_id, unit_id)
+VALUES (19, 1, 10);
+
+INSERT INTO Goods (quantity, order_id, unit_id)
+VALUES (19, 2, 2);
+
+INSERT INTO Goods (quantity, order_id, unit_id)
+VALUES (19, 2, 7);
+
+INSERT INTO Goods (quantity, order_id, unit_id)
+VALUES (19, 4, 9);
