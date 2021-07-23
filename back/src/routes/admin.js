@@ -21,13 +21,13 @@ const {
     checkExitCodeAdd,
     getOrders,
     checkChangeOrderStatus,
-    changeOrderStatus,
     checkCreateOrderBody,
     createOrder
 } = require('../helpers/admin');
 const {
     send400,
-    existNo
+    existNo,
+    changeOrderStatus
 } = require('../helpers/common')
 
 
@@ -110,8 +110,8 @@ router.put('/changeOrderStatus', async (req, res) => {
 router.post('/createOrder', async (req, res) => {
     if(checkCreateOrderBody(req)) return send400(res, 'Invalid data');
 
-    await createOrder(req);
-    res.send({ message: 'ok' })
+    const data = await createOrder(req);
+    res.send(data)
 })
 
 

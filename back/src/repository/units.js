@@ -22,7 +22,7 @@ WHERE Products.code = $1;`,
     ).then(data => data.rows),
 
     getIdByProductAndUnit: (productId, unit) => db.query(
-        `SELECT id FROM Units WHERE product_id = $1 AND unit = $2;`,
+        `SELECT * FROM Units WHERE product_id = $1 AND unit = $2;`,
         [productId, unit]
     ).then(data => data.rows),
 })

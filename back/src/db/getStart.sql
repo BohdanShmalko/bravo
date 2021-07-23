@@ -44,7 +44,6 @@ CREATE TABLE Orders
     req_delivery  BIGSERIAL   NOT NULL,
     orderete_date BIGSERIAL   NOT NULL,
     notes         TEXT        NULL,
-    items         INT         NOT NULL,
     customer_id   INT         NOT NULL REFERENCES Customers (id) ON DELETE CASCADE
 );
 
@@ -83,39 +82,42 @@ INSERT INTO Users (email, status, creation_date)
 VALUES ('bshmalko97@gmail.com', 'admin', 1625555312792);
 
 INSERT INTO Users (email, status, creation_date)
-VALUES ('ggave197@gmail.com', 'customers', 1625555312792);
+VALUES ('ggave197@gmail.com', 'customer', 1625555312792);
+
+INSERT INTO Customers (no, name, address, contact_name, delivery_days, mobile_phone, user_id)
+VALUES ('main-customer', 'Bohdan', 'Kosuba', 'Mr. Bohdan)', '{"mon":true,"tue":false,"wed":true,"thu":true,"fri":false,"sat":false,"san":false}', '0959305377', 2);
 
 -- TEST USERS
 
 INSERT INTO Users (email, status, creation_date)
-VALUES ('ggave1@gmail.com', 'customers', 1625555312792);
+VALUES ('ggave1@gmail.com', 'customer', 1625555312792);
 
 INSERT INTO Users (email, status, creation_date)
-VALUES ('ggave2@gmail.com', 'customers', 1625555312792);
+VALUES ('ggave2@gmail.com', 'customer', 1625555312792);
 
 INSERT INTO Users (email, status, creation_date)
-VALUES ('ggave3@gmail.com', 'customers', 1625555312792);
+VALUES ('ggave3@gmail.com', 'customer', 1625555312792);
 
 INSERT INTO Users (email, status, creation_date)
-VALUES ('ggave4@gmail.com', 'customers', 1625555312792);
+VALUES ('ggave4@gmail.com', 'customer', 1625555312792);
 
 INSERT INTO Users (email, status, creation_date)
-VALUES ('ggave5@gmail.com', 'customers', 1625555312792);
+VALUES ('ggave5@gmail.com', 'customer', 1625555312792);
 
 INSERT INTO Users (email, status, creation_date)
-VALUES ('ggave6@gmail.com', 'customers', 1625555312792);
+VALUES ('ggave6@gmail.com', 'customer', 1625555312792);
 
 INSERT INTO Users (email, status, creation_date)
-VALUES ('ggave7@gmail.com', 'customers', 1625555312792);
+VALUES ('ggave7@gmail.com', 'customer', 1625555312792);
 
 INSERT INTO Users (email, status, creation_date)
-VALUES ('ggave8@gmail.com', 'customers', 1625555312792);
+VALUES ('ggave8@gmail.com', 'customer', 1625555312792);
 
 INSERT INTO Users (email, status, creation_date)
-VALUES ('ggave9@gmail.com', 'customers', 1625555312792);
+VALUES ('ggave9@gmail.com', 'customer', 1625555312792);
 
 INSERT INTO Users (email, status, creation_date)
-VALUES ('ggave10@gmail.com', 'customers', 1625555312792);
+VALUES ('ggave10@gmail.com', 'customer', 1625555312792);
 
 -- TEST CUSTOMERS
 
@@ -239,23 +241,23 @@ VALUES (10, 3, 3);
 
 -- TEST ORDERS
 
-INSERT INTO Orders (address, status, notes, items, customer_id, req_delivery, orderete_date)
-VALUES (NULL, 'new', NULL, 19, 1, 1626957601479, 1626957601678);
+INSERT INTO Orders (address, status, notes, customer_id, req_delivery, orderete_date)
+VALUES (NULL, 'new', NULL, 1, 1626957601479, 1626957601678);
 
-INSERT INTO Orders (address, status, notes, items, customer_id, req_delivery, orderete_date)
-VALUES ('some test address 2', 'canceled', NULL, 3, 1, 1626957601479, 1626957601678);
+INSERT INTO Orders (address, status, notes, customer_id, req_delivery, orderete_date)
+VALUES ('some test address 2', 'canceled', NULL, 1, 1626957601479, 1626957601678);
 
-INSERT INTO Orders (address, status, notes, items, customer_id, req_delivery, orderete_date)
-VALUES ('some test address 3', 'in process', NULL, 15, 1, 1626957601479, 1626957601678);
+INSERT INTO Orders (address, status, notes, customer_id, req_delivery, orderete_date)
+VALUES ('some test address 3', 'in process', NULL, 1, 1626957601479, 1626957601678);
 
-INSERT INTO Orders (address, status, notes, items, customer_id, req_delivery, orderete_date)
-VALUES (NULL, 'delivered', 'my notes', 15, 2, 1626957601479, 1626957601678);
+INSERT INTO Orders (address, status, notes, customer_id, req_delivery, orderete_date)
+VALUES (NULL, 'delivered', 'my notes', 2, 1626957601479, 1626957601678);
 
-INSERT INTO Orders (address, status, notes, items, customer_id, req_delivery, orderete_date)
-VALUES ('some test address 5', 'completed', 'my notes', 15, 3, 1626957601479, 1626957601678);
+INSERT INTO Orders (address, status, notes, customer_id, req_delivery, orderete_date)
+VALUES ('some test address 5', 'completed', 'my notes', 3, 1626957601479, 1626957601678);
 
-INSERT INTO Orders (address, status, notes, items, customer_id, req_delivery, orderete_date)
-VALUES ('some test address 6', 'new', 'my notes', 15, 4, 1626957601479, 1626957601678);
+INSERT INTO Orders (address, status, notes, customer_id, req_delivery, orderete_date)
+VALUES ('some test address 6', 'new', 'my notes', 4, 1626957601479, 1626957601678);
 
 INSERT INTO Goods (quantity, order_id, unit_id)
 VALUES (19, 1, 1);

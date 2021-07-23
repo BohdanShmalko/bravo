@@ -38,7 +38,7 @@ module.exports = db => ({
     ).then(data => data.rows),
 
     getIdByCode: (code) => db.query(
-        `SELECT id
+        `SELECT *
          FROM Products
          WHERE code = $1;`,
         [code]

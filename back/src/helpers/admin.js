@@ -144,7 +144,7 @@ const getOrders = async (req) => {
         if(!address)
             [{ address }] = await ordersDb.getCustomerAddressByOrderId(orderNo);
         const products = await ordersDb.getProducts(orderNo);
-        result.push({ ...ordersMainData[i], address, products })
+        result.push({ ...ordersMainData[i], address, products, items: products.length })
     }
     return result;
 }
@@ -152,43 +152,55 @@ const getOrders = async (req) => {
 const checkChangeOrderStatus = async (req) => {
     const { status, orderNo } = req.body;
     if(!status || !orderNo) return 'Invalid data';
+    if(status !== 'new' || status !== 'cancel' || status !== 'in progress' || status !== 'delivered')
+        return 'Permission denied';
     const [currentStatus] = await ordersRepo(req.db).getStatusById(orderNo);
     if(status === 'cancel' && currentStatus.status !== 'new') return 'You can not cancel order if status not new'
 }
 
-const changeOrderStatus = async (req) => {
-    const { status, orderNo } = req.body;
-    await ordersRepo(req.db).updateStatus(status, orderNo);
-}
-
 const checkCreateOrderBody = req => {
-    const { customerNo, items, products } = req.body;
-    if(!customerNo || !items || !products.length) return true;
+    const { customerNo, products } = req.body;
+    if(!customerNo || !products.length) return true;
 }
 
 const createOrder = async (req) => {
-    const { customerNo, items, notes, reqDelivery, products, address } = req.body;
+    const { customerNo, notes, reqDelivery, products, address } = req.body;
     const status = 'new';
     const ordered = new Date().getTime();
     let newReqDelivery = reqDelivery;
     if(!newReqDelivery) newReqDelivery = new Date().getTime() + TWO_DAYS;
 
-    const [result] = await ordersRepo(req.db).createOrder({
+    const [customer] = await customerRepo(req.db).getByNo(customerNo);
+
+    const [newOrder] = await ordersRepo(req.db).createOrder({
         reqDelivery: newReqDelivery,
         status,
         address,
-        customerId: customerNo,
-        items,
+        customerId: customer.id,
         notes,
         ordered
     })
 
+    const newProducts = [];
     for(let i = 0; i < products.length; i++) {
         const { code, unit, quantity } = products[i];
         const [productId] = await productsRepo(req.db).getIdByCode(code);
         const [unitId] = await unitsRepo(req.db).getIdByProductAndUnit(productId.id, unit);
-        await goodsRepo(req.db).addGood(unitId.id, result.id, quantity)
+        const [good] = await goodsRepo(req.db).addGood(unitId.id, newOrder.id, quantity);
+        newProducts.push({ goodId: good, code, unit, quantity, name: productId.name })
     }
+    let newAddress = address;
+    if(!newAddress)
+        [{ newAddress }] = await ordersRepo(req.db).getCustomerAddressByOrderId(newOrder.id);
+
+    return {
+        orderNo: newOrder.id,
+        customer: customer.name,
+        customerNo, notes, ordered,
+        status, address: newAddress,
+        reqDelivery: newReqDelivery,
+        products: newProducts, items: newProducts.length }
+
 }
 
 module.exports = {
@@ -210,7 +222,6 @@ module.exports = {
     checkExitCodeAdd,
     getOrders,
     checkChangeOrderStatus,
-    changeOrderStatus,
     checkCreateOrderBody,
     createOrder
 }

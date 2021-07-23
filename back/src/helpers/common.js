@@ -1,5 +1,6 @@
 const productsRepo = require('../repository/products');
 const unitsRepo = require('../repository/units');
+const ordersRepo = require('../repository/orders')
 
 const send400 = (res, message) => res.status(400).send({ message });
 
@@ -63,6 +64,11 @@ const getSortedData = async (req) => {
     return { size, data: endData }
 }
 
+const changeOrderStatus = async (req) => {
+    const { status, orderNo } = req.body;
+    await ordersRepo(req.db).updateStatus(status, orderNo);
+}
+
 module.exports = {
     send400,
     existNo,
@@ -70,5 +76,6 @@ module.exports = {
     getManyProducts,
     getManyProductsLike,
     checkSortAvailabilityBody,
-    getSortedData
+    getSortedData,
+    changeOrderStatus
 }

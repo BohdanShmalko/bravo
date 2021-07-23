@@ -58,4 +58,11 @@ module.exports = db => ({
         OR address ~* '${template}'
         OR contact_name ~* '${template}';`
     ).then(data => data.rows[0].count),
+
+    getByUserId: (userId) => db.query(
+        `SELECT Customers.no FROM Users
+        INNER JOIN Customers ON Customers.user_id = Users.id
+        WHERE Users.id = $1;`,
+        [userId]
+    ).then(data => data.rows),
 })

@@ -4,7 +4,6 @@ module.exports = db => ({
         Orders.id AS "orderNo", 
         Customers.name AS "customer", 
         Customers.no AS "customerNo",
-        Orders.items,
         Orders.notes,
         Orders.orderete_date AS "ordered",
         Orders.req_delivery AS "reqDelivery",
@@ -17,7 +16,6 @@ module.exports = db => ({
     getCustomerData: (userId) => db.query(
         `SELECT 
         Orders.id AS "orderNo", 
-        Orders.items,
         Orders.notes,
         Orders.orderete_date AS "ordered",
         Orders.req_delivery AS "reqDelivery",
@@ -32,6 +30,7 @@ module.exports = db => ({
 
     getProducts: (orderId) => db.query(
         `SELECT
+       Goods.id AS "goodId",
         Products.code,
         Products.name,
         Units.unit,
@@ -60,9 +59,22 @@ module.exports = db => ({
         [newStatus, orderId]
     ),
 
-    createOrder: ({ status, address, reqDelivery, ordered, notes, items, customerId }) => db.query(
-        `INSERT INTO Orders (address, status, notes, items, customer_id, req_delivery, orderete_date)
-VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *;`,
-        [address, status, notes, items, customerId, reqDelivery, ordered]
-    ).then(data => data.rows)
+    createOrder: ({ status, address, reqDelivery, ordered, notes, customerId }) => db.query(
+        `INSERT INTO Orders (address, status, notes, customer_id, req_delivery, orderete_date)
+VALUES ($1, $2, $3, $4, $5, $6) RETURNING *;`,
+        [address, status, notes, customerId, reqDelivery, ordered]
+    ).then(data => data.rows),
+
+    checkUserOrder: (userId, orderId) => db.query(
+        `SELECT * FROM Users 
+        INNER JOIN Customers ON Customers.user_id = Users.id
+        INNER JOIN  Orders ON Orders.customer_id = Customers.id
+        WHERE Users.id = $1 AND Orders.id = $2;`,
+        [userId, orderId]
+    ).then(data => data.rows),
+
+    updateOrder: ({ address, notes, orderId }) => db.query(
+        `UPDATE Orders SET address = $1, notes = $2 WHERE id = $3;`,
+        [address, notes, orderId]
+    )
 })

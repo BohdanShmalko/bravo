@@ -3,15 +3,25 @@ import { MatDialog } from '@angular/material/dialog';
 
 import { SortService } from '@core/services/sort/sort.service';
 
+export interface Product {
+  code: string
+  name?: string
+  unit: string
+  quantity: number
+  goodId?: number
+}
+
 export interface OrderData {
   orderNo: string,
   customer: string,
   customerNo: string,
-  items: string,
+  items: number,
   notes: string,
   ordered: string,
   reqDelivery: string,
-  status: string
+  status: string,
+  address?: string
+  products: Product[]
 }
 
 @Component({
@@ -38,11 +48,37 @@ export class OrdersComponents implements OnInit {
       orderNo: 'some order no',
       customer: 'some customer',
       customerNo: 'some cust no',
-      items: 'some items',
+      items: 12,
       notes: 'some notes',
       ordered: 'some ordered',
       reqDelivery: 'mon, sut, fri',
-      status: 'confirm'
+      status: 'confirm',
+      address: 'dkdk',
+      products: [{
+        code: 'some code 1',
+        goodId: 1,
+        name: 'product 1',
+        quantity: 200,
+        unit: 'kg'
+      },{
+        code: 'some code 2',
+        goodId: 2,
+        name: 'product 2',
+        quantity: 100,
+        unit: 'box'
+      }]
+    },
+    {
+      orderNo: 'some order no',
+      customer: 'some customer',
+      customerNo: 'some cust no',
+      items: 12,
+      notes: 'some notes',
+      ordered: 'some ordered',
+      reqDelivery: 'mon, sut, fri',
+      status: 'confirm',
+      address: 'dkdk',
+      products: []
     }
   ]
   public activeCustomerFilter: boolean = false;
