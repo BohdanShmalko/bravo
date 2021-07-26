@@ -7,7 +7,7 @@
       <div class="loader-container">
         <app-file-loader
           (onDataLoad)="loadedData($event)"
-          [disabled]="checkedCsv"
+          [disabled]="startLoad"
           [messages]="errors"
           (onFileLoad)="onLoad($event)"></app-file-loader>
       </div>

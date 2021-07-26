@@ -11,7 +11,7 @@ import { AuthState, StatusType } from '@core/reducers/auth/auth.reducers';
 import { selectStatusAuth } from '@core/reducers/auth/auth.selectors';
 import { CatalogState } from '@core/reducers/catalog/catalog.reducers';
 import { GetProductsAction, GetProductsLikeAction, SortAvailabilityAction } from '@core/reducers/catalog/catalog.actions';
-import { selectCatalogSize, selectProducts } from '@core/reducers/catalog/catalog.selector';
+import {selectCatalogReplaceError, selectCatalogSize, selectProducts} from '@core/reducers/catalog/catalog.selector';
 import { LoadFromLocalstorageAction } from '@core/reducers/auth/auth.actions';
 
 export interface AvailabilityType {
@@ -47,14 +47,12 @@ export interface DialogData {
 })
 export class CatalogComponents implements OnInit, OnDestroy{
 
-  private dataObserver$: Subscription = this.catalogStorage.pipe(select(selectProducts)).subscribe((data: DataTableProducts[]) => {
-    this.dataTable = data;
-    this.sortedData = data;
-  })
+  private dataSubscriber: Subscription;
 
-  public productsCount$: Observable<number> = this.catalogStorage.pipe(select(selectCatalogSize))
+  public productsCount$: Observable<number> = this.catalogStorage.pipe(select(selectCatalogSize));
 
   private status$: Subscription;
+  private replaceError: Subscription;
 
   public val:string = '';
   public howManyLoad: number = 5;
@@ -85,11 +83,19 @@ export class CatalogComponents implements OnInit, OnDestroy{
       if(status === 'admin') this.visibleColumns.push('actions');
       this.userStatus = status;
     })
+    this.replaceError = this.catalogStorage.pipe(select(selectCatalogReplaceError)).subscribe((data: string) => {
+      if(!data.trim() && data !== '') this.load();
+    })
+    this.dataSubscriber = this.catalogStorage.pipe(select(selectProducts)).subscribe((data: DataTableProducts[]) => {
+      this.dataTable = data;
+      this.sortedData = data;
+    })
   }
 
   public ngOnDestroy(): void {
     this.status$.unsubscribe();
-    this.dataObserver$.unsubscribe();
+    this.dataSubscriber.unsubscribe();
+    this.replaceError.unsubscribe();
   }
 
   public set value(template: string) {

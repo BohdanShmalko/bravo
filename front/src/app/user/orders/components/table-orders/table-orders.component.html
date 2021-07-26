@@ -49,7 +49,7 @@
   </section>
 
   <div class="row-container">
-    <app-table-orders-row *ngFor="let item of data" [data]="item"></app-table-orders-row>
+    <app-table-orders-row (onActivate)="chooseOrder($event)" (onInactivate)="removeOrder($event)" *ngFor="let item of data" [data]="item"></app-table-orders-row>
   </div>
 
 

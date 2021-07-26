@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { DigitsViewComponent, PageNotFoundComponent } from '@shared/components';
+import {DigitsViewComponent, PageNotFoundComponent, PrintOrderComponent} from '@shared/components';
 
 const routes: Routes = [
   {
@@ -20,6 +20,9 @@ const routes: Routes = [
     path: 'digitsView/:code', component: DigitsViewComponent
   },
   {
+    path: 'printOrder', component: PrintOrderComponent
+  },
+  {
     path : '**', component: PageNotFoundComponent
   }
 ];
@@ -30,5 +33,9 @@ const routes: Routes = [
 })
 export class AppRoutingModule {
 }
-export type AppRoutingComponentsType = typeof PageNotFoundComponent | typeof DigitsViewComponent;
-export const AppRoutingComponents : AppRoutingComponentsType[] = [PageNotFoundComponent, DigitsViewComponent];
+export type AppRoutingComponentsType =
+  typeof PageNotFoundComponent
+  | typeof DigitsViewComponent
+  | typeof PrintOrderComponent;
+export const AppRoutingComponents : AppRoutingComponentsType[] =
+  [PageNotFoundComponent, DigitsViewComponent, PrintOrderComponent];

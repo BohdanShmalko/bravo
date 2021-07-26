@@ -84,7 +84,7 @@ const replaceCatalog = async (req) => {
     const productsDB = productsRepo(db);
     await productsDB.deleteAll();
     for (let i = 0; i < req.body.length; i++){
-        await addToCatalog(req, req.body[i]);
+        await addToCatalog(req, {...req.body[i], availability: Object.keys(req.body[i].availability)[0] });
     }
 }
 

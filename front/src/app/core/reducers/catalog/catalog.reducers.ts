@@ -49,6 +49,8 @@ export const catalogReducer: ActionReducer<CatalogState, CatalogActions> =
       case catalogActionsType.setCatalogEditError: return { ...state, catalogEditError: action.payload }
       case catalogActionsType.setCatalogReplaceError: return { ...state, catalogReplaceError: action.payload }
       case catalogActionsType.setCatalogAddError: return { ...state, catalogAddError: action.payload }
+      case catalogActionsType.successCatalogReplace:
+        return { ...state, catalogReplaceError: state.catalogReplaceError.trim() ? ' ' : state.catalogReplaceError + ' '  }
       default:
         return state;
     }

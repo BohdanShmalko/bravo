@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {OrderData} from "../../orders.components";
 
 @Component({
@@ -8,4 +8,14 @@ import {OrderData} from "../../orders.components";
 })
 export class TableOrdersComponents {
   @Input('data') data: OrderData[] = [];
+  @Output('onChooseActive') onChooseActive: EventEmitter<OrderData> = new EventEmitter<OrderData>();
+  @Output('onRemoveActive') onRemoveActive: EventEmitter<OrderData> = new EventEmitter<OrderData>();
+
+  public chooseOrder(data : OrderData): void {
+    this.onChooseActive.emit(data);
+  }
+
+  public removeOrder(data : OrderData): void {
+    this.onRemoveActive.emit(data);
+  }
 }

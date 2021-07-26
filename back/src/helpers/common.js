@@ -1,6 +1,7 @@
 const productsRepo = require('../repository/products');
 const unitsRepo = require('../repository/units');
 const ordersRepo = require('../repository/orders')
+const customerRepo = require('../repository/customers')
 
 const send400 = (res, message) => res.status(400).send({ message });
 

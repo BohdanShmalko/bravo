@@ -6,12 +6,12 @@ import { DaysCheckerComponent } from '@shared/components/days-checker/days-check
 import { CustomTextareaComponent } from '@shared/components/custom-textarea/custom-textarea.component';
 import { CustomChipsInputComponent } from '@shared/components/custom-chips-input/custom-chips-input.component';
 import { CustomSelectComponent } from '@shared/components/custom-select/custom-select.component';
+import { PrintOrderComponent } from '@shared/components/print-order/print-order.component';
 
 export type SharedComponentsType =
   | typeof CustomButtonComponent
   | typeof CustomInputComponent
   | typeof LogoComponent
-  | typeof DigitsViewComponent
   | typeof DaysCheckerComponent
   | typeof CustomTextareaComponent
   | typeof CustomChipsInputComponent
@@ -24,7 +24,7 @@ export const components: SharedComponentsType[] = [
   DaysCheckerComponent,
   CustomTextareaComponent,
   CustomChipsInputComponent,
-  CustomSelectComponent
+  CustomSelectComponent,
 ];
 
 export * from '@shared/components/page-not-found/page-not-found.component';
@@ -34,3 +34,4 @@ export * from '@shared/components/logo/logo.component';
 export * from '@shared/components/digits-view/digits-view.component';
 export * from '@shared/components/days-checker/days-checker.component';
 export * from '@shared/components/custom-textarea/custom-textarea.component';
+export * from '@shared/components/print-order/print-order.component';

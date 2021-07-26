@@ -26,6 +26,7 @@ export enum catalogActionsType {
   setCatalogAddError = '[CATALOG] set catalog add error',
   setCatalogReplaceError = '[CATALOG] set catalog replace error',
   setCatalogEditError = '[CATALOG] set catalog edit error',
+  successCatalogReplace = '[CATALOG] success catalog replace'
 }
 
 export class GetProductsAction implements Action {
@@ -62,6 +63,10 @@ export class GetAllCustomerNoAction implements Action {
 
 export class GetAllProductsCodeAction implements Action {
   readonly type = catalogActionsType.getAllProductsCode;
+}
+
+export class SuccessCatalogReplaceAction implements Action {
+  readonly type = catalogActionsType.successCatalogReplace;
 }
 
 export class ReplaceCatalogAction implements Action {
@@ -166,4 +171,5 @@ export type CatalogActions =
   SetAllProductsCodeAction |
   SetCatalogAddErrorAction |
   SetCatalogReplaceErrorAction |
-  SetCatalogEditErrorAction;
+  SetCatalogEditErrorAction |
+  SuccessCatalogReplaceAction;

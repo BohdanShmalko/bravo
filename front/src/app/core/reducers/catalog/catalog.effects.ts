@@ -14,7 +14,7 @@ import {
   DeleteProductFromStateAction,
   EditProductFromStateAction,
   SetAllCustomerNoAction, SetAllProductsCodeAction,
-  SetCatalogEditErrorAction, SetCatalogReplaceErrorAction
+  SetCatalogEditErrorAction, SetCatalogReplaceErrorAction, SuccessCatalogReplaceAction
 } from '@core/reducers/catalog/catalog.actions';
 import { Observable, of } from 'rxjs';
 import { catchError, map, mergeMap } from 'rxjs/operators';
@@ -81,12 +81,12 @@ export class CatalogEffects {
         ))
     ))
 
-  private replaceCatalog$: Observable<SetCatalogReplaceErrorAction> = createEffect(() =>
+  private replaceCatalog$: Observable<SetCatalogReplaceErrorAction | SuccessCatalogReplaceAction> = createEffect(() =>
     this.actions$.pipe(
       ofType(catalogActionsType.replaceCatalog),
       mergeMap((data: { payload: DataTableProducts[] }) =>
         this.adminCatalogService.replaceCatalog(data.payload).pipe(
-          map(() => new SetCatalogReplaceErrorAction('')),
+          map(() => new SuccessCatalogReplaceAction()),
           catchError((errMsg: HttpErrorResponse) => of(new SetCatalogReplaceErrorAction(errMsg.error.message)))
         ))
     ))

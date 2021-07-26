@@ -1,13 +1,12 @@
-import {Component, Inject, OnDestroy, OnInit} from '@angular/core';
-import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
-import {select, Store} from '@ngrx/store';
+import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { select, Store } from '@ngrx/store';
+import { Subscription } from 'rxjs';
 
 import { DataTableProducts } from '../../catalog.components';
-import { EditAddProductComponent } from '../edit-add-product/edit-add-product.component';
 import { CatalogState } from '@core/reducers/catalog/catalog.reducers';
-import {DeleteProductAction} from "@core/reducers/catalog/catalog.actions";
-import {Subscription} from "rxjs";
-import {selectProducts} from "@core/reducers/catalog/catalog.selector";
+import { DeleteProductAction } from '@core/reducers/catalog/catalog.actions';
+import { selectProducts } from '@core/reducers/catalog/catalog.selector';
 
 @Component({
   selector: 'app-delete-product',
@@ -20,7 +19,7 @@ export class DeleteProductComponent implements OnInit, OnDestroy{
   private sendingToServer: boolean = false;
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: DataTableProducts,
-              private dialogRef: MatDialogRef<EditAddProductComponent>,
+              private dialogRef: MatDialogRef<DeleteProductComponent>,
               private catalogStore: Store<CatalogState>) {
   }
 

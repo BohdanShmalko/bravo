@@ -3,8 +3,8 @@
     'active-container': isOpen
     }"
                        class="row-item" hideToggle="true"
-                       (opened)="isOpen = true"
-                       (closed)="isOpen = false">
+                       (opened)="onOpen()"
+                       (closed)="onClose()">
     <mat-expansion-panel-header class="mat-row" >
       <div class="header-container" [ngClass]="{
     'active-header': isOpen
@@ -19,10 +19,16 @@
         <span class="mat-cell">{{ data.customer }}</span>
         <span class="mat-cell">{{ data.customerNo }}</span>
         <span class="mat-cell">{{ data.items }}</span>
-        <span class="mat-cell">{{ data.notes }}</span>
+        <span class="mat-cell">{{ data.notes| cut: 14 }}</span>
         <span class="mat-cell">{{ data.ordered }}</span>
         <span class="mat-cell">{{ data.reqDelivery }}</span>
-        <span class="mat-cell last-cell">{{ data.status }}</span>
+        <span class="mat-cell button-cell" [ngClass]="
+        {
+        'change-cell': data.status.toLowerCase() !== 'confirmed',
+         'confirmed-cell': data.status.toLowerCase() === 'confirmed'
+        }">
+          {{ data.status }}
+        </span>
       </div>
     </mat-expansion-panel-header>
     <div class="products-container">
@@ -35,7 +41,7 @@
           <div class="head-text">Delivery Address:</div>
           <div class="description-text">{{ data.address }}</div>
         </div>
-        <div class="print-container">
+        <div class="print-container" (click)="printOrder()">
           <mat-icon>print</mat-icon>
           <span class="print-text">Print Order</span>
         </div>

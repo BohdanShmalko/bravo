@@ -11,7 +11,7 @@ module.exports = (req, res, next) => {
     });
 
     req.sendEmail = ({to, subject, text, html}) => transporter.sendMail({
-        from: '<bshmalko97@gmail.com>',
+        from: `<${process.env.EMAIL}>`,
         to, subject, text, html,
     });
     next();

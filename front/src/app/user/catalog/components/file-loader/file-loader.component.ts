@@ -15,7 +15,7 @@ export class FileLoaderComponent {
   @Output('onFileLoad') onFileLoad: EventEmitter<File> = new EventEmitter<File>();
   @Output('onDataLoad') onDataLoad: EventEmitter<string | ArrayBuffer | null> =
     new EventEmitter<string | ArrayBuffer | null>();
-  @Input('messages') messages: ErrorMessageType[] = []
+  @Input('messages') messages: string[] = []
   @Input('disabled') disabled: boolean = false
 
   public file: File | null = null;
@@ -28,7 +28,7 @@ export class FileLoaderComponent {
     const file = event.addedFiles[0];
     const format = file.name.split('.')[1];
     if(format !== 'csv'){
-      this.messages.push({ type: 'format', message: 'Your file format is not .csv' })
+      this.messages.push('Your file format is not .csv')
       return
     }
 

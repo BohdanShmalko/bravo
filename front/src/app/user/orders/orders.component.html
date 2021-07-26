@@ -1,5 +1,8 @@
 <app-header name="Orders">
-  <app-header-button [active]="false" color="blue" icon="add" name="add order">
+  <app-header-button (click)="editDialog()" *ngIf="activeData.length && status === 'customer'" color="blue" icon="edit" name="edit order">
+  </app-header-button>
+
+  <app-header-button (click)="addDialog()" color="blue" icon="add" name="add order">
   </app-header-button>
 </app-header>
 <div class="searcher">
@@ -8,7 +11,8 @@
 
 <div class="content">
 
-  <app-table-orders [data]="dataTable"></app-table-orders>
+  <app-table-orders (onChooseActive)="onChooseData($event)" (onRemoveActive)="onRemoveData($event)" [data]="dataTable">
+  </app-table-orders>
 
   <app-empty-table *ngIf="dataTable.length === 0" name="orders">
     <app-header-button [active]="false" color="blue" icon="add" name="add order">
